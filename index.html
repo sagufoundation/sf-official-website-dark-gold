@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ mobileMenu: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SAGU Foundation – Empowering Papua Through Education</title>
+  <meta name="description" content="SAGU Foundation is a local NGO in Jayapura, Papua — Strengthening, Assisting, Generating, and Utilizing human resources through quality education, English language training, and community development."/>
+  <meta name="keywords" content="SAGU Foundation, Papua education, English courses Papua, IELTS preparation, TOEFL preparation, Jayapura, community development, human resource development, NGO Papua, English for Papuans"/>
+  <meta name="author" content="SAGU Foundation"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://sagufoundation.org"/>
+  <!-- Open Graph -->
+  <meta property="og:title" content="SAGU Foundation – Empowering Papua Through Education"/>
+  <meta property="og:description" content="Strengthening, Assisting, Generating, and Utilizing human resources through quality education, English language training, and community development in Papua."/>
+  <meta property="og:image" content="images/logo-sagufoundation.png"/>
+  <meta property="og:url" content="https://sagufoundation.org"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="SAGU Foundation"/>
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="SAGU Foundation – Empowering Papua Through Education"/>
+  <meta name="twitter:description" content="Strengthening, Assisting, Generating, and Utilizing human resources through quality education in Papua."/>
+  <meta name="twitter:image" content="images/logo-sagufoundation.png"/>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo-sagufoundation.png"/>
+  <link rel="apple-touch-icon" href="images/logo-sagufoundation.png"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    :root { --black:#0a0a0a; --dark:#111111; --dark2:#1a1a1a; --gold:#e6a817; --white:#ffffff; --light:#d4d4d4; --muted:#a3a3a3; }
+    body { background: var(--black); color: var(--white); }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(230,168,23,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(230,168,23,0.06) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+
+    .grain::before {
+      content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:var(--gold); transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .nav-link.active { color:#e6a817; }
+    .nav-link.active::after { width:100%; }
+    .card-hover { transition:transform .3s ease, box-shadow .3s ease; }
+    .card-hover:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(230,168,23,.1); }
+    .prog-icon { transition:background .3s, color .3s; }
+    .card-hover:hover .prog-icon { background:var(--gold) !important; color:var(--black) !important; }
+    .prog-img { filter:grayscale(100%); transition:filter .4s ease; }
+    .card-hover:hover .prog-img { filter:grayscale(0%); }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation:fadeUp .7s ease forwards; }
+    .delay-1 { animation-delay:.15s; opacity:0; }
+    .delay-2 { animation-delay:.3s; opacity:0; }
+    .delay-3 { animation-delay:.45s; opacity:0; }
+    .testi-card { border-left:4px solid var(--gold); }
+    .gold-bar { width:48px; height:3px; background:var(--gold); border-radius:2px; }
+    [x-cloak]{display:none}
+    .float-img { animation: floatY 4s ease-in-out infinite; }
+    .float-img-2 { animation: floatY 5s ease-in-out infinite 1s; }
+    .float-img-3 { animation: floatY 4.5s ease-in-out infinite 0.5s; }
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+    /* Loading screen */
+    #loader { position:fixed; inset:0; z-index:9999; background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 55%,#111111 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; transition:opacity .6s ease, visibility .6s ease; background-image:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 55%,#111111 100%),linear-gradient(rgba(230,168,23,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(230,168,23,0.06) 1px,transparent 1px); background-size:100% 100%,50px 50px,50px 50px; }
+    #loader.hidden { opacity:0; visibility:hidden; }
+    .type-wrap { display:inline-flex; justify-content:center; }
+    .type-wrap .type-text { display:inline-block; overflow:hidden; white-space:nowrap; width:0; }
+    .type-wrap .type-text.t1 { animation: typeT1 1s steps(15) 0.3s forwards; }
+    .type-wrap .type-text.t2 { animation: typeT2 1.8s steps(46) 1.6s forwards; }
+    @keyframes typeT1 { 0%{width:0} 100%{width:15ch} }
+    @keyframes typeT2 { 0%{width:0} 100%{width:46ch} }
+    #loader .logo-reveal { opacity:0; transform:scale(0.8); animation: logoIn .6s ease 0.1s forwards; }
+    @keyframes logoIn { to { opacity:1; transform:scale(1); } }
+    /* Gallery */
+    @keyframes galleryScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .gallery-track { animation:galleryScroll 50s linear infinite; }
+    .gallery-track:hover { animation-play-state:paused; }
+  </style>
+</head>
+<body class="grid-bg">
+
+<!-- ═══ LOADING SCREEN ═══ -->
+<div id="loader">
+  <div class="absolute top-10 right-0 w-[900px] h-[900px] rounded-md opacity-15 pointer-events-none" style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+  <div class="absolute -bottom-32 -left-32 w-[700px] h-[700px] rounded-md opacity-15 pointer-events-none" style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+  <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="logo-reveal h-24 w-auto object-contain mb-8 relative z-10"/>
+  <div class="type-wrap mb-4">
+    <span class="type-text t1 text-white text-3xl lg:text-5xl font-extrabold">SAGU Foundation</span>
+  </div>
+  <div class="type-wrap">
+    <span class="type-text t2 text-[#e6a817] text-lg lg:text-xl font-semibold">Strengthening, Assisting, Generating, Utilizing</span>
+  </div>
+</div>
+<script>
+  setTimeout(function(){ document.getElementById('loader').classList.add('hidden'); }, 5000);
+
+  // Active nav on scroll
+  document.addEventListener('DOMContentLoaded', function() {
+    var sections = document.querySelectorAll('section[id], footer[id]');
+    var navLinks = document.querySelectorAll('#main-nav .nav-link');
+    var heroSection = document.querySelector('.grain');
+    if(heroSection) heroSection.id = 'hero';
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY + 120;
+      var current = 'hero';
+      sections.forEach(function(s) {
+        if(scrollY >= s.offsetTop) current = s.id;
+      });
+      if(heroSection && scrollY < heroSection.offsetTop + heroSection.offsetHeight) current = 'hero';
+      navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if(link.dataset.section === current) link.classList.add('active');
+      });
+    });
+  });
+</script>
+
+<!-- ═══ NAVBAR ═══ -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-black/95 backdrop-blur-sm shadow-sm border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="h-12 w-auto object-contain"/>
+      <div>
+        <p class="text-white text-lg font-extrabold leading-tight">SAGU Foundation</p>
+        <p class="text-[#e6a817] text-sm leading-tight">Strengthening, Assisting, Generating, Utilizing</p>
+      </div>
+    </a>
+    <nav class="hidden lg:flex items-center gap-8 text-lg font-semibold text-gray-400" id="main-nav">
+      <a href="#" data-section="hero" class="nav-link hover:text-[#e6a817] transition-colors active">Home</a>
+      <a href="#programs" data-section="programs" class="nav-link hover:text-[#e6a817] transition-colors">Programs</a>
+      <a href="#about" data-section="about" class="nav-link hover:text-[#e6a817] transition-colors">About Us</a>
+      <a href="#partners" data-section="partners" class="nav-link hover:text-[#e6a817] transition-colors">Partners</a>
+      <a href="#gallery" data-section="gallery" class="nav-link hover:text-[#e6a817] transition-colors">Gallery</a>
+      <a href="#contact" data-section="contact" class="nav-link hover:text-[#e6a817] transition-colors">Contact</a>
+    </nav>
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="https://connect.sagufoundation.org" target="_blank" class="text-lg font-semibold text-[#e6a817] border border-[#e6a817] px-4 py-2 rounded-md hover:bg-[#e6a817] hover:text-black transition-all">
+        <i class="fa-solid fa-right-to-bracket mr-2"></i>Log In
+      </a>
+    </div>
+    <button @click="mobileMenu=!mobileMenu" class="lg:hidden text-[#e6a817] text-xl p-2">
+      <i :class="mobileMenu?'fa-solid fa-xmark':'fa-solid fa-bars'"></i>
+    </button>
+  </div>
+  <div x-show="mobileMenu" x-cloak x-transition class="lg:hidden bg-black px-6 pb-6 border-t border-white/10">
+    <nav class="flex flex-col gap-4 mt-4 text-lg font-semibold text-gray-400">
+      <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Home</a>
+      <a href="#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Programs</a>
+      <a href="#about" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">About Us</a>
+      <a href="#partners" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Partners</a>
+      <a href="#gallery" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Gallery</a>
+      <a href="#contact" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Contact</a>
+      <a href="#programs" class="mt-2 bg-[#e6a817] text-black text-center py-2.5 rounded-md font-bold">
+        <i class="fa-solid fa-compass mr-2"></i>Explore Courses
+      </a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══ HERO SLIDER ═══ -->
+<section class="grain relative h-screen flex items-center overflow-hidden"
+  style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 55%,#111111 100%);"
+  x-data="{ slide: 0, init() { setInterval(() => this.slide = (this.slide + 1) % 2, 7000) } }">
+  <div class="absolute top-10 right-0 w-[900px] h-[900px] rounded-md opacity-15 pointer-events-none"
+    style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+  <div class="absolute -bottom-32 -left-32 w-[700px] h-[700px] rounded-md opacity-15 pointer-events-none"
+    style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+
+  <!-- Floating images Slide 1 (6 images: 3 left, 3 right) -->
+  <img x-show="slide === 0" src="images/programs/SAGU-Foundation-General-English-2-500x300.png" alt="" class="float-img absolute top-24 left-[2%] w-36 h-24 object-cover rounded-md border-2 border-[#e6a817]/30 shadow-xl opacity-40 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 0" src="images/programs/SAGU-Foundation-IELTS-Preparation-1-500x300.png" alt="" class="float-img-2 absolute top-[42%] left-[1%] w-32 h-22 object-cover rounded-md border-2 border-white/20 shadow-xl opacity-30 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 0" src="images/programs/SAGU-Foundation-Effective-Communication-in-English-4-500x300.png" alt="" class="float-img-3 absolute bottom-32 left-[3%] w-40 h-28 object-cover rounded-md border-2 border-[#e6a817]/20 shadow-xl opacity-35 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 0" src="images/programs/SAGU-Foundation-Effective-Communication-in-English-1-500x300.png" alt="" class="float-img-2 absolute top-20 right-[2%] w-40 h-28 object-cover rounded-md border-2 border-[#e6a817]/30 shadow-xl opacity-40 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 0" src="images/programs/1-500x300.png" alt="" class="float-img-3 absolute top-[48%] right-[1%] w-36 h-24 object-cover rounded-md border-2 border-white/20 shadow-xl opacity-30 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 0" src="images/programs/SAGU-Foundation-IELTS-Preparation-2-500x300.png" alt="" class="float-img absolute bottom-28 right-[3%] w-32 h-22 object-cover rounded-md border-2 border-[#e6a817]/20 shadow-xl opacity-35 pointer-events-none z-[5] hidden lg:block"/>
+
+  <!-- Floating images Slide 2 (6 images: 3 left, 3 right) -->
+  <img x-show="slide === 1" src="images/programs/SAGU-Foundation-Kelas-Persiapan-Beasiswa-PAM-Port-Numbay-2024-10-500x300.png" alt="" class="float-img absolute top-24 left-[2%] w-36 h-24 object-cover rounded-md border-2 border-[#e6a817]/30 shadow-xl opacity-40 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 1" src="images/programs/SAGU-Foundation-Computer-Literacy-1-500x300.png" alt="" class="float-img-2 absolute top-[42%] left-[1%] w-32 h-22 object-cover rounded-md border-2 border-white/20 shadow-xl opacity-30 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 1" src="images/programs/Writing-Competition-A-Day-In-Life-With-English-500x300.jpg" alt="" class="float-img-3 absolute bottom-32 left-[3%] w-40 h-28 object-cover rounded-md border-2 border-[#e6a817]/20 shadow-xl opacity-35 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 1" src="images/programs/Gambar-2_SB_Suasana-training-scaled-500x300.jpg" alt="" class="float-img-2 absolute top-20 right-[2%] w-40 h-28 object-cover rounded-md border-2 border-[#e6a817]/30 shadow-xl opacity-40 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 1" src="images/programs/SAGU-Foundation-Komputer-Literasi-Kopernik-10-500x300.png" alt="" class="float-img-3 absolute top-[48%] right-[1%] w-36 h-24 object-cover rounded-md border-2 border-white/20 shadow-xl opacity-30 pointer-events-none z-[5] hidden lg:block"/>
+  <img x-show="slide === 1" src="images/programs/Gambar-1_SB_Foto-bersama-Tutor-dan-siswa-500x300.jpg" alt="" class="float-img absolute bottom-28 right-[3%] w-32 h-22 object-cover rounded-md border-2 border-[#e6a817]/20 shadow-xl opacity-35 pointer-events-none z-[5] hidden lg:block"/>
+
+  <!-- Slide 1: Main hero -->
+  <div class="absolute inset-0 z-10 flex items-center pt-20 transition-all duration-700"
+    x-show="slide === 0" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-x-8" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-x-8">
+   <div class="max-w-7xl mx-auto px-6 flex flex-col justify-center h-full w-full">
+    <!-- Top: centered text + buttons -->
+    <div class="text-center mb-12">
+      <h1 class="text-white text-4xl lg:text-6xl font-extrabold leading-[1.08] mb-7">
+        Empowering Papua Through<br/><span class="text-[#e6a817]">Education &</span> Human Development
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
+        SAGU Foundation is a local NGO in Jayapura, Papua — <strong class="text-white">S</strong>trengthening, <strong class="text-white">A</strong>ssisting, <strong class="text-white">G</strong>enerating, and <strong class="text-white">U</strong>tilizing human resources through quality education, English language training, and community development.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="#programs" class="bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-8 py-4 rounded-md transition-all hover:shadow-xl hover:shadow-yellow-700/30">
+          <i class="fa-solid fa-book-open mr-2"></i>Our Programs
+        </a>
+        <a href="#about" class="border border-white/30 hover:border-[#e6a817] text-white font-semibold px-8 py-4 rounded-md transition-all hover:bg-white/10">
+          <i class="fa-solid fa-circle-info mr-2"></i>Learn More
+        </a>
+      </div>
+    </div>
+    <!-- Bottom: 3 boxes in a row -->
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div class="bg-white/5 backdrop-blur rounded-md p-6 border border-white/10">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+            <i class="fa-solid fa-graduation-cap text-lg"></i>
+          </div>
+          <h3 class="text-[#e6a817] text-xl font-extrabold">Education</h3>
+        </div>
+        <p class="text-gray-400 text-lg leading-relaxed">We are primarily focused on supporting the development of education in Indonesia, especially in Papua — aiming to be an agent of change in the region.</p>
+      </div>
+      <div class="bg-[#e6a817]/10 backdrop-blur rounded-md p-6 border border-[#e6a817]/30">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+            <i class="fa-solid fa-users-gear text-lg"></i>
+          </div>
+          <h3 class="text-[#e6a817] text-xl font-extrabold">HR Development</h3>
+        </div>
+        <p class="text-gray-400 text-lg leading-relaxed">Specialized programs aimed at supporting and enhancing skills, abilities, and capacities across various fields of work.</p>
+      </div>
+      <div class="bg-white/5 backdrop-blur rounded-md p-6 border border-white/10">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+            <i class="fa-solid fa-microscope text-lg"></i>
+          </div>
+          <h3 class="text-[#e6a817] text-xl font-extrabold">Research</h3>
+        </div>
+        <p class="text-gray-400 text-lg leading-relaxed">Documenting program implementation processes, developed into research and used as evaluation material.</p>
+      </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- Slide 2: Decade of Advocacy -->
+  <div class="absolute inset-0 z-10 flex items-center pt-20 transition-all duration-700"
+    x-show="slide === 1" x-transition:enter="transition ease-out duration-700" x-transition:enter-start="opacity-0 translate-x-8" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0 -translate-x-8">
+    <div class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center w-full">
+      <div>
+        <h1 class="text-white text-4xl lg:text-6xl font-extrabold leading-[1.08] mb-7">
+          2025–2035:<br/><span class="text-[#e6a817]">A Decade</span><br/>of Advocacy
+        </h1>
+        <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
+          Championing education across Papua — uplifting voices and addressing the needs of marginalised communities for the next ten years.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#about" class="bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-8 py-4 rounded-md transition-all hover:shadow-xl hover:shadow-yellow-700/30">
+            <i class="fa-solid fa-eye mr-2"></i>Our Vision
+          </a>
+          <a href="#programs" class="border border-white/30 hover:border-[#e6a817] text-white font-semibold px-8 py-4 rounded-md transition-all hover:bg-white/10">
+            <i class="fa-solid fa-rocket mr-2"></i>Explore Programs
+          </a>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-6">
+        <div class="bg-white/5 backdrop-blur rounded-md p-8 border border-white/10">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+              <i class="fa-solid fa-eye text-xl"></i>
+            </div>
+            <h3 class="text-[#e6a817] text-2xl font-extrabold">Vision</h3>
+          </div>
+          <p class="text-gray-300 text-lg leading-relaxed">
+            To become a leading advocate for education across Papua by uplifting the voices and addressing the needs of marginalised communities.
+          </p>
+        </div>
+        <div class="bg-[#e6a817]/10 backdrop-blur rounded-md p-8 border border-[#e6a817]/30">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+              <i class="fa-solid fa-rocket text-xl"></i>
+            </div>
+            <h3 class="text-[#e6a817] text-2xl font-extrabold">Mission</h3>
+          </div>
+          <p class="text-gray-300 text-lg leading-relaxed">
+            To promote the importance of investing in 21st-century skills within local communities through inclusive, grassroots-driven approaches that build long-term capacity and opportunity.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider indicators + arrows -->
+  <div class="absolute bottom-24 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+    <button @click="slide = 0" class="w-3 h-3 rounded-md transition-all" :class="slide===0 ? 'bg-[#e6a817] w-8' : 'bg-white/30 hover:bg-white/50'"></button>
+    <button @click="slide = 1" class="w-3 h-3 rounded-md transition-all" :class="slide===1 ? 'bg-[#e6a817] w-8' : 'bg-white/30 hover:bg-white/50'"></button>
+  </div>
+  <button @click="slide = slide === 0 ? 1 : 0" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-md bg-white/10 hover:bg-[#e6a817]/30 text-white flex items-center justify-center transition-all">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+  <button @click="slide = slide === 0 ? 1 : 0" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-md bg-white/10 hover:bg-[#e6a817]/30 text-white flex items-center justify-center transition-all">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+
+</section>
+
+
+
+
+<!-- ═══ PROGRAMS ═══ -->
+<section id="programs" class="py-24 bg-[#f5f5f5] relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3">What We Offer</p>
+      <h2 class="text-[#0a0a0a] text-4xl lg:text-5xl font-extrabold mb-4">Our Programs</h2>
+      <div class="gold-bar mx-auto mb-6"></div>
+      <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">From general English to IELTS preparation, vocational skills to community development — SAGU Foundation offers a complete learning ecosystem for Papuans.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-general-english.png" alt="General English" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">General English</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Basic English language learning materials covering grammar, vocabulary, and communication.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-ielts-preparation.png" alt="IELTS Preparation" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">IELTS Preparation</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Resources specifically tailored to help individuals get ready for the IELTS exam.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-toefl-preparation.png" alt="TOEFL Preparation" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">TOEFL Preparation</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Materials designed to assist with preparation for the TOEFL exam.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-general-english-preparation.png" alt="General English Placement Test" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">General English Placement Test</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Assessments designed to determine your current level of proficiency in English and place you in the appropriate learning program.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-ielts-simulation-test.png" alt="IELTS Simulation Test" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">IELTS Simulation Test</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Practice tests mimicking the structure and format of the IELTS exam.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-toefl-simulation-test.png" alt="TOEFL Simulation Test" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">TOEFL Simulation Test</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Practice exams replicating the format and content of the TOEFL test.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-community-development.png" alt="Community Development" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">Community Development</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Information and resources related to community-focused projects and initiatives.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-computer-literacy.png" alt="Computer Literacy" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">Computer Literacy</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">Resources and guidance to develop basic skills and understanding in using computers and technology effectively.</p>
+        </div>
+      </a>
+      <a href="#contact" class="card-hover bg-white rounded-md shadow-sm border border-gray-200 cursor-pointer block text-center overflow-hidden">
+        <img src="images/programs/program-internship.png" alt="Internship" class="prog-img w-full h-44 object-cover"/>
+        <div class="p-6">
+          <h3 class="text-[#0a0a0a] text-lg font-bold mb-2">Internship</h3>
+          <p class="text-gray-500 text-lg leading-relaxed">We welcome enthusiastic students eager to learn, collaborate, and make a difference in the lives of others.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="https://sagufoundation.org" target="_blank" class="border-2 border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white text-[#0a0a0a] font-bold px-8 py-3.5 rounded-md transition-all inline-block text-lg">
+        <i class="fa-solid fa-grip mr-2"></i>View All Programs
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ EPCC BOOK PROMO ═══ -->
+<section class="py-24 bg-[#e8e8e8] relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <!-- Left: Book image -->
+    <div class="flex-shrink-0 lg:w-1/2 flex justify-center">
+      <img src="images/cta/SAGU-Foundaiton-English-Papuan-Contextual-Coursebook-1024x814.png" alt="English Papuan Contextual Coursebook" class="w-full max-w-xl object-contain drop-shadow-2xl"/>
+    </div>
+    <!-- Right: Text + CTA -->
+    <div class="lg:w-1/2">
+      <h2 class="text-[#0a0a0a] text-3xl lg:text-4xl font-extrabold mb-6 leading-tight">English Papuan Contextual Coursebook</h2>
+      <div class="gold-bar mb-6"></div>
+      <p class="text-gray-600 text-lg leading-relaxed mb-4">
+        EPCC Volume 1 is the first step in a growing series designed to help Papuans learn English in a way that’s relevant, easy to understand, and truly empowering.
+      </p>
+      <p class="text-gray-600 text-lg leading-relaxed mb-4">
+        We believe every Papuan deserves to feel confident speaking English — not afraid of it.
+      </p>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+        Because one day, we want every Papuan learner to proudly say:
+      </p>
+      <blockquote class="border-l-4 border-[#e6a817] pl-5 mb-10">
+        <p class="text-[#0a0a0a] text-xl lg:text-2xl font-extrabold italic">“With English, I am at home anywhere.” 🌍</p>
+      </blockquote>
+      <div class="flex flex-wrap gap-4">
+        <a href="tel:+6281343206029" class="bg-[#0a0a0a] hover:bg-[#e6a817] hover:text-black text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+          <i class="fa-solid fa-phone mr-2"></i>Call to Order
+        </a>
+        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#25d366] hover:bg-[#1fb855] text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+          <i class="fa-brands fa-whatsapp mr-2"></i>Order via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about" class="grain relative bg-[#111111] py-36 border-y border-white/5 overflow-hidden">
+  <div class="absolute top-0 left-[10%] w-[600px] h-[600px] rounded-md opacity-10 pointer-events-none" style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+  <div class="absolute bottom-0 right-[5%] w-[500px] h-[500px] rounded-md opacity-10 pointer-events-none" style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+    <!-- Left: NGO info -->
+    <div>
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-4">Who We Are</p>
+      <h2 class="text-white text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
+        Non-Governmental<br/>Organization <span class="text-[#e6a817]">(NGO)</span>
+      </h2>
+      <div class="gold-bar mb-8"></div>
+      <p class="text-gray-400 leading-relaxed mb-5 text-lg">
+        SAGU Foundation is a Non-Governmental Organization (NGO) based in <strong class="text-white">Jayapura, Papua</strong>. We were established on <strong class="text-white">January 17, 2015</strong>. Our service focus is on <strong class="text-white">Human Resource Development</strong> and <strong class="text-white">Research</strong> in Papua.
+      </p>
+      <p class="text-gray-400 leading-relaxed mb-10 text-lg">
+        SAGU stands for “<strong class="text-[#e6a817]">S</strong>trengthening, <strong class="text-[#e6a817]">A</strong>ssisting, <strong class="text-[#e6a817]">G</strong>enerating, <strong class="text-[#e6a817]">U</strong>tilizing.”
+      </p>
+      <div class="grid grid-cols-3 gap-6 mb-10">
+        <div>
+          <p class="text-[#e6a817] text-3xl font-extrabold">2015</p>
+          <p class="text-gray-500 text-lg mt-1">Established</p>
+        </div>
+        <div>
+          <p class="text-[#e6a817] text-3xl font-extrabold">60+</p>
+          <p class="text-gray-500 text-lg mt-1">Certified Teachers</p>
+        </div>
+        <div>
+          <p class="text-[#e6a817] text-3xl font-extrabold">Papua</p>
+          <p class="text-gray-500 text-lg mt-1">Community Focus</p>
+        </div>
+      </div>
+      <a href="https://sagufoundation.org/about/who-we-are/" target="_blank"
+         class="bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-8 py-4 rounded-md transition-all inline-block text-lg">
+        <i class="fa-solid fa-book-open mr-2"></i>Read Our Full Story
+      </a>
+    </div>
+
+    <!-- Right: The Background -->
+    <div>
+      <div class="bg-white/5 backdrop-blur rounded-md p-8 border border-white/10 mb-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
+            <i class="fa-solid fa-leaf text-xl"></i>
+          </div>
+          <h3 class="text-[#e6a817] text-2xl font-extrabold">The Background</h3>
+        </div>
+        <p class="text-gray-400 leading-relaxed text-lg mb-4">
+          “<strong class="text-white">SAGU</strong>” is an acronym for “<strong class="text-[#e6a817]">S</strong>trengthening, <strong class="text-[#e6a817]">A</strong>ssisting, <strong class="text-[#e6a817]">G</strong>enerating, <strong class="text-[#e6a817]">U</strong>tilizing”.
+        </p>
+        <p class="text-gray-400 leading-relaxed text-lg mb-4">
+          Sagu (sago, <em>Metroxylon sp.</em>) is the staple food of the Papuan people and holds deep cultural significance in Papuan society.
+        </p>
+        <p class="text-gray-400 leading-relaxed text-lg">
+          Sago symbolizes the “<strong class="text-white">mama</strong>”, the one who gives birth to and nurtures the children of Papua.
+        </p>
+      </div>
+      <div class="relative">
+        <div class="w-full h-64 rounded-md bg-gradient-to-br from-[#1a1a1a] to-[#222] flex items-center justify-center overflow-hidden relative border border-white/10">
+          <div class="absolute inset-0 flex items-center justify-center opacity-10">
+            <i class="fa-solid fa-leaf text-[180px] text-[#e6a817] rotate-45"></i>
+          </div>
+          <div class="relative z-10 text-center">
+            <i class="fa-solid fa-landmark text-[#e6a817] text-5xl mb-3"></i>
+            <p class="text-white font-bold text-lg">SAGU Foundation HQ</p>
+            <p class="text-gray-500 text-lg mt-1">Kotaraja, Jayapura, Papua</p>
+          </div>
+        </div>
+        <div class="absolute -bottom-5 -right-5 bg-[#e6a817] rounded-md p-4 shadow-xl text-center">
+          <p class="text-black text-2xl font-extrabold">60+</p>
+          <p class="text-black/70 text-lg font-semibold">Certified Teachers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ BOOK PROMO 2: Sa Tra Pernah Melangkah Sendiri ═══ -->
+<section class="py-24 bg-[#e8e8e8] relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;">
+  <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    <!-- Left: Text + CTA -->
+    <div class="lg:w-1/2">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3"><i class="fa-solid fa-book mr-2"></i>Inspiring Stories</p>
+      <h2 class="text-[#0a0a0a] text-3xl lg:text-4xl font-extrabold mb-6 leading-tight">Sa Tra Pernah Melangkah Sendiri</h2>
+      <div class="gold-bar mb-6"></div>
+      <p class="text-gray-600 text-lg leading-relaxed mb-4">
+        Follow the inspiring journey of Papuan vocational school graduates who received the 2020 Papua Outstanding Student Scholarship!
+      </p>
+      <p class="text-gray-600 text-lg leading-relaxed mb-6">
+        This book tells the story of their passionate steps in pursuing their dreams and studies in Australia. 🌏🎓
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="tel:+6281343206029" class="bg-[#0a0a0a] hover:bg-[#e6a817] hover:text-black text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+          <i class="fa-solid fa-phone mr-2"></i>Call to Order
+        </a>
+        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#25d366] hover:bg-[#1fb855] text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+          <i class="fa-brands fa-whatsapp mr-2"></i>Order via WhatsApp
+        </a>
+      </div>
+    </div>
+    <!-- Right: Book image -->
+    <div class="flex-shrink-0 lg:w-1/2 flex justify-center">
+      <img src="images/cta/SAGU-Foundaiton-Buku-Sa-Tra-Pernah-Melangkah-Sendiri-2-1024x814.png" alt="Sa Tra Pernah Melangkah Sendiri" class="w-full max-w-2xl object-contain drop-shadow-2xl"/>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ PARTNERS ═══ -->
+<section id="partners" class="py-24 bg-[#f5f5f5] relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;"
+  x-data="{ filter: 'all' }">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-10">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3"><i class="fa-solid fa-handshake mr-2"></i>Collaboration</p>
+      <h2 class="text-[#0a0a0a] text-4xl font-extrabold mb-4">Our Partners</h2>
+      <div class="gold-bar mx-auto mb-6"></div>
+      <p class="text-gray-500 text-lg max-w-lg mx-auto">Domestic and international institutions collaborating with SAGU Foundation to advance education, capacity building, and community development in Papua.</p>
+    </div>
+
+    <!-- Filter badges -->
+    <div class="flex justify-center gap-3 mb-12">
+      <button @click="filter='all'" class="px-5 py-2 rounded-md text-lg font-bold transition-all" :class="filter==='all'?'bg-[#0a0a0a] text-white':'bg-white text-[#0a0a0a] border border-gray-300 hover:border-[#e6a817]'">
+        <i class="fa-solid fa-globe mr-2"></i>All
+      </button>
+      <button @click="filter='international'" class="px-5 py-2 rounded-md text-lg font-bold transition-all" :class="filter==='international'?'bg-[#e6a817] text-black':'bg-white text-[#0a0a0a] border border-gray-300 hover:border-[#e6a817]'">
+        <i class="fa-solid fa-earth-americas mr-2"></i>International
+      </button>
+      <button @click="filter='national'" class="px-5 py-2 rounded-md text-lg font-bold transition-all" :class="filter==='national'?'bg-[#e6a817] text-black':'bg-white text-[#0a0a0a] border border-gray-300 hover:border-[#e6a817]'">
+        <i class="fa-solid fa-flag mr-2"></i>National
+      </button>
+    </div>
+
+    <!-- International Partners -->
+    <div x-show="filter==='all' || filter==='international'" x-transition>
+      <h3 class="text-lg font-bold text-[#e6a817] mb-5"><i class="fa-solid fa-earth-americas mr-2"></i>International Partners</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/international-logo-web-sf-ialf-global.png" alt="IALF Global" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">IALF Global</p>
+          <p class="text-gray-500 text-lg mt-1">English language testing & training</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/international-logo-web-sf-union-aid.png" alt="UnionAID" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">UnionAID</p>
+          <p class="text-gray-500 text-lg mt-1">Workers' education & development</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/international-logo-web-sf-international-internships-768x614.png" alt="Global International Internships" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">Global Intl. Internships</p>
+          <p class="text-gray-500 text-lg mt-1">International internship programs</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/international-logo-web-sf-union-aid-1.png" alt="UnionAID NZ" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">UnionAID NZ</p>
+          <p class="text-gray-500 text-lg mt-1">Capacity building & aid support</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- National Partners -->
+    <div x-show="filter==='all' || filter==='national'" x-transition>
+      <h3 class="text-lg font-bold text-[#0a0a0a] mb-5"><i class="fa-solid fa-flag mr-2"></i>National Partners</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-uncen-1.png" alt="UNCEN" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">Universitas Cenderawasih</p>
+          <p class="text-gray-500 text-lg mt-1">Higher education & research</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-fmipa-uncen.png" alt="FMIPA UNCEN" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">FMIPA UNCEN</p>
+          <p class="text-gray-500 text-lg mt-1">Science & mathematics faculty</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-provinsi-papua.png" alt="Provinsi Papua" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">Provinsi Papua</p>
+          <p class="text-gray-500 text-lg mt-1">Provincial government support</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-kabupaten-yahukimo.png" alt="Kabupaten Yahukimo" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">Kabupaten Yahukimo</p>
+          <p class="text-gray-500 text-lg mt-1">Regency-level education programs</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-gidi.png" alt="GIDI" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">GIDI</p>
+          <p class="text-gray-500 text-lg mt-1">Church & community outreach</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-pcmi-papua.png" alt="PCMI Papua" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">PCMI Papua</p>
+          <p class="text-gray-500 text-lg mt-1">Youth empowerment & leadership</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-sacode.png" alt="SACODE" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">SACODE</p>
+          <p class="text-gray-500 text-lg mt-1">Community development initiatives</p>
+        </div>
+        <div class="card-hover bg-white rounded-md p-6 text-center border border-gray-200 shadow-sm">
+          <img src="images/partners/national-logo-web-sf-highland-roastery.png" alt="Highland Roastery" class="h-16 object-contain mx-auto mb-4"/>
+          <p class="text-[#0a0a0a] font-bold text-lg">Highland Roastery</p>
+          <p class="text-gray-500 text-lg mt-1">Local business & vocational support</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center mt-6">
+      <a href="#contact" class="bg-[#0a0a0a] hover:bg-[#e6a817] hover:text-black text-white font-bold px-10 py-4 rounded-md transition-all inline-block text-lg">
+        <i class="fa-solid fa-envelope mr-2"></i>Contact
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ GALLERY ═══ -->
+<section id="gallery" class="py-24 bg-[#111111] overflow-hidden"
+  x-data="{
+    modalOpen: false,
+    modalSrc: '',
+    modalCaption: '',
+    photos: [
+      {src:'images/programs/SAGU-Foundation-General-English-2-500x300.png',caption:'General English Class'},
+      {src:'images/programs/SAGU-Foundation-IELTS-Preparation-1-500x300.png',caption:'IELTS Preparation Program'},
+      {src:'images/programs/SAGU-Foundation-Effective-Communication-in-English-1-500x300.png',caption:'Effective Communication in English'},
+      {src:'images/programs/SAGU-Foundation-Effective-Communication-in-English-4-500x300.png',caption:'Communication Workshop'},
+      {src:'images/programs/SAGU-Foundation-Effective-Communication-in-English-8-500x300.png',caption:'English Training Session'},
+      {src:'images/programs/SAGU-Foundation-IELTS-Preparation-2-500x300.png',caption:'IELTS Study Group'},
+      {src:'images/programs/SAGU-Foundation-Kelas-Persiapan-Beasiswa-PAM-Port-Numbay-2024-10-500x300.png',caption:'Scholarship Preparation Class 2024'},
+      {src:'images/programs/SAGU-Foundation-Kelas-Persiapan-Beasiswa-PAM-Port-Numbay-2024-1-500x300.png',caption:'PAM Scholarship Class 2024'},
+      {src:'images/programs/SAGU-Foundation-Computer-Literacy-1-500x300.png',caption:'Computer Literacy Program'},
+      {src:'images/programs/SAGU-Foundation-Komputer-Literasi-Kopernik-10-500x300.png',caption:'Kopernik Computer Literacy'},
+      {src:'images/programs/Gambar-1_SB_Foto-bersama-Tutor-dan-siswa-500x300.jpg',caption:'Tutors and Students Together'},
+      {src:'images/programs/Gambar-2_SB_Suasana-training-scaled-500x300.jpg',caption:'Training Atmosphere'},
+      {src:'images/programs/Writing-Competition-A-Day-In-Life-With-English-500x300.jpg',caption:'Writing Competition — A Day in Life With English'},
+      {src:'images/programs/1-500x300.png',caption:'SAGU Foundation Activity'}
+    ],
+    get allPhotos() { return [...this.photos, ...this.photos]; }
+  }"
+  @keydown.escape.window="modalOpen=false">
+
+  <!-- Heading -->
+  <div class="max-w-7xl mx-auto px-6 mb-12 text-center">
+    <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3"><i class="fa-solid fa-images mr-2"></i>Moments &amp; Activities</p>
+    <h2 class="text-white text-4xl font-extrabold mb-4">Our Gallery</h2>
+    <div class="gold-bar mx-auto"></div>
+  </div>
+
+  <!-- Scrolling Gallery -->
+  <div class="overflow-hidden">
+    <div class="gallery-track flex py-3" style="width:max-content">
+      <template x-for="(p, i) in allPhotos" :key="i">
+        <div class="flex-shrink-0 w-64 h-80 mr-5 relative cursor-pointer rounded-md overflow-hidden group"
+          @click="modalSrc=p.src; modalCaption=p.caption; modalOpen=true">
+          <img :src="p.src" :alt="p.caption" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+            <p class="text-white text-sm font-semibold leading-snug" x-text="p.caption"></p>
+          </div>
+          <div class="absolute inset-0 ring-2 ring-transparent group-hover:ring-[#e6a817]/50 rounded-md transition-all duration-300 pointer-events-none"></div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <!-- Modal Lightbox -->
+  <div x-show="modalOpen" x-cloak
+    class="fixed inset-0 z-[9998] flex items-center justify-center p-6"
+    style="background:rgba(0,0,0,0.92);"
+    @click.self="modalOpen=false"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0">
+    <div class="relative max-w-lg w-full">
+      <button @click="modalOpen=false"
+        class="absolute -top-12 right-0 text-white/80 hover:text-[#e6a817] text-3xl transition-colors">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img :src="modalSrc" :alt="modalCaption"
+        class="w-full rounded-t-md object-contain max-h-[72vh] shadow-2xl bg-[#111]"/>
+      <div class="bg-[#1a1a1a] border border-white/10 border-t-0 rounded-b-md px-5 py-4">
+        <p class="text-white font-semibold text-base leading-snug" x-text="modalCaption"></p>
+        <p class="text-[#e6a817] text-sm mt-1 font-medium">SAGU Foundation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ CTA ═══ -->
+<section style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a)" class="py-24 text-center relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10 pointer-events-none"
+    style="background:radial-gradient(circle at 25% 50%,#e6a817,transparent 55%),radial-gradient(circle at 75% 50%,#e6a817,transparent 55%)"></div>
+  <div class="relative z-10 max-w-3xl mx-auto px-6">
+    <p class="text-[#e6a817] tracking-[0.25em] uppercase text-lg font-bold mb-4">Enroll Now</p>
+    <h2 class="text-white text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
+      Your Journey to Fluency<br/>Starts <span class="text-[#e6a817]">Here</span>
+    </h2>
+    <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
+      Join thousands of Papuans who have transformed their futures with SAGU Foundation. Explore our 2025 course catalog and register today.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://connect.sagufoundation.org" target="_blank"
+         class="bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-10 py-4 rounded-md transition-all hover:shadow-xl hover:shadow-yellow-700/30">
+        <i class="fa-solid fa-circle-right mr-2"></i>Register Now
+      </a>
+      <a href="tel:+6281312170710"
+         class="border border-white/30 hover:border-[#e6a817] text-white font-semibold px-10 py-4 rounded-md transition-all hover:bg-white/10">
+        <i class="fa-solid fa-phone mr-2"></i>Call Us
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="contact" class="bg-black text-gray-400 py-16 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+      <div>
+        <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="h-14 w-auto mb-5 brightness-90"/>
+        <p class="text-lg leading-relaxed mb-6">
+          <strong class="text-white">S</strong>trengthening, <strong class="text-white">A</strong>ssisting, <strong class="text-white">G</strong>enerating, <strong class="text-white">U</strong>tilizing — empowering Papua through education since 2015.
+        </p>
+        <div class="flex gap-4 text-lg">
+          <a href="https://www.facebook.com/SAGUFoundation/" target="_blank" class="hover:text-[#e6a817] transition-colors"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors"><i class="fa-solid fa-globe"></i></a>
+          <a href="https://connect.sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors"><i class="fa-solid fa-chalkboard-user"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Quick Links</h4>
+        <ul class="space-y-3 text-lg">
+          <li><a href="https://sagufoundation.org/about/who-we-are/" target="_blank" class="hover:text-[#e6a817] transition-colors">Who We Are</a></li>
+          <li><a href="https://sagufoundation.org/about/what-we-do/" target="_blank" class="hover:text-[#e6a817] transition-colors">What We Do</a></li>
+          <li><a href="https://sagufoundation.org/about/partner/" target="_blank" class="hover:text-[#e6a817] transition-colors">Partners</a></li>
+          <li><a href="https://connect.sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">Online Learning Portal</a></li>
+          <li><a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">News &amp; Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Programs</h4>
+        <ul class="space-y-3 text-lg">
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">General English</a></li>
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">IELTS Preparation</a></li>
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">TOEFL Preparation</a></li>
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">English for Young Learners</a></li>
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">English for Business</a></li>
+          <li><a href="#programs" class="hover:text-[#e6a817] transition-colors">Community Development</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Contact</h4>
+        <ul class="space-y-4 text-lg">
+          <li class="flex gap-3">
+            <i class="fa-solid fa-location-dot text-[#e6a817] mt-1 w-4 flex-shrink-0"></i>
+            <span>Jl. Pasar Baru Youtefa, Kompleks ATC Blok H5, Kotaraja, Jayapura, Papua, Indonesia</span>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-phone text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="tel:+6281312170710" class="hover:text-[#e6a817] transition-colors">+62 813-1217-0710</a>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-envelope text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="mailto:info@sagufoundation.org" class="hover:text-[#e6a817] transition-colors">info@sagufoundation.org</a>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-globe text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">sagufoundation.org</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-lg">
+      <p>&copy; 2025 SAGU Foundation. All rights reserved. | Jayapura, Papua, Indonesia</p>
+      <p class="text-[#e6a817] italic text-lg">"Education is the most powerful weapon which you can use to change the world." – Nelson Mandela</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ WHATSAPP FLOATING BUTTON ═══ -->
+<a href="https://wa.me/6281312170710" target="_blank" class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group">
+  <span class="bg-black/90 text-white text-lg font-semibold px-4 py-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-4 group-hover:translate-x-0 pointer-events-none whitespace-nowrap">
+    Any Questions? Chat via WhatsApp
+  </span>
+  <img src="images/sf-connect-cs.png" alt="Chat via WhatsApp" class="w-24 h-24 rounded-md object-cover hover:scale-110 transition-transform duration-300"/>
+</a>
+
+</body>
+</html>
