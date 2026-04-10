@@ -1,69 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="{ mobileMenu: false }">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Courses | SAGU Foundation</title>
-  <meta name="description" content="Browse the latest SAGU Foundation courses, explore categories, and contact us for private classes." />
+  <meta name="description" content="Browse the latest SAGU Foundation courses, categories, and learning options." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background:#0a0a0a; color:#ffffff; }
+    html { scroll-behavior: smooth; }
+    body { background:#f5f5f5; color:#0a0a0a; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:#e6a817; transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
     .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    [x-cloak]{display:none}
   </style>
 </head>
 <body>
 
-<header class="sticky top-0 z-40 bg-black/90 backdrop-blur border-b border-white/10">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3">
-      <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="h-11 w-auto object-contain"/>
-      <div>
-        <p class="text-white font-extrabold leading-tight">SAGU Foundation</p>
-        <p class="text-[#e6a817] text-sm leading-tight">Courses</p>
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-white/10">
+  <div class="hidden md:block bg-[#0f0f0f] border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between gap-4 text-sm text-gray-300">
+      <nav class="flex items-center gap-3">
+        <a href="https://sagufoundation.org/about/who-we-are/" target="_blank" class="hover:text-[#e6a817] transition-colors">Who we are</a>
+        <span class="text-white/30">|</span>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Our Strategic &amp; Direction</a>
+        <span class="text-white/30">|</span>
+        <a href="https://sagufoundation.org/about/what-we-do/" target="_blank" class="hover:text-[#e6a817] transition-colors">What We Do</a>
+        <span class="text-white/30">|</span>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Our Team</a>
+        <span class="text-white/30">|</span>
+        <a href="https://sagufoundation.org/about/partner/" target="_blank" class="hover:text-[#e6a817] transition-colors">Partners</a>
+        <span class="text-white/30">|</span>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Collaborators</a>
+        <span class="text-white/30">|</span>
+        <a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">Blog</a>
+        <span class="text-white/30">|</span>
+        <a href="index.html#gallery" class="hover:text-[#e6a817] transition-colors">Gallery</a>
+      </nav>
+      <div class="flex items-center gap-3 text-base">
+        <a href="https://www.instagram.com/sagufoundation/" target="_blank" class="hover:text-[#e6a817] transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/SAGUFoundation/" target="_blank" class="hover:text-[#e6a817] transition-colors" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a href="https://www.tiktok.com/@sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://www.youtube.com/@sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://whatsapp.com/channel/sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
-    </a>
-    <nav class="flex items-center gap-5 text-sm font-semibold text-gray-300">
-      <a href="index.html" class="hover:text-[#e6a817] transition-colors">Home</a>
-      <a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">Programs</a>
-      <a href="index.html#contact" class="hover:text-[#e6a817] transition-colors">Contact</a>
-    </nav>
+    </div>
+  </div>
+  <div class="bg-black/95 backdrop-blur-sm shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="h-12 w-auto object-contain"/>
+        <div>
+          <p class="text-white text-lg font-extrabold leading-tight">SAGU Foundation</p>
+          <p class="text-[#e6a817] text-sm leading-tight">Strengthening, Assisting, Generating, Utilizing</p>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-7 text-base font-semibold text-gray-300" id="main-nav">
+        <a href="index.html" class="nav-link hover:text-[#e6a817] transition-colors">Home</a>
+        <div class="relative group">
+          <button class="nav-link hover:text-[#e6a817] transition-colors flex items-center gap-2">
+            Our Programs <i class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+          <div class="absolute left-0 top-full mt-3 w-72 bg-[#111111] border border-white/10 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-2">
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">General English</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">IELTS/TOEFL Preparation</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">IELTS/TOEFL Simulation Test</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">Computer Literacy</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">Community Development</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">Internship</a>
+            <a href="index.html#programs" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">Scholarship Club</a>
+          </div>
+        </div>
+        <div class="relative group">
+          <button class="nav-link hover:text-[#e6a817] transition-colors flex items-center gap-2">
+            SUP Programs <i class="fa-solid fa-chevron-down text-xs"></i>
+          </button>
+          <div class="absolute left-0 top-full mt-3 w-56 bg-[#111111] border border-white/10 rounded-md shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all p-2">
+            <a href="#" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">SUP 2020</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">SUP 2021</a>
+            <a href="#" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">SUP Tutors</a>
+          </div>
+        </div>
+        <a href="#" class="nav-link hover:text-[#e6a817] transition-colors">Annual Reports</a>
+        <a href="index.html#contact" class="nav-link hover:text-[#e6a817] transition-colors">Contact</a>
+      </nav>
+      <button @click="mobileMenu=!mobileMenu" class="lg:hidden text-[#e6a817] text-xl p-2">
+        <i :class="mobileMenu?'fa-solid fa-xmark':'fa-solid fa-bars'"></i>
+      </button>
+    </div>
+    <div x-show="mobileMenu" x-cloak x-transition class="lg:hidden bg-black px-6 pb-6 border-t border-white/10">
+      <nav class="flex flex-col gap-3 mt-4 text-base font-semibold text-gray-300">
+        <a href="index.html" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Home</a>
+        <details class="rounded-md border border-white/10 bg-white/5">
+          <summary class="px-4 py-3 cursor-pointer list-none flex items-center justify-between">
+            <span>Our Programs</span>
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </summary>
+          <div class="px-4 pb-3 flex flex-col gap-2 text-sm text-gray-400">
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">General English</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Preparation</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Simulation Test</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Computer Literacy</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Community Development</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Internship</a>
+            <a href="index.html#programs" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Scholarship Club</a>
+          </div>
+        </details>
+        <details class="rounded-md border border-white/10 bg-white/5">
+          <summary class="px-4 py-3 cursor-pointer list-none flex items-center justify-between">
+            <span>SUP Programs</span>
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+          </summary>
+          <div class="px-4 pb-3 flex flex-col gap-2 text-sm text-gray-400">
+            <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">SUP 2020</a>
+            <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">SUP 2021</a>
+            <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">SUP Tutors</a>
+          </div>
+        </details>
+        <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Annual Reports</a>
+        <a href="index.html#contact" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Contact</a>
+      </nav>
+    </div>
   </div>
 </header>
 
-<main class="py-14"
+<main class="pt-28 md:pt-36 pb-14"
   x-data="{
     search: '',
     year: 'all',
     term: 'all',
     courses: [
-      {
-        title: 'General English Grammar & Vocabulary 2',
-        image: 'images/courses/General English Grammar & Vocabulary 2.jpg',
-        year: '2026',
-        term: '2',
-        category: 'General English',
-        description: 'Build confidence in grammar and daily communication with structured learning modules.'
-      },
-      {
-        title: 'TOEFL ITP Simulation Test Without Feedback',
-        image: 'images/courses/TOEFL ITP Simulation Test Without Feedback.png',
-        year: '2026',
-        term: '1',
-        category: 'IELTS/TOEFL Simulation Test',
-        description: 'Practice with real test timing and format to prepare for your TOEFL ITP experience.'
-      },
-      {
-        title: 'Literasi Komputer Google Apps 1',
-        image: 'images/courses/Literasi Komputer Google Apps 1.png',
-        year: '2025',
-        term: '4',
-        category: 'Computer Literacy',
-        description: 'Learn essential Google Workspace skills for productivity, collaboration, and study support.'
-      }
+      { title: 'General English Grammar & Vocabulary 2', image: 'images/courses/General English Grammar & Vocabulary 2.jpg', year: '2026', term: '2', category: 'General English', description: 'Build confidence in grammar and daily communication with structured learning modules.' },
+      { title: 'TOEFL ITP Simulation Test Without Feedback', image: 'images/courses/TOEFL ITP Simulation Test Without Feedback.png', year: '2026', term: '1', category: 'IELTS/TOEFL Simulation Test', description: 'Practice with real test timing and format to prepare for your TOEFL ITP experience.' },
+      { title: 'Literasi Komputer Google Apps 1', image: 'images/courses/Literasi Komputer Google Apps 1.png', year: '2025', term: '4', category: 'Computer Literacy', description: 'Learn essential Google Workspace skills for productivity, collaboration, and study support.' }
     ],
     get filteredCourses() {
       return this.courses.filter((course) => {
@@ -77,62 +151,48 @@
   <div class="max-w-7xl mx-auto px-6">
     <div class="mb-10">
       <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Course Directory</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-3">Latest Courses</h1>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Latest Courses</h1>
       <div class="gold-bar"></div>
     </div>
-
     <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-8 items-start">
       <section>
         <div class="space-y-6">
           <template x-for="course in filteredCourses" :key="course.title">
-            <article class="bg-[#141414] border border-white/10 rounded-md overflow-hidden">
+            <article class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
               <div class="grid md:grid-cols-[240px_minmax(0,1fr)]">
-                <div class="aspect-[4/5] md:aspect-auto">
-                  <img :src="course.image" :alt="course.title" class="w-full h-full object-cover"/>
-                </div>
+                <div class="aspect-[4/5] md:aspect-auto bg-gray-100"><img :src="course.image" :alt="course.title" class="w-full h-full object-cover"/></div>
                 <div class="p-6">
                   <div class="flex flex-wrap gap-2 mb-3 text-xs font-semibold">
-                    <span class="bg-[#e6a817]/20 text-[#e6a817] px-2.5 py-1 rounded">Year <span x-text="course.year"></span></span>
-                    <span class="bg-white/10 text-gray-200 px-2.5 py-1 rounded">Term <span x-text="course.term"></span></span>
-                    <span class="bg-white/10 text-gray-200 px-2.5 py-1 rounded" x-text="course.category"></span>
+                    <span class="bg-[#e6a817]/20 text-[#b98305] px-2.5 py-1 rounded">Year <span x-text="course.year"></span></span>
+                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded">Term <span x-text="course.term"></span></span>
+                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded" x-text="course.category"></span>
                   </div>
-                  <h2 class="text-2xl font-bold text-white mb-3" x-text="course.title"></h2>
-                  <p class="text-gray-400 leading-relaxed mb-5" x-text="course.description"></p>
-                  <a href="#" class="inline-flex items-center gap-2 text-[#e6a817] font-semibold hover:underline">
-                    View Course Detail <i class="fa-solid fa-arrow-right text-xs"></i>
-                  </a>
+                  <h2 class="text-2xl font-bold text-[#0a0a0a] mb-3" x-text="course.title"></h2>
+                  <p class="text-gray-600 leading-relaxed mb-5" x-text="course.description"></p>
+                  <a href="#" class="inline-flex items-center gap-2 text-[#b98305] font-semibold hover:underline">View Course Detail <i class="fa-solid fa-arrow-right text-xs"></i></a>
                 </div>
               </div>
             </article>
           </template>
-          <div x-show="filteredCourses.length === 0" class="bg-[#141414] border border-white/10 rounded-md p-8 text-center text-gray-400">
-            No courses match your current filters.
-          </div>
         </div>
       </section>
-
       <aside class="space-y-6">
-        <div class="bg-[#141414] border border-white/10 rounded-md p-5">
-          <h3 class="text-white font-bold text-lg mb-4">Search</h3>
-          <div class="relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-            <input x-model="search" type="text" placeholder="Search courses..." class="w-full bg-[#0f0f0f] border border-white/15 rounded-md pl-10 pr-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-[#e6a817]"/>
-          </div>
+        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Search</h3>
+          <div class="relative"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input x-model="search" type="text" placeholder="Search courses..." class="w-full bg-white border border-gray-300 rounded-md pl-10 pr-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]"/></div>
         </div>
-
-        <div class="bg-[#141414] border border-white/10 rounded-md p-5">
-          <h3 class="text-white font-bold text-lg mb-4">Filter by Year</h3>
-          <select x-model="year" class="w-full bg-[#0f0f0f] border border-white/15 rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#e6a817]">
+        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Year</h3>
+          <select x-model="year" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
             <option value="all">All Years</option>
             <option value="2026">2026</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
           </select>
         </div>
-
-        <div class="bg-[#141414] border border-white/10 rounded-md p-5">
-          <h3 class="text-white font-bold text-lg mb-4">Filter by Term</h3>
-          <select x-model="term" class="w-full bg-[#0f0f0f] border border-white/15 rounded-md px-4 py-3 text-white focus:outline-none focus:border-[#e6a817]">
+        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Term</h3>
+          <select x-model="term" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
             <option value="all">All Terms</option>
             <option value="1">Term 1</option>
             <option value="2">Term 2</option>
@@ -140,31 +200,102 @@
             <option value="4">Term 4</option>
           </select>
         </div>
-
-        <div class="bg-[#141414] border border-white/10 rounded-md p-5">
-          <h3 class="text-white font-bold text-lg mb-4">Course Categories</h3>
-          <ul class="space-y-2 text-gray-300">
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">General English</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Preparation</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Simulation Test</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">Computer Literacy</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">Community Development</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">Internship</a></li>
-            <li><a href="#" class="hover:text-[#e6a817] transition-colors">Scholarship Club</a></li>
+        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Course Categories</h3>
+          <ul class="space-y-2 text-gray-700">
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">General English</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">IELTS/TOEFL Preparation</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">IELTS/TOEFL Simulation Test</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">Computer Literacy</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">Community Development</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">Internship</a></li>
+            <li><a href="#" class="hover:text-[#b98305] transition-colors">Scholarship Club</a></li>
           </ul>
         </div>
-
         <div class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-md p-5">
-          <h3 class="text-[#e6a817] font-extrabold text-xl mb-2">Need a Private Class?</h3>
-          <p class="text-gray-300 mb-4">Get a personalized learning plan tailored to your goal and schedule.</p>
-          <a href="index.html#contact" class="inline-flex items-center justify-center w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all">
-            <i class="fa-solid fa-comments mr-2"></i>Go to Contact Page
-          </a>
+          <h3 class="text-[#b98305] font-extrabold text-xl mb-2">Need a Private Class?</h3>
+          <p class="text-gray-700 mb-4">Get a personalized learning plan tailored to your goal and schedule.</p>
+          <a href="index.html#contact" class="inline-flex items-center justify-center w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all"><i class="fa-solid fa-comments mr-2"></i>Go to Contact Page</a>
         </div>
       </aside>
     </div>
   </div>
 </main>
+
+<footer class="bg-black text-gray-400 py-16 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+      <div>
+        <img src="images/logo-sagufoundation.png" alt="SAGU Foundation" class="h-14 w-auto mb-5 brightness-90"/>
+        <p class="text-lg leading-relaxed mb-6">
+          <strong class="text-white">S</strong>trengthening, <strong class="text-white">A</strong>ssisting, <strong class="text-white">G</strong>enerating, <strong class="text-white">U</strong>tilizing — empowering Papua through education since 2015.
+        </p>
+        <div class="flex gap-4 text-xl">
+          <a href="https://www.instagram.com/sagufoundation/" target="_blank" class="hover:text-[#e6a817] transition-colors" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/SAGUFoundation/" target="_blank" class="hover:text-[#e6a817] transition-colors" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.tiktok.com/@sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+          <a href="https://www.youtube.com/@sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://whatsapp.com/channel/sagufoundation" target="_blank" class="hover:text-[#e6a817] transition-colors" title="WhatsApp Channel"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Quick Links</h4>
+        <ul class="space-y-3 text-lg">
+          <li><a href="https://sagufoundation.org/about/who-we-are/" target="_blank" class="hover:text-[#e6a817] transition-colors">Who We Are</a></li>
+          <li><a href="#" class="hover:text-[#e6a817] transition-colors">Our Strategic &amp; Direction</a></li>
+          <li><a href="https://sagufoundation.org/about/what-we-do/" target="_blank" class="hover:text-[#e6a817] transition-colors">What We Do</a></li>
+          <li><a href="#" class="hover:text-[#e6a817] transition-colors">Our Team</a></li>
+          <li><a href="https://sagufoundation.org/about/partner/" target="_blank" class="hover:text-[#e6a817] transition-colors">Partners</a></li>
+          <li><a href="#" class="hover:text-[#e6a817] transition-colors">Collaborators</a></li>
+          <li><a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">Blog</a></li>
+          <li><a href="index.html#gallery" class="hover:text-[#e6a817] transition-colors">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Programs</h4>
+        <ul class="space-y-3 text-lg">
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">General English</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Preparation</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">IELTS/TOEFL Simulation Test</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">Computer Literacy</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">Community Development</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">Internship</a></li>
+          <li><a href="index.html#programs" class="hover:text-[#e6a817] transition-colors">Scholarship Club</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold mb-5 text-lg uppercase tracking-wider">Contact</h4>
+        <ul class="space-y-4 text-lg">
+          <li class="flex gap-3">
+            <i class="fa-solid fa-location-dot text-[#e6a817] mt-1 w-4 flex-shrink-0"></i>
+            <span>Jl. Pasar Baru Youtefa, Kompleks ATC Blok H5, Kotaraja, Jayapura, Papua, Indonesia</span>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-phone text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="tel:+6281312170710" class="hover:text-[#e6a817] transition-colors">+62 813-1217-0710</a>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-envelope text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="mailto:info@sagufoundation.org" class="hover:text-[#e6a817] transition-colors">info@sagufoundation.org</a>
+          </li>
+          <li class="flex gap-3">
+            <i class="fa-solid fa-globe text-[#e6a817] mt-0.5 w-4 flex-shrink-0"></i>
+            <a href="https://sagufoundation.org" target="_blank" class="hover:text-[#e6a817] transition-colors">sagufoundation.org</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-lg">&copy; 2025 SAGU Foundation. All rights reserved. | Jayapura, Papua, Indonesia</p>
+      <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-500">
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Terms &amp; Conditions</a>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">Site Map</a>
+        <a href="#" class="hover:text-[#e6a817] transition-colors">FAQ</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
