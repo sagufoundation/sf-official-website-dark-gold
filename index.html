@@ -289,16 +289,16 @@
           </div>
           <h3 class="text-[#e6a817] text-xl font-extrabold">Education</h3>
         </div>
-        <p class="text-gray-400 text-lg leading-relaxed">We are primarily focused on supporting the development of education in Indonesia, especially in Papua — aiming to be an agent of change in the region.</p>
+        <p class="text-gray-400 text-lg leading-relaxed">Contributing to the advancement of education in Papua through targeted programmes and initiatives.</p>
       </div>
       <div class="bg-[#e6a817]/10 backdrop-blur rounded-md p-6 border border-[#e6a817]/30">
         <div class="flex items-center gap-3 mb-3">
           <div class="w-10 h-10 rounded-md bg-[#e6a817]/20 flex items-center justify-center text-[#e6a817]">
             <i class="fa-solid fa-users-gear text-lg"></i>
           </div>
-          <h3 class="text-[#e6a817] text-xl font-extrabold">HR Development</h3>
+          <h3 class="text-[#e6a817] text-xl font-extrabold">Workforce Development</h3>
         </div>
-        <p class="text-gray-400 text-lg leading-relaxed">Specialized programs aimed at supporting and enhancing skills, abilities, and capacities across various fields of work.</p>
+        <p class="text-gray-400 text-lg leading-relaxed">Specialised programmes focused on developing practical skills and building workforce readiness, opening pathways to employment and scholarship opportunities that contribute to long-term development in Papua.</p>
       </div>
       <div class="bg-white/5 backdrop-blur rounded-md p-6 border border-white/10">
         <div class="flex items-center gap-3 mb-3">
@@ -307,7 +307,7 @@
           </div>
           <h3 class="text-[#e6a817] text-xl font-extrabold">Research</h3>
         </div>
-        <p class="text-gray-400 text-lg leading-relaxed">Documenting program implementation processes, developed into research and used as evaluation material.</p>
+        <p class="text-gray-400 text-lg leading-relaxed">Programme implementation is systematically documented and developed into research outputs for evaluation and continuous improvement.</p>
       </div>
     </div>
    </div>
@@ -319,10 +319,10 @@
     <div class="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-16 items-center w-full">
       <div>
         <h1 class="text-white text-4xl lg:text-6xl font-extrabold leading-[1.08] mb-7">
-          2025–2035:<br/><span class="text-[#e6a817]">A Decade</span><br/>of Advocacy
+          2025–2035:<br/><span class="text-[#e6a817]">A Decade of</span><br/>Education Advocacy
         </h1>
         <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg">
-          Championing education across Papua — uplifting voices and addressing the needs of marginalised communities for the next ten years.
+          Advancing education in Papua through community programmes, skills development, and long-term capacity building.
         </p>
         <div class="flex flex-wrap gap-4">
           <a href="#about" class="bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-8 py-4 rounded-md transition-all hover:shadow-xl hover:shadow-yellow-700/30">
@@ -342,7 +342,7 @@
             <h3 class="text-[#e6a817] text-2xl font-extrabold">Vision</h3>
           </div>
           <p class="text-gray-300 text-lg leading-relaxed">
-            To become a leading advocate for education across Papua by uplifting the voices and addressing the needs of marginalised communities.
+            To advocate for equitable education in Papua, addressing the needs of marginalised communities.
           </p>
         </div>
         <div class="bg-[#e6a817]/10 backdrop-blur rounded-md p-8 border border-[#e6a817]/30">
@@ -380,65 +380,181 @@
 
 <!-- ═══ AVAILABLE COURSES ═══ -->
 <section id="available-courses" class="py-16 bg-[#0b0b0b] border-y border-white/10"
+  style="background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px); background-size: 36px 36px;"
+  @keydown.escape.window="closeCourseModal()"
   x-data="{
     start: 0,
     visibleCount: 4,
-    courses: [
-      { title: 'General English Grammar & Vocabulary 1', image: 'images/courses/General English Grammar & Vocabulary 1.jpg', link: '#' },
-      { title: 'General English Grammar & Vocabulary 2', image: 'images/courses/General English Grammar & Vocabulary 2.jpg', link: '#' },
-      { title: 'Literasi Komputer 1', image: 'images/courses/Literasi Komputer 1.jpg', link: '#' },
-      { title: 'Literasi Komputer Google Apps 1', image: 'images/courses/Literasi Komputer Google Apps 1.png', link: '#' },
-      { title: 'TOEFL ITP Simulation Test Without Feedback', image: 'images/courses/TOEFL ITP Simulation Test Without Feedback.png', link: '#' }
-    ],
+    loading: true,
+    errorMessage: '',
+    courses: [],
+    selectedProgram: 'all',
+    modalOpen: false,
+    selectedCourse: null,
+    get filteredCourses() {
+      if (this.selectedProgram === 'all') return this.courses;
+      return this.courses.filter((course) => course.category === this.selectedProgram);
+    },
+    get programOptions() {
+      return [...new Set(this.courses.map((course) => course.category).filter(Boolean))];
+    },
     get visibleCourses() {
+      if (this.filteredCourses.length === 0) return [];
       const result = [];
-      for (let i = 0; i < this.visibleCount; i++) {
-        result.push(this.courses[(this.start + i) % this.courses.length]);
+      const displayCount = Math.min(this.visibleCount, this.filteredCourses.length);
+      for (let i = 0; i < displayCount; i++) {
+        result.push(this.filteredCourses[(this.start + i) % this.filteredCourses.length]);
       }
       return result;
     },
     next() {
-      this.start = (this.start + 1) % this.courses.length;
+      if (this.filteredCourses.length <= 1) return;
+      this.start = (this.start + 1) % this.filteredCourses.length;
     },
     prev() {
-      this.start = (this.start - 1 + this.courses.length) % this.courses.length;
+      if (this.filteredCourses.length <= 1) return;
+      this.start = (this.start - 1 + this.filteredCourses.length) % this.filteredCourses.length;
     },
     goTo(index) {
-      this.start = index;
+      if (index >= 0 && index < this.filteredCourses.length) {
+        this.start = index;
+      }
     },
-    init() {
-      setInterval(() => {
-        this.next();
-      }, 2200);
+    openCourseModal(course) {
+      this.selectedCourse = course;
+      this.modalOpen = true;
+    },
+    closeCourseModal() {
+      this.modalOpen = false;
+    },
+    async loadCourses() {
+      try {
+        const response = await fetch('https://connect.sagufoundation.org/api/v1/courses');
+        const result = await response.json();
+        if (!response.ok || !result.success || !Array.isArray(result.data)) {
+          throw new Error('Invalid courses response');
+        }
+        const availableCourses = result.data.filter((course) => String(course.status || '').toLowerCase() !== 'completed');
+        this.courses = availableCourses.map((course) => {
+          const formattedPrice = course.price?.formatted || '';
+          const isFreeFlag = course.is_free === true || course.is_free === 1 || course.is_free === '1';
+          const isFreeFromPrice = /^rp\s*0([.,]0+)?$/i.test(formattedPrice.trim()) || /^0([.,]0+)?$/.test(formattedPrice.trim());
+          return {
+            id: course.id,
+            title: course.name,
+            image: course.poster || 'images/logo-sagufoundation.png',
+            category: course.program?.name || '',
+            isFree: isFreeFlag || isFreeFromPrice
+          };
+        });
+        this.start = 0;
+      } catch (error) {
+        this.errorMessage = 'Failed to load courses. Please try again later.';
+      } finally {
+        this.loading = false;
+      }
+    },
+    async init() {
+      await this.loadCourses();
+      if (this.filteredCourses.length > 1) {
+        setInterval(() => {
+          this.next();
+        }, 2200);
+      }
     }
   }">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="mb-10 text-center">
-      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm md:text-base font-bold mb-3">Learning Path</p>
-      <h2 class="text-white text-3xl md:text-4xl font-extrabold">Available Courses</h2>
+    <div class="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm md:text-base font-bold mb-3">Learning Path</p>
+        <h2 class="text-white text-3xl md:text-4xl font-extrabold">Available Courses</h2>
+      </div>
+      <div class="w-full md:w-auto">
+        <label for="program-filter" class="block text-xs tracking-[0.15em] uppercase text-gray-300 font-semibold mb-2">Filter by Program</label>
+        <select id="program-filter" x-model="selectedProgram" @change="start = 0"
+          class="w-full md:min-w-[260px] bg-[#111111] border border-white/20 rounded-md px-4 py-2.5 text-gray-100 focus:outline-none focus:border-[#e6a817]">
+          <option value="all">All Programs</option>
+          <template x-for="program in programOptions" :key="'program-' + program">
+            <option :value="program" x-text="program"></option>
+          </template>
+        </select>
+      </div>
     </div>
-    <div class="relative">
-      <button @click="prev()" class="absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-md bg-white/10 hover:bg-[#e6a817]/80 hover:text-black text-white flex items-center justify-center transition-all">
+    <div x-show="loading" class="text-center text-gray-300 py-10">
+      Loading courses...
+    </div>
+    <div x-show="!loading && errorMessage" class="text-center text-red-300 py-10" x-text="errorMessage"></div>
+    <div x-show="!loading && !errorMessage && courses.length === 0" class="text-center text-gray-300 py-10">
+      No courses available right now.
+    </div>
+    <div x-show="!loading && !errorMessage && courses.length > 0 && filteredCourses.length === 0" class="text-center text-gray-300 py-10">
+      No courses found for the selected program.
+    </div>
+    <div x-show="!loading && !errorMessage && visibleCourses.length > 0" class="relative">
+      <button @click="prev()" :disabled="filteredCourses.length <= 1" class="absolute -left-3 md:-left-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-md bg-white/10 hover:bg-[#e6a817]/80 hover:text-black text-white flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
-      <button @click="next()" class="absolute -right-3 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-md bg-white/10 hover:bg-[#e6a817]/80 hover:text-black text-white flex items-center justify-center transition-all">
+      <button @click="next()" :disabled="filteredCourses.length <= 1" class="absolute -right-3 md:-right-5 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-md bg-white/10 hover:bg-[#e6a817]/80 hover:text-black text-white flex items-center justify-center transition-all disabled:opacity-40 disabled:cursor-not-allowed">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <template x-for="(course, idx) in visibleCourses" :key="course.image + '-' + idx + '-' + start">
-          <a :href="course.link" class="group block bg-[#151515] border border-white/10 rounded-md overflow-hidden hover:border-[#e6a817]/60 transition-all">
+        <template x-for="(course, idx) in visibleCourses" :key="course.id + '-' + idx + '-' + start">
+          <button type="button" @click="openCourseModal(course)" class="group block w-full text-left bg-[#151515] border border-white/10 rounded-md overflow-hidden hover:border-[#e6a817]/60 transition-all focus:outline-none focus:ring-2 focus:ring-[#e6a817]/40">
             <div class="aspect-[4/5] overflow-hidden">
               <img :src="course.image" :alt="course.title" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
             </div>
             <div class="p-3">
               <p class="text-sm text-white font-semibold leading-snug group-hover:text-[#e6a817] transition-colors" x-text="course.title"></p>
+              <p class="text-xs text-gray-400 mt-2" x-text="course.category"></p>
+              <template x-if="course.isFree">
+                <span class="inline-flex items-center rounded-full bg-green-500/20 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-green-300 mt-2">Free</span>
+              </template>
             </div>
-          </a>
+          </button>
         </template>
       </div>
     </div>
-    <div class="flex items-center justify-center gap-2 mt-6">
-      <template x-for="(course, dotIndex) in courses" :key="'dot-' + dotIndex">
+    <div x-show="modalOpen" x-cloak class="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6"
+      style="background:rgba(0,0,0,0.88);" @click.self="closeCourseModal()"
+      x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150"
+      x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+      <div class="w-full max-w-4xl bg-[#121212] border border-white/10 rounded-md overflow-hidden shadow-2xl">
+        <div class="grid md:grid-cols-2">
+          <div class="bg-black">
+            <img :src="selectedCourse && selectedCourse.image ? selectedCourse.image : 'images/logo-sagufoundation.png'"
+              :alt="selectedCourse && selectedCourse.title ? selectedCourse.title : 'Course poster'"
+              class="w-full h-full min-h-[280px] md:min-h-[420px] object-cover"/>
+          </div>
+          <div class="p-6 md:p-8 text-gray-200">
+            <div class="flex items-start justify-between gap-4 mb-5">
+              <div>
+                <p class="text-[#e6a817] tracking-[0.2em] uppercase text-xs font-bold">How to Register</p>
+                <h3 class="text-white text-2xl font-extrabold mt-2 leading-tight"
+                  x-text="selectedCourse && selectedCourse.title ? selectedCourse.title : 'Selected Course'"></h3>
+              </div>
+              <button type="button" @click="closeCourseModal()"
+                class="text-white/70 hover:text-white text-2xl leading-none transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <ol class="list-decimal list-inside space-y-3 text-sm md:text-base text-gray-300">
+              <li>Log in or register on <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer" class="text-[#e6a817] hover:underline">SF Connect</a>.</li>
+              <li>Search for this course.</li>
+              <li>Click the <strong class="text-white">"Register"</strong> button.</li>
+              <li>Wait for verification.</li>
+              <li>Enjoy your learning journey.</li>
+            </ol>
+            <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer"
+              class="mt-7 inline-flex items-center justify-center bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-6 py-3 rounded-md transition-all">
+              <i class="fa-solid fa-arrow-up-right-from-square mr-2"></i>Go to SF Connect
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div x-show="filteredCourses.length > 1 && !loading && !errorMessage" class="flex items-center justify-center gap-2 mt-6">
+      <template x-for="(course, dotIndex) in filteredCourses" :key="'dot-' + dotIndex">
         <button @click="goTo(dotIndex)" class="h-2.5 rounded-full transition-all"
           :class="start === dotIndex ? 'w-7 bg-[#e6a817]' : 'w-2.5 bg-white/30 hover:bg-white/60'">
         </button>
@@ -532,11 +648,11 @@
     </div>
 
     <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
-      <a href="https://sagufoundation.org/about/what-we-do/" target="_blank" class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-white font-bold px-8 py-3.5 rounded-md transition-all inline-block text-lg">
-        <i class="fa-solid fa-compass mr-2"></i>What We Do
+      <a href="#contact" class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-white font-bold px-8 py-3.5 rounded-md transition-all inline-block text-lg">
+        <i class="fa-solid fa-comments mr-2"></i>Contact Us
       </a>
-      <a href="#" class="border-2 border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white text-[#0a0a0a] font-bold px-8 py-3.5 rounded-md transition-all inline-block text-lg">
-        <i class="fa-solid fa-sitemap mr-2"></i>Our Strategic &amp; Direction
+      <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer" class="border-2 border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white text-[#0a0a0a] font-bold px-8 py-3.5 rounded-md transition-all inline-block text-lg">
+        <i class="fa-solid fa-circle-right mr-2"></i>Register Now
       </a>
     </div>
   </div>
@@ -568,10 +684,10 @@
         <p class="text-[#0a0a0a] text-xl lg:text-2xl font-extrabold italic">“With English, I am at home anywhere.” 🌍</p>
       </blockquote>
       <div class="flex flex-wrap gap-4">
-        <a href="tel:+6281343206029" class="bg-[#0a0a0a] hover:bg-[#e6a817] hover:text-black text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+        <a href="tel:+6281343206029" class="border-2 border-[#0a0a0a] bg-[#f5f5f5] hover:bg-[#0a0a0a] hover:text-[#f5f5f5] text-[#0a0a0a] font-bold px-8 py-4 rounded-md transition-all text-lg">
           <i class="fa-solid fa-phone mr-2"></i>Call to Order
         </a>
-        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#25d366] hover:bg-[#1fb855] text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-[#f5f5f5] font-bold px-8 py-4 rounded-md transition-all text-lg">
           <i class="fa-brands fa-whatsapp mr-2"></i>Order via WhatsApp
         </a>
       </div>
@@ -668,16 +784,16 @@
       <h2 class="text-[#0a0a0a] text-3xl lg:text-4xl font-extrabold mb-6 leading-tight">Sa Tra Pernah Melangkah Sendiri</h2>
       <div class="gold-bar mb-6"></div>
       <p class="text-gray-600 text-lg leading-relaxed mb-4">
-        Follow the inspiring journey of Papuan vocational school graduates who received the 2020 Papua Outstanding Student Scholarship!
+        Follow the inspiring journeys of Papuan vocational school graduates who received the 2020 Beasiswa Siswa Unggul Papua, a scholarship programme from the Government of Papua that supports native Papuan students to pursue further study.
       </p>
       <p class="text-gray-600 text-lg leading-relaxed mb-6">
         This book tells the story of their passionate steps in pursuing their dreams and studies in Australia. 🌏🎓
       </p>
       <div class="flex flex-wrap gap-4">
-        <a href="tel:+6281343206029" class="bg-[#0a0a0a] hover:bg-[#e6a817] hover:text-black text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+        <a href="tel:+6281343206029" class="border-2 border-[#0a0a0a] bg-[#f5f5f5] hover:bg-[#0a0a0a] hover:text-[#f5f5f5] text-[#0a0a0a] font-bold px-8 py-4 rounded-md transition-all text-lg">
           <i class="fa-solid fa-phone mr-2"></i>Call to Order
         </a>
-        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#25d366] hover:bg-[#1fb855] text-white font-bold px-8 py-4 rounded-md transition-all text-lg">
+        <a href="https://wa.me/+6281343206029" target="_blank" class="bg-[#0a0a0a] hover:bg-[#1a1a1a] text-[#f5f5f5] font-bold px-8 py-4 rounded-md transition-all text-lg">
           <i class="fa-brands fa-whatsapp mr-2"></i>Order via WhatsApp
         </a>
       </div>
@@ -941,10 +1057,10 @@
   <div class="relative z-10 max-w-3xl mx-auto px-6">
     <p class="text-[#e6a817] tracking-[0.25em] uppercase text-lg font-bold mb-4">Enroll Now</p>
     <h2 class="text-white text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
-      Your Journey to Fluency<br/>Starts <span class="text-[#e6a817]">Here</span>
+      Your Learning Journey<br/>Starts <span class="text-[#e6a817]">Here</span>
     </h2>
     <p class="text-gray-400 text-lg mb-10 max-w-xl mx-auto">
-      Join thousands of Papuans who have transformed their futures with SAGU Foundation. Explore our 2025 course catalog and register today.
+      Join a growing community of Papuans building skills and opportunities through SAGU Foundation. Explore our 2025 course catalogue and register today.
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a href="https://connect.sagufoundation.org" target="_blank"
