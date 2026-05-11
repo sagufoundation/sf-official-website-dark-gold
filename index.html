@@ -190,7 +190,7 @@
             <a href="#" class="block px-3 py-2 text-sm text-gray-300 hover:text-[#e6a817] hover:bg-white/5 rounded">SUP Tutors</a>
           </div>
         </div>
-        <a href="#" class="nav-link hover:text-[#e6a817] transition-colors">Annual Reports</a>
+        <a href="#annual-reports" class="nav-link hover:text-[#e6a817] transition-colors">Annual Reports</a>
         <a href="#contact" data-section="contact" class="nav-link hover:text-[#e6a817] transition-colors">Contact</a>
       </nav>
       <button @click="mobileMenu=!mobileMenu" class="lg:hidden text-[#e6a817] text-xl p-2">
@@ -226,7 +226,7 @@
             <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">SUP Tutors</a>
           </div>
         </details>
-        <a href="#" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Annual Reports</a>
+        <a href="#annual-reports" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Annual Reports</a>
         <a href="#contact" @click="mobileMenu=false" class="hover:text-[#e6a817] transition-colors">Contact</a>
       </nav>
     </div>
@@ -578,7 +578,7 @@
       <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3">What We Offer</p>
       <h2 class="text-[#0a0a0a] text-4xl lg:text-5xl font-extrabold mb-4">Our Programs</h2>
       <div class="gold-bar mx-auto mb-6"></div>
-      <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">From general English to IELTS preparation, vocational skills to community development — SAGU Foundation offers a complete learning ecosystem for Papuans.</p>
+      <p class="text-gray-500 max-w-xl mx-auto text-lg leading-relaxed">From general English to IELTS preparation, vocational skills to community development — SAGU Foundation offers a complete learning ecosystem for everyone.</p>
     </div>
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
@@ -692,6 +692,85 @@
         </a>
       </div>
     </div>
+  </div>
+</section>
+
+
+
+<!-- ═══ EPCC VIDEO & STORY SECTION ═══ -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Video Container -->
+    <div class="max-w-4xl mx-auto mb-12">
+      <div class="relative aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl">
+        <iframe 
+          width="100%" 
+          height="100%" 
+          src="https://www.youtube.com/embed/HRAISKfGKKk" 
+          title="English Papuan Contextual Coursebook" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-[#0a0a0a] text-3xl lg:text-4xl font-extrabold mb-6 leading-tight">
+        English Papuan Contextual Coursebook
+      </h2>
+      <div class="gold-bar mx-auto mb-8"></div>
+
+      <div class="prose prose-lg text-gray-600 mx-auto text-left lg:text-center">
+        <p class="mb-4">
+          SAGU Foundation proudly presents the <strong>English Papuan Contextual Coursebook (EPCC)</strong>
+        </p>
+        <p class="mb-4">
+          Created by Diana M. Kambuaya, M.Ed., our Academic Program Manager, with contributions from Ajaibik Sonai Morin and Emma Ronsumbre as Content Contributors, and Romibo Rumaikewi as Audio Editor.
+        </p>
+        <p class="mb-6">
+          This coursebook was made possible through the <strong>YSEALI Professional Fellows Program Alumni Accelerator Project Award 2024</strong>.
+        </p>
+        
+        <p class="mb-6">
+          This short video captures the journey of how the book came to life — beginning with a simple but powerful prayer in 2007, and brought to fruition through an international award in 2024.
+        </p>
+        
+        <p class="mb-8">
+          The EPCC is Volume 1 of what we hope will be a continuing series designed to help Papuans learn English in a way that feels relevant, accessible, and empowering.
+        </p>
+
+        <blockquote class="border-l-4 border-[#e6a817] pl-6 text-[#0a0a0a] text-xl font-medium mb-10">
+          “With English, I am at home anywhere.” 🌍
+        </blockquote>
+
+        <p class="mb-10">
+          Because English shouldn’t be something to fear — it should be something to embrace.
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <!-- Watch on YouTube -->
+        <a href="https://www.youtube.com/watch?v=HRAISKfGKKk" 
+           target="_blank"
+           class="inline-flex items-center gap-3 bg-[#FF0000] hover:bg-[#cc0000] text-white font-semibold px-8 py-4 rounded-2xl transition-all">
+          <i class="fa-brands fa-youtube text-2xl"></i>
+          <span>Watch Full Video on YouTube</span>
+        </a>
+
+        <!-- SAGU Foundation Channel -->
+        <a href="https://www.youtube.com/@sagufoundation" 
+           target="_blank"
+           class="inline-flex items-center gap-3 border-2 border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white text-[#0a0a0a] font-semibold px-8 py-4 rounded-2xl transition-all">
+          <i class="fa-brands fa-youtube text-2xl"></i>
+          <span>Visit SAGU Foundation Channel</span>
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1074,6 +1153,119 @@
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+<!-- ═══ ANNUAL REPORTS SECTION ═══ -->
+<section id="annual-reports" class="py-24 bg-[#e8e8e8] relative overflow-hidden"
+  style="background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-lg font-bold mb-3">
+        <i class="fa-solid fa-file-lines mr-2"></i>Transparency & Impact
+      </p>
+      <h2 class="text-[#0a0a0a] text-3xl lg:text-5xl font-extrabold mb-6 leading-tight">Annual Reports</h2>
+      <div class="gold-bar mx-auto mb-6"></div>
+      <p class="text-gray-600 text-xl max-w-2xl mx-auto">
+        Download our yearly reports and discover the progress, achievements, and impact of SAGU Foundation.
+      </p>
+    </div>
+
+    <!-- Reports Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10" 
+         x-data="{
+           reports: [
+             {
+               year: 2023,
+               title: 'Annual Report 2023',
+               desc: 'Our foundational year report showcasing our programs, activities, and impact for the communities.',
+               cover: './images/reports/sf-annual-reports-2023.png',
+               slug: '2023',
+               pdf: 'https://download.sagufoundation.org/SAGU-FOUNDATION-Annual-Report-2023.pdf'
+             },
+             {
+               year: 2024,
+               title: 'Annual Report 2024',
+               desc: 'We are proud to present our 2024 Annual Report, showcasing the significant milestones and achievements of SAGU Foundation over the past year. This report highlights our impactful community development programs, innovative educational initiatives, and meaningful partnerships that empower Papuan youth and communities. It underscores our unwavering commitment to strengthening, assisting, generating, and utilising resources for sustainable development by fostering education, advocating contextual learning, and promoting community-driven initiatives that create lasting impacts across Papua.',
+               cover: './images/reports/sf-annual-reports-2024.png',
+               slug: '2024',
+               pdf: 'https://download.sagufoundation.org/SAGU-FOUNDATION-Annual-Report-2024.pdf'
+             },
+             {
+               year: 2025,
+               title: 'Annual Report 2025',
+               desc: 'The SAGU Foundation Annual Report 2025 marks a decade of the organization’s journey in enhancing human resources in Papua through education, research, and community development. Throughout the year, SAGU Foundation implemented a wide range of strategic programs, including English language courses (General English, ESP, IELTS/TOEFL), computer literacy training, student internships, school visits, webinars, and professional and staff development activities. In addition, various context-based Community Development (ComDev) initiatives were carried out across Papua, supported by partnerships with educational institutions, international organizations, and local communities. Other key milestones include the launch of the EPCC book, the strengthening of collaborative networks, individual team achievements, and active engagement in educational and community empowerment initiatives. Altogether, these efforts reflect SAGU Foundation’s strong commitment to contributing sustainably to inclusive and competitive human development in Papua',
+               cover: './images/reports/sf-annual-reports-2025.png',
+               slug: '2025',
+               pdf: 'https://download.sagufoundation.org/SAGU-FOUNDATION-Annual-Report-2025.pdf'
+             }
+           ]
+         }">
+      
+      <template x-for="(report, index) in reports" :key="index">
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
+             @click="window.location.href = `reports.html?year=${report.slug}`">
+          
+          <!-- Cover Image (4:5 ratio) -->
+          <div class="relative aspect-[4/5] overflow-hidden bg-gray-100">
+            <img :src="report.cover" 
+                 :alt="report.title"
+                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+            
+            <!-- Year Badge -->
+            <div class="absolute top-4 right-4 bg-[#0a0a0a] text-white text-sm font-bold px-4 py-1.5 rounded-full">
+              <span x-text="report.year"></span>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-[#0a0a0a] font-bold text-2xl mb-3" x-text="report.title"></h3>
+            <p class="text-gray-600 leading-relaxed line-clamp-3 mb-6" x-text="report.desc"></p>
+            
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+              <!-- View Detail
+              <a :href="`reports.html?year=${report.slug}`" 
+                 class="flex-1 text-center border-2 border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white text-[#0a0a0a] font-semibold py-3.5 rounded-xl transition-all text-sm">
+                <i class="fa-solid fa-arrow-right mr-2"></i>View Full Report
+              </a> -->
+              
+              <!-- Download PDF -->
+              <a :href="report.pdf" 
+                 target="_blank"
+                 @click.stop
+                 class="flex-1 text-center bg-[#0a0a0a] hover:bg-[#1a1a1a] text-white font-semibold py-3.5 rounded-xl transition-all text-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i>
+                <span>View or Download PDF</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </template>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Alpine.js Script (pastikan sudah include Alpine di head) -->
+<script>
+  // Jika belum ada Alpine.js, tambahkan ini:
+  // <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</script>
+
+
+
+
 
 
 <!-- ═══ FOOTER ═══ -->
