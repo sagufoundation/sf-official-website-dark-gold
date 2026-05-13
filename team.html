@@ -30,15 +30,15 @@
         <span class="text-white/30">|</span>
         <a href="strategic-direction.html" class="hover:text-[#e6a817] transition-colors">Our Strategic &amp; Direction</a>
         <span class="text-white/30">|</span>
-        <a href="what-we-do.html" target="_blank" class="hover:text-[#e6a817] transition-colors">What We Do</a>
+        <a href="what-we-do.html" class="hover:text-[#e6a817] transition-colors">What We Do</a>
         <span class="text-white/30">|</span>
-        <a href="#" class="hover:text-[#e6a817] transition-colors">Our Team</a>
+        <a href="team.html" class="hover:text-[#e6a817] transition-colors">Our Team</a>
         <span class="text-white/30">|</span>
-        <a href="partners.html" target="_blank" class="hover:text-[#e6a817] transition-colors">Partners</a>
+        <a href="#partners" class="hover:text-[#e6a817] transition-colors">Partners</a>
         <span class="text-white/30">|</span>
         <a href="collaborators.html" class="hover:text-[#e6a817] transition-colors">Collaborators</a>
         <span class="text-white/30">|</span>
-        <a href="blog.html" target="_blank" class="hover:text-[#e6a817] transition-colors">Blog</a>
+        <a href="blog.html" class="hover:text-[#e6a817] transition-colors">Blog</a>
         <span class="text-white/30">|</span>
         <a href="#gallery" class="hover:text-[#e6a817] transition-colors">Gallery</a>
       </nav>
@@ -129,144 +129,240 @@
   </div>
 </header>
 
-<main class="pt-28 md:pt-36 pb-14"
-  x-data="{
-    search: '',
-    year: 'all',
-    term: 'all',
-    currentPage: 1,
-    itemsPerPage: 2,
-    courses: [
-      { title: 'General English Grammar & Vocabulary 2', image: 'images/courses/General English Grammar & Vocabulary 2.jpg', year: '2026', term: '2', category: 'General English', description: 'Build confidence in grammar and daily communication with structured learning modules.' },
-      { title: 'TOEFL ITP Simulation Test Without Feedback', image: 'images/courses/TOEFL ITP Simulation Test Without Feedback.png', year: '2026', term: '1', category: 'IELTS/TOEFL Simulation Test', description: 'Practice with real test timing and format to prepare for your TOEFL ITP experience.' },
-      { title: 'Literasi Komputer Google Apps 1', image: 'images/courses/Literasi Komputer Google Apps 1.png', year: '2025', term: '4', category: 'Computer Literacy', description: 'Learn essential Google Workspace skills for productivity, collaboration, and study support.' }
-    ],
-    get filteredCourses() {
-      return this.courses.filter((course) => {
-        const matchSearch = this.search === '' || course.title.toLowerCase().includes(this.search.toLowerCase()) || course.category.toLowerCase().includes(this.search.toLowerCase());
-        const matchYear = this.year === 'all' || course.year === this.year;
-        const matchTerm = this.term === 'all' || course.term === this.term;
-        return matchSearch && matchYear && matchTerm;
-      });
-    },
-    get totalPages() {
-      return Math.max(1, Math.ceil(this.filteredCourses.length / this.itemsPerPage));
-    },
-    get paginatedCourses() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return this.filteredCourses.slice(start, start + this.itemsPerPage);
-    },
-    get pageNumbers() {
-      return Array.from({ length: this.totalPages }, (_, index) => index + 1);
-    },
-    setPage(page) {
-      this.currentPage = Math.min(Math.max(1, page), this.totalPages);
-    },
-    nextPage() {
-      this.setPage(this.currentPage + 1);
-    },
-    prevPage() {
-      this.setPage(this.currentPage - 1);
-    }
-  }">
+
+
+
+
+
+<!-- ═══ OUR TEAM PAGE ═══ -->
+<main class="pt-28 md:pt-36 pb-14 bg-[#f8f8f8]">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="mb-10">
-      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Course Directory</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Latest Courses</h1>
-      <div class="gold-bar"></div>
+
+    <!-- Header -->
+    <div class="mb-16 text-center">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Meet Our People</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Our Team</h1>
+      <div class="gold-bar w-32 h-1 bg-[#e6a817] mx-auto"></div>
     </div>
-    <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-8 items-start">
-      <section>
-        <div x-effect="if (currentPage > totalPages) currentPage = totalPages"></div>
-        <div class="space-y-6">
-          <template x-for="course in paginatedCourses" :key="course.title">
-            <article class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
-              <div class="grid md:grid-cols-[240px_minmax(0,1fr)]">
-                <div class="aspect-[4/5] md:aspect-auto bg-gray-100"><img :src="course.image" :alt="course.title" class="w-full h-full object-cover"/></div>
-                <div class="p-6">
-                  <div class="flex flex-wrap gap-2 mb-3 text-xs font-semibold">
-                    <span class="bg-[#e6a817]/20 text-[#b98305] px-2.5 py-1 rounded">Year <span x-text="course.year"></span></span>
-                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded">Term <span x-text="course.term"></span></span>
-                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded" x-text="course.category"></span>
-                  </div>
-                  <h2 class="text-2xl font-bold text-[#0a0a0a] mb-3" x-text="course.title"></h2>
-                  <p class="text-gray-600 leading-relaxed mb-5" x-text="course.description"></p>
-                  <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#b98305] font-semibold hover:underline">Register Now <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                </div>
+
+    <!-- Introduction -->
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <p class="text-gray-600 text-lg leading-relaxed">
+        We are a growing team of passionate educators, trainers, and professionals committed to advancing human resource development in Papua.
+      </p>
+    </div>
+
+    <!-- Alpine.js Team Section -->
+    <div class="max-w-7xl mx-auto" 
+         x-data="{
+           activeTab: 'all',
+           tabs: [
+             { key:'all',                    label:'SF Team' },
+             { key:'englishTutors',          label:'English Tutors' },
+             { key:'computerLiteracyTutors', label:'Computer Literacy Tutors' },
+             { key:'administrationTeam',     label:'Administration Team' },
+             { key:'webDeveloperTeam',       label:'Web Developer Team' },
+             { key:'smeTeam',                label:'Social Media Engagement Team' },
+             { key:'leadershipTeam',         label:'Leadership Team' },
+             { key:'officeManagementTeam',   label:'Office Management Team' }
+           ],
+           members: [
+             {
+               name: 'Elisabeth Jakarimilena',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Elisabeth-Jakarimilena-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/elisabeth-jakarimilena/',
+               email: 'elisabeth.jakarimilena@sagufoundation.org',
+               cats: ['officeManagementTeam']
+             },
+             {
+               name: 'Azarya Patty',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Azarya-Patty-1-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/azaryapatty/',
+               email: 'azarya.patty@sagufoundation.org',
+               cats: ['englishTutors']
+             },
+             {
+               name: 'Diana Kambuaya',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Diana-Kambuaya-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/diana-kambuaya-64182a115/',
+               email: 'diana.kambuaya@sagufoundation.org',
+               cats: ['englishTutors','leadershipTeam']
+             },
+             {
+               name: 'Sonai Morin',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Sonai-Morin-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/sonai-morin-751bbb279/',
+               email: 'sonai.morin@sagufoundation.org',
+               cats: ['englishTutors']
+             },
+             {
+               name: 'Tisha Rumbewas',
+               img:  'https://sagufoundation.org/wp-content/uploads/2024/02/SAGU-Foundation-Tisha-Rumbewas-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/tisha-rumbewas-92065b48/',
+               email: 'tisha.rumbewas@sagufoundation.org',
+               cats: ['leadershipTeam']
+             },
+             {
+               name: 'Samuel Bosawer',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Samuel-Bosawer-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/samuel-bosawer-8a278b239/',
+               email: 'samuel.bosawer@sagufoundation.org',
+               cats: ['computerLiteracyTutors','webDeveloperTeam']
+             },
+             {
+               name: 'Lucia Runggeari',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Lucia-Runggeari-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/lucia-runggeari-659859258/',
+               email: 'lucia.runggeari@sagufoundation.org',
+               cats: ['englishTutors']
+             },
+             {
+               name: 'Zefan Mofu',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Zefan-Mofu-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/zefan-emilyo-mofu-b8639a357',
+               email: 'zefan.mofu@sagufoundation.org',
+               cats: ['smeTeam']
+             },
+             {
+               name: 'Febe Worabay',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Febe-Worabay-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/febeworabay/',
+               email: 'febe.worabay@sagufoundation.org',
+               cats: ['administrationTeam','smeTeam']
+             },
+             {
+               name: 'Enos Okomsaru',
+               img:  'https://sagufoundation.org/wp-content/uploads/2026/01/Enos-Okomsaru.png',
+               linkedin: 'https://www.linkedin.com/company/sagufoundation',
+               email: 'enos.okomsaru@sagufoundation.org',
+               cats: ['officeManagementTeam']
+             },
+             {
+               name: 'Vingky Robaha',
+               img:  'https://sagufoundation.org/wp-content/uploads/2024/02/SAGU-Foundation-Team-Vingky-Robaha-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/vingkyrobaha/',
+               email: 'vingky.robaha@sagufoundation.org',
+               cats: ['administrationTeam']
+             },
+             {
+               name: 'Romibo Rumaikewi',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Romibo-Rumaikewi-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/romibo-rumaikewi-119666183/',
+               email: 'romibo.rumaikewi@sagufoundation.org',
+               cats: ['englishTutors','smeTeam','officeManagementTeam','administrationTeam']
+             },
+             {
+               name: 'Emma Ronsumbre',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Emma-Ronsumbre-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/ronsumbreemmaeunike/',
+               email: 'emma.ronsumbre@sagufoundation.org',
+               cats: ['englishTutors']
+             },
+             {
+               name: 'Janzen Faidiban',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Janzen-Faidiban-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/janzenfaidiban/',
+               email: 'janzen.faidiban@sagufoundation.org',
+               cats: ['computerLiteracyTutors','webDeveloperTeam']
+             },
+             {
+               name: 'Rachel Mansawan',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/04/SAGU-Foundation-Team-Rachel-Mansawan-200x200.png',
+               linkedin: 'https://www.linkedin.com/in/rachelmansawan/',
+               email: 'rachel.mansawan@sagufoundation.org',
+               cats: ['englishTutors']
+             },
+             {
+               name: 'Kanaan Abidondifu',
+               img:  'https://sagufoundation.org/wp-content/uploads/2025/06/SAGU-Foundation-Kanaan-Abidondifu.png',
+               linkedin: 'https://www.linkedin.com/company/sagufoundation',
+               email: 'kanaan.abidondifu@sagufoundation.org',
+               cats: ['englishTutors']
+             }
+           ],
+           get filtered() {
+             if (this.activeTab === 'all') return this.members;
+             return this.members.filter(m => m.cats.includes(this.activeTab));
+           }
+         }">
+
+      <!-- Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <template x-for="tab in tabs" :key="tab.key">
+          <button 
+            @click="activeTab = tab.key"
+            :class="activeTab === tab.key 
+              ? 'bg-[#0a0a0a] text-white shadow-md' 
+              : 'bg-white border border-gray-300 hover:border-[#e6a817] text-gray-700'"
+            class="px-6 py-3 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap">
+            <span x-text="tab.label"></span>
+          </button>
+        </template>
+      </div>
+
+      <!-- Count -->
+      <p class="text-center text-sm text-gray-500 mb-10">
+        Showing <span class="font-semibold text-[#0a0a0a]" x-text="filtered.length"></span> member<span x-show="filtered.length !== 1">s</span>
+      </p>
+
+      <!-- Team Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <template x-for="(member, i) in filtered" :key="member.name">
+          <div class="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300">
+            
+            <!-- Photo -->
+            <div class="relative overflow-hidden">
+              <img :src="member.img" 
+                   :alt="member.name"
+                   class="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105">
+
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end justify-center pb-6 gap-4">
+                
+                <!-- LinkedIn -->
+                <a :href="member.linkedin" 
+                   target="_blank"
+                   class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-[#0a0a0a] hover:bg-[#e6a817] hover:text-white transition-all shadow-lg">
+                  <i class="fa-brands fa-linkedin text-xl"></i>
+                </a>
+
+                <!-- Email -->
+                <a :href="`mailto:${member.email}`" 
+                   class="w-10 h-10 bg-white rounded-2xl flex items-center justify-center text-[#0a0a0a] hover:bg-[#e6a817] hover:text-white transition-all shadow-lg">
+                  <i class="fa-solid fa-envelope text-xl"></i>
+                </a>
               </div>
-            </article>
-          </template>
-          <template x-if="filteredCourses.length === 0">
-            <div class="bg-white border border-gray-200 rounded-md p-6 text-gray-600">
-              No courses match your current filters.
             </div>
-          </template>
-        </div>
-        <div x-show="filteredCourses.length > 0" class="mt-8 flex flex-wrap items-center justify-between gap-3">
-          <p class="text-sm text-gray-600">
-            Showing page <span class="font-semibold" x-text="currentPage"></span> of <span class="font-semibold" x-text="totalPages"></span>
-          </p>
-          <div class="flex items-center gap-2">
-            <button @click="prevPage()" :disabled="currentPage === 1" class="px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-50 disabled:cursor-not-allowed">
-              <i class="fa-solid fa-chevron-left text-xs"></i>
-            </button>
-            <template x-for="page in pageNumbers" :key="'page-' + page">
-              <button @click="setPage(page)" class="min-w-9 px-3 py-2 rounded-md border text-sm font-semibold transition-colors"
-                :class="currentPage === page ? 'border-[#e6a817] bg-[#e6a817] text-black' : 'border-gray-300 bg-white text-gray-700 hover:border-[#e6a817]'">
-                <span x-text="page"></span>
-              </button>
-            </template>
-            <button @click="nextPage()" :disabled="currentPage === totalPages" class="px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-50 disabled:cursor-not-allowed">
-              <i class="fa-solid fa-chevron-right text-xs"></i>
-            </button>
+
+            <!-- Info -->
+            <div class="p-5 text-center">
+              <h3 class="font-bold text-[#0a0a0a] text-[15px] leading-tight" x-text="member.name"></h3>
+            </div>
           </div>
-        </div>
-      </section>
-      <aside class="space-y-6">
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Search</h3>
-          <div class="relative"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input x-model="search" @input="currentPage = 1" type="text" placeholder="Search courses..." class="w-full bg-white border border-gray-300 rounded-md pl-10 pr-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]"/></div>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Year</h3>
-          <select x-model="year" @change="currentPage = 1" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
-            <option value="all">All Years</option>
-            <option value="2026">2026</option>
-            <option value="2025">2025</option>
-            <option value="2024">2024</option>
-          </select>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Term</h3>
-          <select x-model="term" @change="currentPage = 1" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
-            <option value="all">All Terms</option>
-            <option value="1">Term 1</option>
-            <option value="2">Term 2</option>
-            <option value="3">Term 3</option>
-            <option value="4">Term 4</option>
-          </select>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Course Categories</h3>
-          <ul class="space-y-2 text-gray-700">
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">General English</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">IELTS/TOEFL Preparation</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">IELTS/TOEFL Simulation Test</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">Computer Literacy</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">Community Development</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">Internship</a></li>
-            <li><a href="#" class="hover:text-[#b98305] transition-colors">Scholarship Club</a></li>
-          </ul>
-        </div>
-        <div class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-md p-5">
-          <h3 class="text-[#b98305] font-extrabold text-xl mb-2">Need a Private Class?</h3>
-          <p class="text-gray-700 mb-4">Get a personalized learning plan tailored to your goal and schedule.</p>
-          <a href="index.html#contact" class="inline-flex items-center justify-center w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all"><i class="fa-solid fa-comments mr-2"></i>Go to Contact Page</a>
-        </div>
-      </aside>
+        </template>
+      </div>
     </div>
+
+    <!-- Join Us -->
+    <div class="mt-20 bg-[#0a0a0a] text-white rounded-3xl p-12 md:p-16 text-center">
+      <i class="fa-solid fa-hands-holding-circle text-[#e6a817] text-5xl mb-6"></i>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Want to Join Our Team?</h2>
+      <p class="max-w-xl mx-auto text-gray-300 mb-8">
+        We're always looking for passionate individuals who want to contribute to human resource development in Papua.
+      </p>
+      <a href="#" class="inline-flex items-center gap-3 bg-[#e6a817] hover:bg-amber-400 text-[#0a0a0a] font-bold px-10 py-5 rounded-2xl transition-all">
+        Explore Internship & Opportunities
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
   </div>
 </main>
+
+
+
+
+
 
 <footer class="bg-black text-gray-400 py-16 border-t border-white/5">
   <div class="max-w-7xl mx-auto px-6">
