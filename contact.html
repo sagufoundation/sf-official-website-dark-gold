@@ -40,6 +40,12 @@
     .nav-link.active { color:#e6a817; }
     .nav-link.active::after { width:100%; }
     .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    .form-control-custom { transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease; }
+    .form-control-custom.is-invalid { border-color:#dc2626 !important; background:#fff7f7; }
+    .form-control-custom.is-valid { border-color:#16a34a !important; }
+    .form-error { margin-top:.4rem; min-height:1rem; font-size:.78rem; line-height:1.2; color:#dc2626; }
+    input[type='checkbox'].form-control-custom.is-invalid { outline:2px solid #dc2626; outline-offset:2px; border-radius:4px; }
+    input[type='checkbox'].form-control-custom.is-valid { outline:2px solid #16a34a; outline-offset:2px; border-radius:4px; }
     [x-cloak]{display:none}
   </style>
   <script type="application/ld+json">
@@ -101,37 +107,31 @@
             </div>
           </li>
         </ul>
-
-        <div class="mt-8 pt-6 border-t border-gray-200">
-          <h3 class="text-lg font-bold text-[#0a0a0a] mb-3">Office Hours</h3>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li class="flex justify-between"><span>Monday - Friday</span><span>08:00 - 17:00 WIT</span></li>
-            <li class="flex justify-between"><span>Saturday</span><span>09:00 - 13:00 WIT</span></li>
-            <li class="flex justify-between"><span>Sunday</span><span>Closed</span></li>
-          </ul>
-        </div>
       </section>
 
       <section class="bg-white border border-gray-200 rounded-md p-8 shadow-sm">
         <h2 class="text-2xl font-bold text-[#0a0a0a] mb-6">Send Us a Message</h2>
-        <form action="#" method="post" class="space-y-5">
+        <form id="contact-form" action="#" method="post" class="space-y-5" novalidate>
           <div>
             <label for="full-name" class="block text-sm text-gray-700 font-semibold mb-2">Full Name</label>
-            <input id="full-name" name="full_name" type="text" required class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Enter your full name"/>
+            <input id="full-name" name="full_name" type="text" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Enter your full name"/>
+            <p id="error-full-name" class="form-error"></p>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
               <label for="phone-number" class="block text-sm text-gray-700 font-semibold mb-2">Phone Number</label>
-              <input id="phone-number" name="phone_number" type="tel" required class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="e.g. +62 813 0000 0000"/>
+              <input id="phone-number" name="phone_number" type="tel" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="e.g. +62 813 0000 0000"/>
+              <p id="error-phone-number" class="form-error"></p>
             </div>
             <div>
               <label for="email-address" class="block text-sm text-gray-700 font-semibold mb-2">Email Address</label>
-              <input id="email-address" name="email_address" type="email" required class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="you@example.com"/>
+              <input id="email-address" name="email_address" type="email" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="you@example.com"/>
+              <p id="error-email-address" class="form-error"></p>
             </div>
           </div>
           <div>
             <label for="topic" class="block text-sm text-gray-700 font-semibold mb-2">Topic</label>
-            <select id="topic" name="topic" required class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
+            <select id="topic" name="topic" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
               <option value="">Select a topic</option>
               <option value="Private Class">Private Class</option>
               <option value="Collaboration">Collaboration</option>
@@ -141,15 +141,18 @@
               <option value="Course Consultation">Course Consultation</option>
               <option value="General Inquiry">General Inquiry</option>
             </select>
+            <p id="error-topic" class="form-error"></p>
           </div>
           <div>
             <label for="message" class="block text-sm text-gray-700 font-semibold mb-2">Message</label>
-            <textarea id="message" name="message" rows="5" required class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Write your message here..."></textarea>
+            <textarea id="message" name="message" rows="5" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Write your message here..."></textarea>
+            <p id="error-message" class="form-error"></p>
           </div>
           <label class="flex items-start gap-3 text-gray-600 text-sm">
-            <input type="checkbox" name="confirmation" required class="mt-1 accent-[#e6a817]"/>
+            <input id="confirmation" type="checkbox" name="confirmation" required class="form-control-custom mt-1 accent-[#e6a817]"/>
             <span>I confirm that the information above is correct and I agree to be contacted by the SAGU Foundation team.</span>
           </label>
+          <p id="error-confirmation" class="form-error pl-8"></p>
           <button type="submit" class="w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-6 py-3.5 rounded-md transition-all">
             <i class="fa-solid fa-paper-plane mr-2"></i>Send Message
           </button>
@@ -188,6 +191,83 @@
 
 
 
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form) return;
+
+      var fieldConfigs = [
+        { id: 'full-name', message: 'Full Name wajib diisi.' },
+        { id: 'phone-number', message: 'Phone Number wajib diisi.' },
+        { id: 'email-address', message: 'Email Address wajib diisi dengan format yang benar.' },
+        { id: 'topic', message: 'Silakan pilih topic.' },
+        { id: 'message', message: 'Message wajib diisi.' },
+        { id: 'confirmation', message: 'Silakan centang konfirmasi sebelum kirim pesan.' }
+      ];
+
+      function isValidField(field) {
+        if (field.type === 'checkbox') return field.checked;
+        var value = field.value.trim();
+        if (!value) return false;
+        if (field.type === 'email') {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+        return true;
+      }
+
+      function setFieldState(field, isValid, message) {
+        var errorElement = document.getElementById('error-' + field.id);
+        field.classList.remove('is-invalid', 'is-valid');
+        if (isValid) {
+          field.classList.add('is-valid');
+          if (errorElement) errorElement.textContent = '';
+          return;
+        }
+        field.classList.add('is-invalid');
+        if (errorElement) errorElement.textContent = message;
+      }
+
+      function validateField(config) {
+        var field = document.getElementById(config.id);
+        if (!field) return true;
+        var valid = isValidField(field);
+        setFieldState(field, valid, config.message);
+        return valid;
+      }
+
+      fieldConfigs.forEach(function (config) {
+        var field = document.getElementById(config.id);
+        if (!field) return;
+        var eventName = field.type === 'checkbox' || field.tagName === 'SELECT' ? 'change' : 'input';
+        field.addEventListener(eventName, function () {
+          validateField(config);
+        });
+        field.addEventListener('blur', function () {
+          validateField(config);
+        });
+      });
+
+      form.addEventListener('submit', function (event) {
+        var firstInvalidField = null;
+        var allValid = true;
+
+        fieldConfigs.forEach(function (config) {
+          var field = document.getElementById(config.id);
+          if (!field) return;
+          var valid = validateField(config);
+          if (!valid) {
+            allValid = false;
+            if (!firstInvalidField) firstInvalidField = field;
+          }
+        });
+
+        if (!allValid) {
+          event.preventDefault();
+          if (firstInvalidField) firstInvalidField.focus();
+        }
+      });
+    })();
+  </script>
   <script src="js/whatsapp-floating-button.js"></script>
   <div id="sf-footer-partial-root"></div>
   <script src="js/footer-partial.js"></script>

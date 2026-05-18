@@ -70,9 +70,19 @@
         '.sfh-mobile-links details{border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:4px 12px;background:rgba(255,255,255,.03);}',
         '.sfh-mobile-links details a{display:block;padding:6px 0 6px 8px;font-size:14px;font-weight:500;color:#c7c7c7;}',
         '.sfh-mobile-links details a.active{color:#e6a817;}',
+        '.sfh-main-offset{padding-top:112px !important;}',
+        '.sfh-breadcrumb{margin-bottom:20px;}',
+        '.sfh-breadcrumb-inner{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}',
+        '.sfh-breadcrumb-path{display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.4;color:#6b7280;}',
+        '.sfh-breadcrumb-path a{text-decoration:none;color:#111827;font-weight:600;}',
+        '.sfh-breadcrumb-path a:hover{color:#e6a817;}',
+        '.sfh-breadcrumb-current{color:#111827;font-weight:700;}',
+        '.sfh-breadcrumb-cta{text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;padding:7px 12px;border-radius:999px;border:1px solid rgba(230,168,23,.45);background:rgba(230,168,23,.12);color:#111827;transition:all .2s ease;}',
+        '.sfh-breadcrumb-cta:hover{background:#e6a817;border-color:#e6a817;color:#111827;}',
         '@media (max-width:1439px){.sfh-mega-grid{grid-template-columns:repeat(4,minmax(0,1fr));}}',
         '@media (max-width:1279px){.sfh-mega-grid{grid-template-columns:repeat(3,minmax(0,1fr));}}',
         '@media (min-width:768px){.sfh-topbar{display:block;}}',
+        '@media (max-width:640px){.sfh-breadcrumb-inner{align-items:flex-start;}.sfh-breadcrumb-cta{font-size:11px;padding:6px 10px;}}',
         '@media (min-width:1024px){.sfh-nav{display:flex;}.sfh-mobile-toggle,.sfh-mobile-panel{display:none !important;}}'
       ].join('');
       document.head.appendChild(style);
@@ -178,6 +188,59 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+    function toTitleCase(text) {
+      return String(text || '')
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .replace(/\b\w/g, function (char) { return char.toUpperCase(); });
+    }
+
+    function resolvePageName() {
+      var rawTitle = String(document.title || '').trim();
+      if (rawTitle) {
+        var titlePart = rawTitle.split('|')[0].trim();
+        if (titlePart) return titlePart;
+      }
+
+      var mainHeading = document.querySelector('main h1');
+      if (mainHeading && mainHeading.textContent.trim()) {
+        return mainHeading.textContent.trim();
+      }
+
+      var slug = (window.location.pathname.split('/').pop() || '').replace(/\.html$/i, '');
+      return slug ? toTitleCase(slug) : 'Page';
+    }
+
+    function injectBreadcrumb() {
+      var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+      if (currentPage === 'index.html' || currentPage === '') return;
+
+      var main = document.querySelector('main');
+      if (!main || main.querySelector('#sfh-breadcrumb')) return;
+
+      var pageName = resolvePageName();
+      var breadcrumb = document.createElement('div');
+      breadcrumb.id = 'sfh-breadcrumb';
+      breadcrumb.className = 'sfh-breadcrumb';
+      breadcrumb.innerHTML = [
+        '<div class=\"sfh-breadcrumb-inner\">',
+        '  <p class=\"sfh-breadcrumb-path\">',
+        '    <a href=\"index.html\">Home</a>',
+        '    <span aria-hidden=\"true\">&gt;</span>',
+        '    <span class=\"sfh-breadcrumb-current\">' + escapeHtml(pageName) + '</span>',
+        '  </p>',
+        '  <a href=\"courses.html\" class=\"sfh-breadcrumb-cta\">View All Courses: courses.html</a>',
+        '</div>'
+      ].join('');
+
+      var computedPaddingTop = parseFloat(window.getComputedStyle(main).paddingTop || '0');
+      if (computedPaddingTop < 90) {
+        main.classList.add('sfh-main-offset');
+      }
+
+      main.insertBefore(breadcrumb, main.firstChild);
+    }
 
     function extractPrograms(payload) {
       if (Array.isArray(payload)) return payload;
@@ -264,6 +327,8 @@
         link.setAttribute('aria-current', 'page');
       }
     });
+
+    injectBreadcrumb();
   }
 
   if (document.readyState === 'loading') {

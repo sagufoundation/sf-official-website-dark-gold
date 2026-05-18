@@ -21,14 +21,82 @@
   <meta name="twitter:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
   <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
   <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background:#f5f5f5; color:#0a0a0a; }
+    .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    [x-cloak]{display:none}
+  </style>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
   </script>
 </head>
 <body>
-  <main>
-    <h1>Site Map</h1>
-    <p>This page is being prepared. Please check back soon.</p>
+  <main class="pt-28 md:pt-36 pb-14">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="mb-10 text-center">
+        <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Navigation</p>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Site Map</h1>
+        <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
+        <p class="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed">
+          Explore all main sections of SAGU Foundation website from this page.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <section class="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-[#0a0a0a] mb-4">Main Pages</h2>
+          <ul class="space-y-2 text-gray-700">
+            <li><a href="index.html" class="hover:text-[#e6a817] transition-colors">Home</a></li>
+            <li><a href="who-we-are.html" class="hover:text-[#e6a817] transition-colors">Who We Are</a></li>
+            <li><a href="what-we-do.html" class="hover:text-[#e6a817] transition-colors">What We Do</a></li>
+            <li><a href="strategic-direction.html" class="hover:text-[#e6a817] transition-colors">Our Strategic &amp; Direction</a></li>
+            <li><a href="team.html" class="hover:text-[#e6a817] transition-colors">Our Team</a></li>
+            <li><a href="contact.html" class="hover:text-[#e6a817] transition-colors">Contact</a></li>
+          </ul>
+        </section>
+        <section class="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-[#0a0a0a] mb-4">Programs</h2>
+          <ul class="space-y-2 text-gray-700">
+            <li><a href="programs.html" class="hover:text-[#e6a817] transition-colors">Programs</a></li>
+            <li><a href="courses.html" class="hover:text-[#e6a817] transition-colors">Courses</a></li>
+            <li><a href="sup-2020.html" class="hover:text-[#e6a817] transition-colors">SUP 2020</a></li>
+            <li><a href="sup-2021.html" class="hover:text-[#e6a817] transition-colors">SUP 2021</a></li>
+            <li><a href="sup-tutors.html" class="hover:text-[#e6a817] transition-colors">SUP Tutors</a></li>
+          </ul>
+        </section>
+        <section class="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-[#0a0a0a] mb-4">Reports &amp; Publications</h2>
+          <ul class="space-y-2 text-gray-700">
+            <li><a href="annual-reports.html" class="hover:text-[#e6a817] transition-colors">Annual Reports</a></li>
+            <li><a href="events.html" class="hover:text-[#e6a817] transition-colors">Events</a></li>
+            <li><a href="blog.html" class="hover:text-[#e6a817] transition-colors">Blog</a></li>
+            <li><a href="gallery.html" class="hover:text-[#e6a817] transition-colors">Gallery</a></li>
+          </ul>
+        </section>
+        <section class="bg-white border border-gray-200 rounded-md p-6 shadow-sm">
+          <h2 class="text-xl font-bold text-[#0a0a0a] mb-4">Network</h2>
+          <ul class="space-y-2 text-gray-700">
+            <li><a href="partners.html" class="hover:text-[#e6a817] transition-colors">Partners</a></li>
+            <li><a href="collaborators.html" class="hover:text-[#e6a817] transition-colors">Collaborators</a></li>
+          </ul>
+        </section>
+        <section class="bg-white border border-gray-200 rounded-md p-6 shadow-sm md:col-span-2 lg:col-span-2">
+          <h2 class="text-xl font-bold text-[#0a0a0a] mb-4">Legal &amp; Information</h2>
+          <ul class="grid sm:grid-cols-2 gap-2 text-gray-700">
+            <li><a href="privacy-policy.html" class="hover:text-[#e6a817] transition-colors">Privacy Policy</a></li>
+            <li><a href="term-condition.html" class="hover:text-[#e6a817] transition-colors">Terms &amp; Conditions</a></li>
+            <li><a href="faq.html" class="hover:text-[#e6a817] transition-colors">FAQ</a></li>
+            <li><a href="site-map.html" class="hover:text-[#e6a817] transition-colors">Site Map</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
   </main>
   <script src="js/whatsapp-floating-button.js"></script>
   <div id="sf-footer-partial-root"></div>

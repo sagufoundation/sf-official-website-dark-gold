@@ -68,7 +68,7 @@
           <template x-for="course in courses" :key="course.id ? 'course-' + course.id : course.slug">
             <article class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
               <div class="grid md:grid-cols-[240px_minmax(0,1fr)]">
-                <div class="aspect-[4/5] md:aspect-auto bg-gray-100"><img :src="course.image" :alt="course.title" class="w-full h-full object-cover"/></div>
+                <div class="aspect-[4/5] bg-gray-100"><img :src="course.image" :alt="course.title" class="w-full h-full object-contain bg-white p-2"/></div>
                 <div class="p-6">
                   <div class="flex flex-wrap gap-2 mb-3 text-xs font-semibold">
                     <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded">Term <span x-text="course.term"></span></span>
