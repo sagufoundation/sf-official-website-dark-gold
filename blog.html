@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ mobileMenu: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | SAGU Foundation</title>
+  <meta name="description" content="Baca artikel, cerita kegiatan, dan pembaruan dampak terbaru dari SAGU Foundation." />
+  <meta name="keywords" content="SAGU Foundation, Papua, education, community development, English program" />
+  <meta name="author" content="SAGU Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sagufoundation.org/blog.html" />
+  <meta property="og:title" content="Blog | SAGU Foundation" />
+  <meta property="og:description" content="Baca artikel, cerita kegiatan, dan pembaruan dampak terbaru dari SAGU Foundation." />
+  <meta property="og:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
+  <meta property="og:url" content="https://sagufoundation.org/blog.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SAGU Foundation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog | SAGU Foundation" />
+  <meta name="twitter:description" content="Baca artikel, cerita kegiatan, dan pembaruan dampak terbaru dari SAGU Foundation." />
+  <meta name="twitter:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
+  <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
+  <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background:#f5f5f5; color:#0a0a0a; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:#e6a817; transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .topbar-link { position:relative; }
+    .topbar-link::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#e6a817; transition:width .3s ease; }
+    .topbar-link:hover::after { width:100%; }
+    .topbar-link.active { color:#e6a817; }
+    .topbar-link.active::after { width:100%; }
+    .nav-link.active { color:#e6a817; }
+    .nav-link.active::after { width:100%; }
+    .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    [x-cloak]{display:none}
+  </style>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
+  </script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+<main class="pt-28 md:pt-36 pb-14" 
+  x-data="{
+    search: '',
+    year: 'all',
+    category: 'all',
+    currentPage: 1,
+    itemsPerPage: 6,
+    posts: [
+      {
+        title: 'English Fun Day With Books',
+        image: './images/blog/english-fun-day-with-books.jpg',
+        date: '2025-08-23',
+        year: '2025',
+        category: 'Community Development',
+        excerpt: 'A community literacy project introducing English to children in Hobong Village through fun, interactive activities.'
+      },
+      {
+        title: '1-Day Training Workshop For GKI Sunday School Teachers',
+        image: './images/blog/1-Day-Training-Workshop-For-GKI-Sunday-School-Teachers-SF.jpg',
+        date: '2025-08-09',
+        year: '2025',
+        category: 'Community Development',
+        excerpt: 'Equipping Sunday School teachers with practical methods to teach English using songs, prayers, and Bible stories.'
+      },
+      {
+        title: 'Strengthening Digital Skills for Learning and Work: A Community Development Program for Fategomi Youth in Jayapura',
+        image: './images/blog/Strengthening-Digital-Skills-for-Learning-and-Work-A-Community-Development-Program-for-Fategomi-Youth-in-Jayapura.jpg',
+        date: '2025-08-31',
+        year: '2025',
+        category: 'Community Development',
+        excerpt: 'Google Apps training to enhance digital literacy among Fategomi youth living in Jayapura.'
+      }
+    ],
+    get filteredPosts() {
+      return this.posts.filter((post) => {
+        const matchSearch = this.search === '' || 
+          post.title.toLowerCase().includes(this.search.toLowerCase()) || 
+          post.excerpt.toLowerCase().includes(this.search.toLowerCase());
+        const matchYear = this.year === 'all' || post.year === this.year;
+        const matchCategory = this.category === 'all' || post.category === this.category;
+        return matchSearch && matchYear && matchCategory;
+      });
+    },
+    get totalPages() { return Math.max(1, Math.ceil(this.filteredPosts.length / this.itemsPerPage)); },
+    get paginatedPosts() {
+      const start = (this.currentPage - 1) * this.itemsPerPage;
+      return this.filteredPosts.slice(start, start + this.itemsPerPage);
+    }
+  }">
+
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Header -->
+    <div class="mb-12 text-center">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Articles, Stories & Impact</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Our Blog</h1>
+      <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
+    </div>
+
+    <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-8 items-start">
+
+      <!-- MAIN BLOG CONTENT -->
+      <section>
+        <div class="space-y-8">
+          <template x-for="post in paginatedPosts" :key="post.title">
+            <article class="blog-card bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm">
+              
+              <!-- Landscape Image -->
+              <div class="relative">
+                <img :src="post.image" :alt="post.title" 
+                     class="w-full aspect-video object-cover">
+              </div>
+
+              <!-- Content -->
+              <div class="p-6 md:p-8">
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-xs font-medium bg-[#e6a817]/10 text-[#e6a817] px-3 py-1 rounded-full" x-text="post.year"></span>
+                  <span class="text-xs font-medium bg-gray-100 px-3 py-1 rounded-full" x-text="post.category"></span>
+                </div>
+                
+                <h2 class="text-2xl font-bold leading-tight mb-4" x-text="post.title"></h2>
+                <p class="text-gray-600 leading-relaxed mb-6" x-text="post.excerpt"></p>
+                
+                <a href="#" 
+                   class="inline-flex items-center gap-2 text-[#e6a817] font-semibold hover:underline">
+                  Read More 
+                  <i class="fa-solid fa-arrow-right text-sm"></i>
+                </a>
+              </div>
+            </article>
+          </template>
+        </div>
+
+        <!-- Pagination -->
+        <div x-show="filteredPosts.length > 0" class="mt-12 flex justify-between items-center">
+          <p class="text-sm text-gray-600">
+            Page <span class="font-semibold" x-text="currentPage"></span> of <span class="font-semibold" x-text="totalPages"></span>
+          </p>
+          <div class="flex gap-3">
+            <button @click="currentPage--" :disabled="currentPage === 1" 
+                    class="px-5 py-3 border rounded-2xl hover:border-[#e6a817] disabled:opacity-50">Previous</button>
+            <button @click="currentPage++" :disabled="currentPage === totalPages" 
+                    class="px-5 py-3 border rounded-2xl hover:border-[#e6a817] disabled:opacity-50">Next</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="space-y-6">
+
+        <!-- Search -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+          <h3 class="font-bold text-lg mb-4">Search Articles</h3>
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            <input x-model="search" @input="currentPage = 1" 
+                   type="text" placeholder="Search blog..." 
+                   class="w-full pl-11 pr-4 py-4 border border-gray-300 rounded-3xl focus:outline-none focus:border-[#e6a817]">
+          </div>
+        </div>
+
+        <!-- Filter by Year -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+          <h3 class="font-bold text-lg mb-4">Filter by Year</h3>
+          <select x-model="year" @change="currentPage = 1" 
+                  class="w-full border border-gray-300 rounded-3xl px-5 py-4 focus:outline-none focus:border-[#e6a817]">
+            <option value="all">All Years</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+          </select>
+        </div>
+
+        <!-- Categories -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+          <h3 class="font-bold text-lg mb-4">Categories</h3>
+          <ul class="space-y-3 text-gray-700">
+            <li><a href="#" @click.prevent="category='all';currentPage=1" class="hover:text-[#e6a817] transition-colors block" :class="{ 'text-[#e6a817] font-semibold': category === 'all' }">All Articles</a></li>
+            <li><a href="#" @click.prevent="category='Community Development';currentPage=1" class="hover:text-[#e6a817] transition-colors block">Community Development</a></li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+  <script src="js/whatsapp-floating-button.js"></script>
+  <div id="sf-footer-partial-root"></div>
+  <script src="js/footer-partial.js"></script>
+  <script src="js/header-partial.js"></script>
+</body>
+</html>

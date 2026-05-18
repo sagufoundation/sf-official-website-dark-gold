@@ -1,0 +1,12 @@
+# Aktifkan Rewrite Engine
+RewriteEngine On
+
+# Hilangkan .html dari URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)\.html$ $1 [L,R=301]
+
+# Izinkan mengakses tanpa .html (jika user ketik tanpa .html)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ $1.html [L]

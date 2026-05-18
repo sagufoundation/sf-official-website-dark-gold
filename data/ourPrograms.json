@@ -1,0 +1,202 @@
+{
+  "programs": [
+    {
+      "id": "general-english",
+      "title": "General English",
+      "description": "Basic English language learning materials covering grammar, vocabulary, and communication.",
+      "detailDescription": "General English is designed to build confident and practical communication skills in daily and academic contexts. Participants strengthen core grammar, vocabulary, pronunciation, and all four language skills through guided practice.",
+      "highlights": [
+        "Integrated speaking, listening, reading, and writing practice",
+        "Contextual grammar and vocabulary for daily communication",
+        "Interactive activities with feedback from tutors"
+      ],
+      "idealFor": [
+        "Beginner to intermediate English learners",
+        "Students preparing for higher-level English programs",
+        "Professionals who want to improve daily communication"
+      ],
+      "ctaLabel": "Register on SF Connect",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-general-english.png",
+      "imageAlt": "General English",
+      "menuHref": "program-detail.html?id=general-english",
+      "sectionHref": "program-detail.html?id=general-english"
+    },
+    {
+      "id": "ielts-preparation",
+      "title": "IELTS Preparation",
+      "description": "Resources specifically tailored to help individuals get ready for the IELTS exam.",
+      "detailDescription": "IELTS Preparation focuses on exam readiness with strategy-based learning for Listening, Reading, Writing, and Speaking. Participants learn the test format, scoring criteria, and time-management techniques through structured drills and simulations.",
+      "highlights": [
+        "Focused training for all four IELTS sections",
+        "Practice with exam-style questions and simulations",
+        "Guidance on scoring criteria and answer strategy"
+      ],
+      "idealFor": [
+        "Learners targeting IELTS for study or career pathways",
+        "Students applying for scholarship opportunities",
+        "Participants needing structured IELTS guidance"
+      ],
+      "ctaLabel": "Explore IELTS Courses",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-ielts-preparation.png",
+      "imageAlt": "IELTS Preparation",
+      "menuHref": "program-detail.html?id=ielts-preparation",
+      "sectionHref": "program-detail.html?id=ielts-preparation"
+    },
+    {
+      "id": "toefl-preparation",
+      "title": "TOEFL Preparation",
+      "description": "Materials designed to assist with preparation for the TOEFL exam.",
+      "detailDescription": "TOEFL Preparation equips learners with the academic English skills and test strategies required for TOEFL performance. The program emphasizes comprehension accuracy, structured responses, and consistent score improvement through guided practice.",
+      "highlights": [
+        "Skill-based preparation for TOEFL test components",
+        "Academic reading and listening comprehension drills",
+        "Writing and speaking response practice with tutor feedback"
+      ],
+      "idealFor": [
+        "Students preparing for international study requirements",
+        "Learners aiming to improve TOEFL performance",
+        "Participants needing exam-focused academic English support"
+      ],
+      "ctaLabel": "Explore TOEFL Courses",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-toefl-preparation.png",
+      "imageAlt": "TOEFL Preparation",
+      "menuHref": "program-detail.html?id=toefl-preparation",
+      "sectionHref": "program-detail.html?id=toefl-preparation"
+    },
+    {
+      "id": "general-english-placement-test",
+      "title": "General English Placement Test",
+      "description": "Assessments designed to determine your current level of proficiency in English and place you in the appropriate learning program.",
+      "detailDescription": "The General English Placement Test maps each learner’s current proficiency level before class placement. This helps ensure participants enter the most suitable class level for faster progress and effective learning outcomes.",
+      "highlights": [
+        "Initial proficiency mapping for accurate class placement",
+        "Assessment of grammar, vocabulary, and communication basics",
+        "Recommendation for suitable learning level and next steps"
+      ],
+      "idealFor": [
+        "New participants joining English programs",
+        "Learners who want to identify their current level",
+        "Students seeking personalized learning pathways"
+      ],
+      "ctaLabel": "Start Placement Process",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-general-english-preparation.png",
+      "imageAlt": "General English Placement Test",
+      "menuHref": "program-detail.html?id=general-english-placement-test",
+      "sectionHref": "program-detail.html?id=general-english-placement-test"
+    },
+    {
+      "id": "ielts-simulation-test",
+      "title": "IELTS Simulation Test",
+      "description": "Practice tests mimicking the structure and format of the IELTS exam.",
+      "detailDescription": "IELTS Simulation Test provides realistic exam simulation so participants can measure readiness before taking the official test. Through timed sessions and structured review, learners identify strengths and improvement areas clearly.",
+      "highlights": [
+        "Full-format IELTS simulation experience",
+        "Timed practice to build exam stamina and confidence",
+        "Post-test review to map strengths and improvement points"
+      ],
+      "idealFor": [
+        "IELTS candidates nearing their test date",
+        "Learners who need readiness benchmarking",
+        "Students practicing under exam-like pressure"
+      ],
+      "ctaLabel": "Join IELTS Simulation",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-ielts-simulation-test.png",
+      "imageAlt": "IELTS Simulation Test",
+      "menuHref": "program-detail.html?id=ielts-simulation-test",
+      "sectionHref": "program-detail.html?id=ielts-simulation-test"
+    },
+    {
+      "id": "toefl-simulation-test",
+      "title": "TOEFL Simulation Test",
+      "description": "Practice exams replicating the format and content of the TOEFL test.",
+      "detailDescription": "TOEFL Simulation Test allows participants to experience the TOEFL structure in a controlled environment before taking the official exam. It supports readiness evaluation and helps learners adjust study priorities based on performance.",
+      "highlights": [
+        "Realistic TOEFL-style test simulation",
+        "Structured scoring and readiness feedback",
+        "Focused review for targeted score improvement"
+      ],
+      "idealFor": [
+        "TOEFL candidates preparing for official testing",
+        "Learners needing performance diagnostics",
+        "Students finalizing exam preparation strategies"
+      ],
+      "ctaLabel": "Join TOEFL Simulation",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-toefl-simulation-test.png",
+      "imageAlt": "TOEFL Simulation Test",
+      "menuHref": "program-detail.html?id=toefl-simulation-test",
+      "sectionHref": "program-detail.html?id=toefl-simulation-test"
+    },
+    {
+      "id": "community-development",
+      "title": "Community Development",
+      "description": "Information and resources related to community-focused projects and initiatives.",
+      "detailDescription": "Community Development programs are designed to strengthen local capacity through education-based community initiatives. Activities are contextualized to local needs and encourage collaboration, participation, and sustainable impact.",
+      "highlights": [
+        "Context-based initiatives aligned with local priorities",
+        "Community participation and collaborative implementation",
+        "Education-driven approach for long-term social impact"
+      ],
+      "idealFor": [
+        "Community leaders and local facilitators",
+        "Institutions seeking social-impact collaboration",
+        "Participants interested in grassroots development work"
+      ],
+      "ctaLabel": "Discuss Collaboration",
+      "ctaHref": "contact.html",
+      "image": "images/programs/program-community-development.png",
+      "imageAlt": "Community Development",
+      "menuHref": "program-detail.html?id=community-development",
+      "sectionHref": "program-detail.html?id=community-development"
+    },
+    {
+      "id": "computer-literacy",
+      "title": "Computer Literacy",
+      "description": "Resources and guidance to develop basic skills and understanding in using computers and technology effectively.",
+      "detailDescription": "Computer Literacy builds foundational digital skills needed for study, work, and everyday productivity. Participants learn practical computer usage, internet navigation, basic office tools, and digital communication practices.",
+      "highlights": [
+        "Fundamental computer and digital navigation skills",
+        "Hands-on practice with common productivity tools",
+        "Practical digital communication and online safety awareness"
+      ],
+      "idealFor": [
+        "Beginners who are new to computer use",
+        "Students requiring digital readiness for learning",
+        "Community members improving employability skills"
+      ],
+      "ctaLabel": "Explore Computer Literacy",
+      "ctaHref": "https://connect.sagufoundation.org",
+      "image": "images/programs/program-computer-literacy.png",
+      "imageAlt": "Computer Literacy",
+      "menuHref": "program-detail.html?id=computer-literacy",
+      "sectionHref": "program-detail.html?id=computer-literacy"
+    },
+    {
+      "id": "internship",
+      "title": "Internship",
+      "description": "We welcome enthusiastic students eager to learn, collaborate, and make a difference in the lives of others.",
+      "detailDescription": "The Internship program offers practical learning experiences through real project involvement within SAGU Foundation activities. Interns gain exposure to teamwork, communication, and social-impact workflows while contributing to meaningful initiatives.",
+      "highlights": [
+        "Hands-on experience in real program activities",
+        "Mentored learning with collaborative project tasks",
+        "Professional growth in communication and teamwork"
+      ],
+      "idealFor": [
+        "Students seeking practical field experience",
+        "Young professionals interested in social-impact work",
+        "Learners developing leadership and project skills"
+      ],
+      "ctaLabel": "Apply / Contact Team",
+      "ctaHref": "contact.html",
+      "image": "images/programs/program-internship.png",
+      "imageAlt": "Internship",
+      "menuHref": "program-detail.html?id=internship",
+      "sectionHref": "program-detail.html?id=internship"
+    }
+  ]
+}

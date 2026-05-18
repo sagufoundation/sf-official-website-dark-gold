@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ mobileMenu: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Detail | SAGU Foundation</title>
+  <meta name="description" content="Detail program SAGU Foundation untuk pengembangan pendidikan, bahasa Inggris, dan komunitas di Papua." />
+  <meta name="keywords" content="SAGU Foundation, program detail, Papua, education, English program" />
+  <meta name="author" content="SAGU Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sagufoundation.org/program-detail.html" />
+  <meta property="og:title" content="Program Detail | SAGU Foundation" />
+  <meta property="og:description" content="Lihat detail lengkap program SAGU Foundation." />
+  <meta property="og:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
+  <meta property="og:url" content="https://sagufoundation.org/program-detail.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SAGU Foundation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Program Detail | SAGU Foundation" />
+  <meta name="twitter:description" content="Lihat detail lengkap program SAGU Foundation." />
+  <meta name="twitter:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
+  <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
+  <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background:#f5f5f5; color:#0a0a0a; }
+    .nav-link { position:relative; }
+    .nav-link::after { content:''; position:absolute; left:0; bottom:-3px; width:0; height:2px; background:#e6a817; transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .topbar-link { position:relative; }
+    .topbar-link::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background:#e6a817; transition:width .3s ease; }
+    .topbar-link:hover::after { width:100%; }
+    .topbar-link.active { color:#e6a817; }
+    .topbar-link.active::after { width:100%; }
+    .nav-link.active { color:#e6a817; }
+    .nav-link.active::after { width:100%; }
+    .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    [x-cloak]{display:none}
+  </style>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
+  </script>
+</head>
+<body>
+<main class="pt-28 md:pt-36 pb-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <section id="program-detail-state" class="mb-12 text-center">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Our Programs</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Program Detail</h1>
+      <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
+      <p class="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed">Loading program details...</p>
+    </section>
+    <div id="program-detail-content"></div>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var stateRoot = document.getElementById('program-detail-state');
+    var contentRoot = document.getElementById('program-detail-content');
+    if (!stateRoot || !contentRoot) return;
+
+    function escapeHtml(value) {
+      return String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function extractPrograms(payload) {
+      if (Array.isArray(payload)) return payload;
+      if (payload && Array.isArray(payload.programs)) return payload.programs;
+      return [];
+    }
+
+    function normalizeList(value) {
+      if (!Array.isArray(value)) return [];
+      return value.map(function (item) { return String(item || '').trim(); }).filter(Boolean);
+    }
+
+    function getProgramIdFromQuery() {
+      var params = new URLSearchParams(window.location.search);
+      return String(params.get('id') || '').trim().toLowerCase();
+    }
+
+    function buildProgramDetailHref(program) {
+      if (!program || !program.id) return 'index.html#programs';
+      return 'program-detail.html?id=' + encodeURIComponent(program.id);
+    }
+
+    function renderNotFound(programs) {
+      stateRoot.innerHTML = [
+        '<p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Our Programs</p>',
+        '<h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Program Not Found</h1>',
+        '<div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>',
+        '<p class="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed">Program yang dipilih tidak ditemukan. Pilih program dari daftar berikut.</p>'
+      ].join('');
+
+      if (!Array.isArray(programs) || programs.length === 0) {
+        contentRoot.innerHTML = '<section class="bg-white border border-gray-200 rounded-md p-8 shadow-sm text-center text-gray-600">Program data is unavailable right now.</section>';
+        return;
+      }
+
+      var cards = programs.map(function (program) {
+        var title = escapeHtml(program.title || 'Program');
+        var description = escapeHtml(program.description || '');
+        var image = escapeHtml(program.image || 'images/logo-sagufoundation.png');
+        var imageAlt = escapeHtml(program.imageAlt || title);
+        var href = escapeHtml(buildProgramDetailHref(program));
+        return '<a href="' + href + '" class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all">' +
+          '<img src="' + image + '" alt="' + imageAlt + '" class="w-full h-44 object-cover"/>' +
+          '<div class="p-5 text-left">' +
+          '<h3 class="text-xl font-bold text-[#0a0a0a] mb-2">' + title + '</h3>' +
+          '<p class="text-gray-600 text-sm leading-relaxed">' + description + '</p>' +
+          '</div></a>';
+      }).join('');
+
+      contentRoot.innerHTML = '<section class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">' + cards + '</section>';
+    }
+
+    function renderProgramDetail(program, programs) {
+      var title = escapeHtml(program.title || 'Program');
+      var description = escapeHtml(program.description || '');
+      var detailDescription = escapeHtml(program.detailDescription || program.description || '');
+      var image = escapeHtml(program.image || 'images/logo-sagufoundation.png');
+      var imageAlt = escapeHtml(program.imageAlt || program.title || 'Program');
+      var ctaHref = escapeHtml(program.ctaHref || 'contact.html');
+      var ctaLabel = escapeHtml(program.ctaLabel || 'Contact Us');
+      var highlights = normalizeList(program.highlights);
+      var idealFor = normalizeList(program.idealFor);
+      var highlightsHtml = highlights.length
+        ? highlights.map(function (item) {
+            return '<li class="flex items-start gap-3"><span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span><span class="text-gray-700">' + escapeHtml(item) + '</span></li>';
+          }).join('')
+        : '<li class="text-gray-500">Detail highlights will be updated soon.</li>';
+      var idealForHtml = idealFor.length
+        ? idealFor.map(function (item) {
+            return '<li class="flex items-start gap-3"><span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span><span class="text-gray-700">' + escapeHtml(item) + '</span></li>';
+          }).join('')
+        : '<li class="text-gray-500">Target participants will be updated soon.</li>';
+
+      document.title = (program.title ? program.title + ' | ' : '') + 'Program Detail | SAGU Foundation';
+
+      stateRoot.innerHTML = [
+        '<p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Our Programs</p>',
+        '<h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">' + title + '</h1>',
+        '<div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>',
+        '<p class="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed">' + description + '</p>'
+      ].join('');
+
+      var relatedPrograms = Array.isArray(programs)
+        ? programs.filter(function (item) {
+            return item && item.id && item.id !== program.id;
+          }).slice(0, 3)
+        : [];
+
+      var relatedHtml = relatedPrograms.map(function (item) {
+        var relatedTitle = escapeHtml(item.title || 'Program');
+        var relatedImage = escapeHtml(item.image || 'images/logo-sagufoundation.png');
+        var relatedAlt = escapeHtml(item.imageAlt || item.title || 'Program');
+        var relatedDescription = escapeHtml(item.description || '');
+        var relatedHref = escapeHtml(buildProgramDetailHref(item));
+        return '<a href="' + relatedHref + '" class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all">' +
+          '<img src="' + relatedImage + '" alt="' + relatedAlt + '" class="w-full h-36 object-cover"/>' +
+          '<div class="p-4"><h3 class="font-bold text-[#0a0a0a] mb-1">' + relatedTitle + '</h3><p class="text-gray-600 text-sm leading-relaxed">' + relatedDescription + '</p></div>' +
+          '</a>';
+      }).join('');
+
+      contentRoot.innerHTML = [
+        '<section class="grid lg:grid-cols-5 gap-8 mb-10">',
+        '  <div class="lg:col-span-2 bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">',
+        '    <img src="' + image + '" alt="' + imageAlt + '" class="w-full h-72 object-cover"/>',
+        '    <div class="p-6">',
+        '      <p class="text-xs tracking-[0.15em] uppercase text-[#b98305] font-bold mb-2">Program Overview</p>',
+        '      <p class="text-gray-700 leading-relaxed">' + detailDescription + '</p>',
+        '      <div class="mt-6 flex flex-wrap gap-3">',
+        '        <a href="' + ctaHref + '" class="inline-flex items-center justify-center bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all">',
+        '          <i class="fa-solid fa-circle-right mr-2"></i>' + ctaLabel,
+        '        </a>',
+        '        <a href="index.html#programs" class="inline-flex items-center justify-center border border-gray-300 hover:border-[#e6a817] text-[#0a0a0a] font-semibold px-5 py-3 rounded-md transition-all">',
+        '          <i class="fa-solid fa-arrow-left mr-2"></i>Back to Our Programs',
+        '        </a>',
+        '      </div>',
+        '    </div>',
+        '  </div>',
+        '  <div class="lg:col-span-3 space-y-8">',
+        '    <section class="bg-white border border-gray-200 rounded-md p-7 shadow-sm">',
+        '      <h2 class="text-2xl font-bold text-[#0a0a0a] mb-5">Program Highlights</h2>',
+        '      <ul class="space-y-3">' + highlightsHtml + '</ul>',
+        '    </section>',
+        '    <section class="bg-white border border-gray-200 rounded-md p-7 shadow-sm">',
+        '      <h2 class="text-2xl font-bold text-[#0a0a0a] mb-5">Ideal Participants</h2>',
+        '      <ul class="space-y-3">' + idealForHtml + '</ul>',
+        '    </section>',
+        '  </div>',
+        '</section>',
+        relatedHtml ? '<section><h2 class="text-2xl md:text-3xl font-extrabold text-[#0a0a0a] mb-5">Other Programs</h2><div class="grid md:grid-cols-3 gap-5">' + relatedHtml + '</div></section>' : ''
+      ].join('');
+    }
+
+    var fallbackPrograms = [
+      {
+        id: 'general-english',
+        title: 'General English',
+        description: 'Basic English language learning materials covering grammar, vocabulary, and communication.',
+        detailDescription: 'General English builds practical English communication through integrated skill practice.',
+        highlights: ['Integrated four-skill learning', 'Grammar and vocabulary development'],
+        idealFor: ['Beginner to intermediate learners'],
+        image: 'images/programs/program-general-english.png',
+        imageAlt: 'General English',
+        ctaLabel: 'Register on SF Connect',
+        ctaHref: 'https://connect.sagufoundation.org'
+      },
+      {
+        id: 'ielts-preparation',
+        title: 'IELTS Preparation',
+        description: 'Resources specifically tailored to help individuals get ready for the IELTS exam.',
+        detailDescription: 'IELTS Preparation provides strategy-based guidance for all exam sections.',
+        highlights: ['Exam-format practice', 'Score-focused preparation'],
+        idealFor: ['Learners preparing for IELTS'],
+        image: 'images/programs/program-ielts-preparation.png',
+        imageAlt: 'IELTS Preparation',
+        ctaLabel: 'Explore IELTS Courses',
+        ctaHref: 'https://connect.sagufoundation.org'
+      },
+      {
+        id: 'toefl-preparation',
+        title: 'TOEFL Preparation',
+        description: 'Materials designed to assist with preparation for the TOEFL exam.',
+        detailDescription: 'TOEFL Preparation strengthens academic English and test strategy.',
+        highlights: ['Academic-focused practice', 'TOEFL test strategy'],
+        idealFor: ['Learners preparing for TOEFL'],
+        image: 'images/programs/program-toefl-preparation.png',
+        imageAlt: 'TOEFL Preparation',
+        ctaLabel: 'Explore TOEFL Courses',
+        ctaHref: 'https://connect.sagufoundation.org'
+      }
+    ];
+
+    var requestedId = getProgramIdFromQuery();
+
+    fetch('data/ourPrograms.json')
+      .then(function (response) {
+        if (!response.ok) throw new Error('Failed to load data');
+        return response.json();
+      })
+      .then(function (payload) {
+        var programs = extractPrograms(payload);
+        return programs.length ? programs : fallbackPrograms;
+      })
+      .then(function (programs) {
+        var selectedProgram = null;
+        if (requestedId) {
+          selectedProgram = programs.find(function (program) {
+            return String(program && program.id ? program.id : '').toLowerCase() === requestedId;
+          }) || null;
+        }
+        if (!selectedProgram && !requestedId && programs.length > 0) {
+          selectedProgram = programs[0];
+        }
+        if (!selectedProgram) {
+          renderNotFound(programs);
+          return;
+        }
+        renderProgramDetail(selectedProgram, programs);
+      })
+      .catch(function () {
+        var selectedFallback = null;
+        if (requestedId) {
+          selectedFallback = fallbackPrograms.find(function (program) {
+            return String(program.id || '').toLowerCase() === requestedId;
+          }) || null;
+        }
+        if (!selectedFallback && !requestedId && fallbackPrograms.length > 0) {
+          selectedFallback = fallbackPrograms[0];
+        }
+        if (!selectedFallback) {
+          renderNotFound(fallbackPrograms);
+          return;
+        }
+        renderProgramDetail(selectedFallback, fallbackPrograms);
+      });
+  })();
+</script>
+
+<script src="js/whatsapp-floating-button.js"></script>
+<div id="sf-footer-partial-root"></div>
+<script src="js/footer-partial.js"></script>
+<script src="js/header-partial.js"></script>
+</body>
+</html>
