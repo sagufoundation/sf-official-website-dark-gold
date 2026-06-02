@@ -230,7 +230,7 @@
         '    <span aria-hidden=\"true\">&gt;</span>',
         '    <span class=\"sfh-breadcrumb-current\">' + escapeHtml(pageName) + '</span>',
         '  </p>',
-        '  <a href=\"courses.html\" class=\"sfh-breadcrumb-cta\">View All Courses: courses.html</a>',
+        // '  <a href=\"courses.html\" class=\"sfh-breadcrumb-cta\">View All Courses: courses.html</a>',
         '</div>'
       ].join('');
 
