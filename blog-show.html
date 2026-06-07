@@ -113,9 +113,9 @@
     #back-to-top:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230,168,23,0.5); }
 
     /* Breadcrumb */
-    .breadcrumb-item + .breadcrumb-item::before {
+    /* .breadcrumb-item + .breadcrumb-item::before {
       content: '/'; margin: 0 8px; color: #bbb;
-    }
+    } */
 
     /* TOC styles */
     .toc-link { transition: all 0.2s ease; border-left: 2px solid transparent; }
@@ -174,12 +174,7 @@
     <!-- ======= ARTICLE CONTENT ======= -->
     <div id="article-content" class="hidden">
 
-      <!-- Breadcrumb -->
-      <nav class="flex items-center gap-0 text-sm text-gray-500 mb-8 flex-wrap" id="breadcrumb">
-        <a href="index.html" class="hover:text-[#e6a817] transition breadcrumb-item">Home</a>
-        <a href="blog.html" class="hover:text-[#e6a817] transition breadcrumb-item">Blog</a>
-        <span class="breadcrumb-item text-[#0a0a0a] font-medium truncate max-w-xs" id="breadcrumb-title">Article</span>
-      </nav>
+     
 
       <div class="grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10 items-start">
 
@@ -555,7 +550,7 @@ async function loadArticle() {
     });
 
     // Breadcrumb
-    document.getElementById('breadcrumb-title').textContent = post.title.length > 50 ? post.title.slice(0, 50) + '…' : post.title;
+    // document.getElementById('breadcrumb-title').textContent = post.title.length > 50 ? post.title.slice(0, 50) + '…' : post.title;
 
     // Title
     document.getElementById('article-title').textContent = post.title;
