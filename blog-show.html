@@ -3,33 +3,633 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Article | SAGU Foundation</title>
-  <meta name="description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
+  <title id="page-title">Article | SAGU Foundation</title>
+  <meta id="meta-desc" name="description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
   <meta name="keywords" content="SAGU Foundation, Papua, education, community development" />
   <meta name="author" content="SAGU Foundation" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://sagufoundation.org/blog-show.html" />
-  <meta property="og:title" content="Article | SAGU Foundation" />
-  <meta property="og:description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
-  <meta property="og:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
-  <meta property="og:url" content="https://sagufoundation.org/blog-show.html" />
-  <meta property="og:type" content="website" />
+  <meta id="og-title" property="og:title" content="Article | SAGU Foundation" />
+  <meta id="og-desc" property="og:description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
+  <meta id="og-image" property="og:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
+  <meta id="og-url" property="og:url" content="https://sagufoundation.org/blog-show.html" />
+  <meta property="og:type" content="article" />
   <meta property="og:site_name" content="SAGU Foundation" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Article | SAGU Foundation" />
-  <meta name="twitter:description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
-  <meta name="twitter:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
   <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
   <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
-  <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f5f5; color: #0a0a0a; }
+
+    /* Reading progress bar */
+    #reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #e6a817, #f5c842);
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* Article prose */
+    .prose-article { max-width: none; line-height: 1.85; color: #1a1a1a; }
+    .prose-article p { margin-bottom: 1.35em; font-size: 1.0625rem; }
+    .prose-article h1, .prose-article h2, .prose-article h3, .prose-article h4 {
+      font-weight: 800; color: #0a0a0a; margin: 2em 0 0.8em; line-height: 1.3;
+    }
+    .prose-article h2 { font-size: 1.5rem; padding-bottom: 0.4em; border-bottom: 2px solid #f0f0f0; }
+    .prose-article h3 { font-size: 1.25rem; }
+    .prose-article h4 { font-size: 1.1rem; color: #444; }
+    .prose-article ul, .prose-article ol { padding-left: 1.8em; margin-bottom: 1.35em; }
+    .prose-article ul li, .prose-article ol li { margin-bottom: 0.5em; font-size: 1.0625rem; }
+    .prose-article ul li { list-style-type: disc; }
+    .prose-article ol li { list-style-type: decimal; }
+    .prose-article a { color: #e6a817; text-decoration: underline; font-weight: 500; }
+    .prose-article a:hover { color: #c8900f; }
+    .prose-article strong { font-weight: 700; color: #0a0a0a; }
+    .prose-article em { font-style: italic; }
+    .prose-article blockquote {
+      border-left: 4px solid #e6a817; background: #fef9ee;
+      padding: 1em 1.5em; margin: 1.5em 0; border-radius: 0 12px 12px 0;
+      font-style: italic; color: #555;
+    }
+
+    /* Images in content */
+    .prose-article figure { margin: 2em 0; }
+    .prose-article figure img {
+      width: 100%; border-radius: 16px; object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .prose-article figure.image img { max-height: 520px; }
+
+    /* Tables in content */
+    .prose-article table { width: 100%; border-collapse: collapse; margin: 1.5em 0; border-radius: 12px; overflow: hidden; }
+    .prose-article td, .prose-article th {
+      border: 1px solid #e8e8e8; padding: 12px 16px; text-align: left; font-size: 0.9rem;
+    }
+    .prose-article tr:nth-child(even) td { background: #fafafa; }
+    .prose-article td em { font-size: 0.875rem; color: #666; }
+
+    /* Disclaimer table styling */
+    .prose-article figure.table { background: #fffbf0; border: 1px solid #e6a817/30; border-radius: 12px; overflow: hidden; }
+    .prose-article figure.table td { background: transparent; border: none; padding: 14px 18px; color: #7a6030; font-size: 0.875rem; }
+
+    /* Skeleton shimmer */
+    @keyframes shimmer {
+      0% { background-position: -900px 0; }
+      100% { background-position: 900px 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+      background-size: 900px 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 12px;
+    }
+
+    /* Recommendation card hover */
+    .rec-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .rec-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+
+    /* Share button hover */
+    .share-btn { transition: all 0.2s ease; }
+    .share-btn:hover { transform: scale(1.08); }
+
+    /* Back to top button */
+    #back-to-top {
+      position: fixed; bottom: 90px; right: 24px; z-index: 100;
+      width: 44px; height: 44px;
+      background: #e6a817; color: #0a0a0a;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(230,168,23,0.4);
+      opacity: 0; pointer-events: none; transition: all 0.3s ease;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: all; }
+    #back-to-top:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(230,168,23,0.5); }
+
+    /* Breadcrumb */
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: '/'; margin: 0 8px; color: #bbb;
+    }
+
+    /* TOC styles */
+    .toc-link { transition: all 0.2s ease; border-left: 2px solid transparent; }
+    .toc-link:hover, .toc-link.active { color: #e6a817; border-left-color: #e6a817; padding-left: 12px; }
+
+    @media (min-width: 1024px) {
+      .sticky-sidebar { position: sticky; top: 120px; max-height: calc(100vh - 140px); overflow-y: auto; }
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>Article</h1>
-    <p>This page is being prepared. Please check back soon.</p>
-  </main>
+
+<!-- Reading progress bar -->
+<!-- <div id="reading-progress"></div> -->
+
+<!-- Back to top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <i class="fa-solid fa-arrow-up text-sm"></i>
+</button>
+
+<main class="pt-28 md:pt-36 pb-14">
+  <div class="max-w-7xl mx-auto px-4 md:px-6">
+
+    <!-- ======= LOADING STATE ======= -->
+    <div id="loading-state" class="space-y-6">
+      <!-- Breadcrumb skeleton -->
+      <div class="skeleton h-4 w-64"></div>
+      <!-- Cover skeleton -->
+      <div class="skeleton w-full rounded-3xl" style="height:420px"></div>
+      <!-- Content skeleton -->
+      <div class="max-w-3xl mx-auto space-y-4 mt-8">
+        <div class="skeleton h-5 w-32 rounded-full"></div>
+        <div class="skeleton h-10 w-full"></div>
+        <div class="skeleton h-10 w-4/5"></div>
+        <div class="skeleton h-4 w-48 mt-2"></div>
+        <div class="mt-8 space-y-3">
+          <div class="skeleton h-4 w-full"></div>
+          <div class="skeleton h-4 w-full"></div>
+          <div class="skeleton h-4 w-5/6"></div>
+          <div class="skeleton h-4 w-full"></div>
+          <div class="skeleton h-4 w-3/4"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= ERROR STATE ======= -->
+    <div id="error-state" class="hidden text-center py-24">
+      <i class="fa-solid fa-triangle-exclamation text-[#e6a817] text-6xl mb-6"></i>
+      <h2 class="text-2xl font-bold mb-3">Artikel tidak ditemukan</h2>
+      <p class="text-gray-500 mb-8" id="error-msg">Artikel yang kamu cari tidak tersedia atau telah dihapus.</p>
+      <a href="blog.html" class="inline-flex items-center gap-2 bg-[#e6a817] text-[#0a0a0a] font-bold px-8 py-4 rounded-2xl hover:bg-amber-400 transition">
+        <i class="fa-solid fa-arrow-left"></i> Kembali ke Blog
+      </a>
+    </div>
+
+    <!-- ======= ARTICLE CONTENT ======= -->
+    <div id="article-content" class="hidden">
+
+      <!-- Breadcrumb -->
+      <nav class="flex items-center gap-0 text-sm text-gray-500 mb-8 flex-wrap" id="breadcrumb">
+        <a href="index.html" class="hover:text-[#e6a817] transition breadcrumb-item">Home</a>
+        <a href="blog.html" class="hover:text-[#e6a817] transition breadcrumb-item">Blog</a>
+        <span class="breadcrumb-item text-[#0a0a0a] font-medium truncate max-w-xs" id="breadcrumb-title">Article</span>
+      </nav>
+
+      <div class="grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10 items-start">
+
+        <!-- ===== MAIN ARTICLE ===== -->
+        <article>
+          <!-- Hero Cover Image -->
+          <div class="relative rounded-3xl overflow-hidden shadow-md mb-10">
+            <img id="article-cover"
+                 src="" alt=""
+                 class="w-full object-cover"
+                 style="max-height: 480px; min-height: 260px;"
+                 onerror="this.src='https://placehold.co/1200x480/f5f5f5/cccccc?text=SAGU+Foundation'">
+            <!-- Category badge -->
+            <div class="absolute bottom-5 left-5 flex gap-2 flex-wrap" id="article-badges"></div>
+          </div>
+
+          <!-- Title & Meta -->
+          <div class="mb-8">
+            <h1 id="article-title" class="text-3xl md:text-4xl font-extrabold leading-tight mb-5 text-[#0a0a0a]"></h1>
+
+            <!-- Author + Date + Read time -->
+            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 pb-6 border-b border-gray-200">
+              <div class="flex items-center gap-2">
+                <div class="w-9 h-9 rounded-full bg-[#e6a817]/20 flex items-center justify-center">
+                  <i class="fa-solid fa-user text-[#e6a817] text-xs"></i>
+                </div>
+                <span id="article-author" class="font-semibold text-[#0a0a0a]"></span>
+              </div>
+              <span class="flex items-center gap-1.5">
+                <i class="fa-regular fa-calendar text-[#e6a817]"></i>
+                <span id="article-date"></span>
+              </span>
+              <span class="flex items-center gap-1.5">
+                <i class="fa-regular fa-clock text-[#e6a817]"></i>
+                <span id="article-read-time"></span> min read
+              </span>
+            </div>
+          </div>
+
+          <!-- Share buttons (top) -->
+          <div class="flex items-center gap-3 mb-8 flex-wrap">
+            <span class="text-sm font-semibold text-gray-600">Share:</span>
+            <a id="share-wa" href="#" target="_blank" rel="noopener"
+               class="share-btn flex items-center gap-2 bg-green-50 text-green-600 border border-green-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-green-100">
+              <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+            <a id="share-fb" href="#" target="_blank" rel="noopener"
+               class="share-btn flex items-center gap-2 bg-blue-50 text-blue-600 border border-blue-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-100">
+              <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+            <a id="share-tw" href="#" target="_blank" rel="noopener"
+               class="share-btn flex items-center gap-2 bg-sky-50 text-sky-500 border border-sky-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-sky-100">
+              <i class="fa-brands fa-x-twitter"></i> Twitter
+            </a>
+            <button onclick="copyLink()"
+               class="share-btn flex items-center gap-2 bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-200">
+              <i class="fa-solid fa-link"></i> <span id="copy-label">Copy Link</span>
+            </button>
+          </div>
+
+          <!-- Article Body -->
+          <div id="article-body" class="prose-article" style="text-align: justify;"></div>
+
+          <!-- Tags / Categories (bottom) -->
+          <div class="flex flex-wrap gap-2 mt-10 pt-8 border-t border-gray-200">
+            <span class="text-sm font-semibold text-gray-600 mr-1">Category:</span>
+            <span id="article-cat-tag"
+                  class="text-sm bg-[#e6a817]/15 text-[#8b6110] font-semibold px-4 py-1.5 rounded-full"></span>
+          </div>
+
+          <!-- Author Card -->
+          <div class="mt-8 bg-white border border-gray-200 rounded-3xl p-6 md:p-8 flex gap-5 items-start shadow-sm">
+            <div class="w-14 h-14 rounded-2xl bg-[#e6a817]/20 flex items-center justify-center flex-shrink-0">
+              <i class="fa-solid fa-user-pen text-[#e6a817] text-xl"></i>
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-1 font-semibold">Written by</p>
+              <p id="author-card-name" class="font-extrabold text-xl text-[#0a0a0a] mb-2"></p>
+              <p class="text-sm text-gray-500 leading-relaxed">
+                A member of the SAGU Foundation community, contributing through education, research, and community-based development initiatives in Papua.
+              </p>
+            </div>
+          </div>
+
+          <!-- Navigation: prev/next (simple back) -->
+          <div class="mt-10 flex justify-between items-center">
+            <a href="blog.html"
+               class="inline-flex items-center gap-2 text-[#0a0a0a] font-semibold border border-gray-300 px-6 py-3 rounded-2xl hover:border-[#e6a817] hover:text-[#e6a817] transition">
+              <i class="fa-solid fa-arrow-left"></i> All Articles
+            </a>
+            <!-- Share again (bottom) -->
+            <div class="flex gap-2">
+              <a id="share-wa-bottom" href="#" target="_blank" rel="noopener"
+                 class="share-btn w-10 h-10 flex items-center justify-center bg-green-50 text-green-600 border border-green-200 rounded-xl hover:bg-green-100">
+                <i class="fa-brands fa-whatsapp"></i>
+              </a>
+              <a id="share-fb-bottom" href="#" target="_blank" rel="noopener"
+                 class="share-btn w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-600 border border-blue-200 rounded-xl hover:bg-blue-100">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+              <button onclick="copyLink()"
+                 class="share-btn w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-600 border border-gray-200 rounded-xl hover:bg-gray-200">
+                <i class="fa-solid fa-link text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="sticky-sidebar space-y-6">
+
+          <!-- Table of Contents (dynamic, generated from h2/h3 in content) -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm" id="toc-box" style="display:none">
+            <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+              <i class="fa-solid fa-list-ul text-[#e6a817]"></i> Table of Contents
+            </h3>
+            <ul id="toc-list" class="space-y-2 text-sm"></ul>
+          </div>
+
+          <!-- Article Info Card -->
+          <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm">
+            <h3 class="font-bold text-base mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-circle-info text-[#e6a817]"></i> Article Info
+            </h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-gray-500">Published</span>
+                <span class="font-semibold" id="sidebar-date"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-500">Author</span>
+                <span class="font-semibold" id="sidebar-author"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-500">Category</span>
+                <span class="font-semibold" id="sidebar-cat"></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-500">Read Time</span>
+                <span class="font-semibold" id="sidebar-readtime"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <div class="bg-[#0a0a0a] text-white rounded-3xl p-5 text-center">
+            <i class="fa-solid fa-graduation-cap text-[#e6a817] text-3xl mb-3"></i>
+            <h3 class="font-bold text-base mb-2">Join Our Programs</h3>
+            <p class="text-gray-400 text-xs mb-4">Jadilah bagian dari perubahan positif di Papua.</p>
+            <a href="courses.html"
+               class="inline-block bg-[#e6a817] hover:bg-amber-400 text-[#0a0a0a] font-bold px-4 py-2.5 rounded-xl text-sm transition-all">
+              Browse Courses <i class="fa-solid fa-arrow-right ml-1"></i>
+            </a>
+          </div>
+
+        </aside>
+      </div>
+
+      <!-- ======= RECOMMENDED ARTICLES ======= -->
+      <section class="mt-16 pt-10 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <p class="text-[#e6a817] text-xs tracking-widest uppercase font-bold mb-1">Keep Reading</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold">Recommended Articles</h2>
+          </div>
+          <a href="blog.html" class="text-sm font-semibold text-gray-500 hover:text-[#e6a817] transition hidden sm:block">
+            View All <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+
+        <!-- Loading skeletons for recs -->
+        <div id="recs-loading" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <template id="rec-skeleton-tpl">
+            <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm">
+              <div class="skeleton w-full" style="height:180px"></div>
+              <div class="p-5 space-y-3">
+                <div class="skeleton h-4 w-20 rounded-full"></div>
+                <div class="skeleton h-5 w-full"></div>
+                <div class="skeleton h-5 w-3/4"></div>
+                <div class="skeleton h-4 w-24 mt-2"></div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <div id="recs-grid" class="hidden grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </section>
+
+    </div>
+    <!-- end article-content -->
+
+  </div>
+</main>
+
+<script>
+const API_BASE = 'https://connect.sagufoundation.org/public/api/v1';
+
+// ---- Helpers ----
+function getSlug() {
+  return new URLSearchParams(window.location.search).get('slug') || '';
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html || '';
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function readTime(html) {
+  const words = stripHtml(html).split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / 200));
+}
+
+function copyLink() {
+  navigator.clipboard.writeText(window.location.href).then(() => {
+    const lbl = document.getElementById('copy-label');
+    if (lbl) { lbl.textContent = 'Copied!'; setTimeout(() => lbl.textContent = 'Copy Link', 2000); }
+  });
+}
+
+// ---- Share URLs ----
+function setShareLinks(title, url) {
+  const enc = encodeURIComponent;
+  const waUrl = `https://wa.me/?text=${enc(title + '\n' + url)}`;
+  const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`;
+  const twUrl = `https://twitter.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`;
+  ['share-wa', 'share-wa-bottom'].forEach(id => { const el = document.getElementById(id); if (el) el.href = waUrl; });
+  ['share-fb', 'share-fb-bottom'].forEach(id => { const el = document.getElementById(id); if (el) el.href = fbUrl; });
+  const tw = document.getElementById('share-tw'); if (tw) tw.href = twUrl;
+}
+
+// ---- Reading Progress Bar ----
+window.addEventListener('scroll', () => {
+  const body = document.body;
+  const docEl = document.documentElement;
+  const totalH = Math.max(body.scrollHeight, docEl.scrollHeight) - docEl.clientHeight;
+  const progress = (window.scrollY / totalH) * 100;
+  document.getElementById('reading-progress').style.width = Math.min(100, progress) + '%';
+
+  // Back to top visibility
+  const btn = document.getElementById('back-to-top');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// ---- Generate Table of Contents ----
+function buildTOC(bodyEl) {
+  const headings = bodyEl.querySelectorAll('h2, h3');
+  if (headings.length < 2) return;
+
+  const tocBox = document.getElementById('toc-box');
+  const tocList = document.getElementById('toc-list');
+  tocBox.style.display = 'block';
+
+  headings.forEach((h, i) => {
+    const id = 'section-' + i;
+    h.id = id;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = h.textContent;
+    a.className = 'toc-link block py-1 px-3 rounded-lg text-gray-600 hover:text-[#e6a817] ' + (h.tagName === 'H3' ? 'ml-3 text-xs' : 'text-sm font-medium');
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+}
+
+// ---- Render Skeletons for Recs ----
+function renderRecSkeletons() {
+  const container = document.getElementById('recs-loading');
+  container.innerHTML = '';
+  for (let i = 0; i < 3; i++) {
+    container.innerHTML += `
+      <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-sm">
+        <div class="skeleton w-full" style="height:180px"></div>
+        <div class="p-5 space-y-3">
+          <div class="skeleton h-4 w-20 rounded-full"></div>
+          <div class="skeleton h-5 w-full"></div>
+          <div class="skeleton h-5 w-3/4"></div>
+          <div class="skeleton h-4 w-24 mt-2"></div>
+        </div>
+      </div>`;
+  }
+}
+
+// ---- Render Recommended Posts ----
+function renderRecs(posts) {
+  const grid = document.getElementById('recs-grid');
+  const loading = document.getElementById('recs-loading');
+
+  if (!posts || posts.length === 0) {
+    loading.innerHTML = '<p class="text-gray-400 text-sm col-span-3">Tidak ada rekomendasi saat ini.</p>';
+    return;
+  }
+
+  grid.innerHTML = posts.map(post => `
+    <a href="blog-show.html?slug=${post.slug}" class="rec-card bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm block group">
+      <div class="overflow-hidden relative">
+        <span class="absolute top-3 left-3 z-10 text-xs font-bold bg-[#e6a817] text-[#0a0a0a] px-2.5 py-1 rounded-full shadow">
+          ${post.category?.label || 'Article'}
+        </span>
+        <img src="${post.cover}" alt="${post.title}"
+             class="w-full object-cover group-hover:scale-105 transition-transform duration-300"
+             style="height:180px;"
+             onerror="this.src='https://placehold.co/600x180/f5f5f5/ccc?text=SAGU'">
+      </div>
+      <div class="p-5">
+        <p class="text-xs text-gray-400 mb-2 flex items-center gap-1.5">
+          <i class="fa-regular fa-calendar text-[#e6a817]"></i> ${formatDate(post.created_at)}
+        </p>
+        <h3 class="font-bold text-base leading-snug line-clamp-2 group-hover:text-[#e6a817] transition mb-3">${post.title}</h3>
+        <p class="text-sm text-gray-500 line-clamp-2">${stripHtml(post.content).substring(0, 120)}…</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-[#e6a817] font-semibold text-sm">
+          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+        </span>
+      </div>
+    </a>
+  `).join('');
+
+  loading.classList.add('hidden');
+  grid.classList.remove('hidden');
+  grid.className = grid.className.replace('hidden', '') + ' grid sm:grid-cols-2 lg:grid-cols-3 gap-6';
+}
+
+// ---- Update Meta Tags ----
+function updateMeta(post) {
+  const title = `${post.title} | SAGU Foundation`;
+  const desc = stripHtml(post.content).substring(0, 160);
+  const url = window.location.href;
+
+  document.getElementById('page-title').textContent = title;
+  document.getElementById('meta-desc').setAttribute('content', desc);
+  document.getElementById('og-title').setAttribute('content', title);
+  document.getElementById('og-desc').setAttribute('content', desc);
+  document.getElementById('og-image').setAttribute('content', post.cover);
+  document.getElementById('og-url').setAttribute('content', url);
+}
+
+// ---- Main Fetch ----
+async function loadArticle() {
+  const slug = getSlug();
+  if (!slug) { showError('Article slug not found.'); return; }
+
+  try {
+    const res = await fetch(`${API_BASE}/blogs/${slug}`);
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+    const json = await res.json();
+    const post = json.data;
+    if (!post) throw new Error('Article data is empty.');
+
+    // ---- Populate ----
+    document.getElementById('loading-state').classList.add('hidden');
+    document.getElementById('article-content').classList.remove('hidden');
+
+    // Cover
+    const coverImg = document.getElementById('article-cover');
+    coverImg.src = post.cover;
+    coverImg.alt = post.title;
+
+    // Category badges
+    const badgesEl = document.getElementById('article-badges');
+    (post.categories || [post.category]).forEach(cat => {
+      badgesEl.innerHTML += `<span class="text-xs font-bold bg-[#e6a817] text-[#0a0a0a] px-3 py-1.5 rounded-full shadow">${cat.label}</span>`;
+    });
+
+    // Breadcrumb
+    document.getElementById('breadcrumb-title').textContent = post.title.length > 50 ? post.title.slice(0, 50) + '…' : post.title;
+
+    // Title
+    document.getElementById('article-title').textContent = post.title;
+
+    // Meta
+    document.getElementById('article-author').textContent = post.author?.name || 'SAGU Foundation';
+    document.getElementById('article-date').textContent = formatDate(post.created_at);
+    const rt = readTime(post.content);
+    document.getElementById('article-read-time').textContent = rt;
+
+    // Sidebar info
+    document.getElementById('sidebar-date').textContent = formatDate(post.created_at);
+    document.getElementById('sidebar-author').textContent = post.author?.name || '-';
+    document.getElementById('sidebar-cat').textContent = post.category?.label || '-';
+    document.getElementById('sidebar-readtime').textContent = rt + ' min';
+
+    // Author card
+    document.getElementById('author-card-name').textContent = post.author?.name || 'SAGU Foundation';
+
+    // Category tag
+    document.getElementById('article-cat-tag').textContent = post.category?.label || '';
+
+    // Content body
+    const bodyEl = document.getElementById('article-body');
+    bodyEl.innerHTML = post.content;
+
+    // Fix images in content: ensure responsive
+    bodyEl.querySelectorAll('img').forEach(img => {
+      img.removeAttribute('width');
+      img.removeAttribute('srcset');
+      img.removeAttribute('sizes');
+      img.classList.add('max-w-full', 'h-auto');
+    });
+
+    // Build TOC
+    buildTOC(bodyEl);
+
+    // Share links
+    setShareLinks(post.title, window.location.href);
+
+    // Update meta tags
+    updateMeta(post);
+
+    // ---- Load recommendations (same category, exclude current) ----
+    renderRecSkeletons();
+    const recRes = await fetch(`${API_BASE}/blogs?category=${post.category?.value || ''}&page=1`);
+    const recJson = await recRes.json();
+    const recs = (recJson.data || []).filter(p => p.slug !== post.slug).slice(0, 3);
+
+    // If same category has fewer than 3, top up from latest
+    let finalRecs = recs;
+    if (finalRecs.length < 3) {
+      const latestRes = await fetch(`${API_BASE}/blogs?page=1`);
+      const latestJson = await latestRes.json();
+      const extras = (latestJson.data || []).filter(p => p.slug !== post.slug && !finalRecs.find(r => r.id === p.id));
+      finalRecs = [...finalRecs, ...extras].slice(0, 3);
+    }
+    renderRecs(finalRecs);
+
+  } catch (err) {
+    showError(err.message || 'Failed to load article.');
+  }
+}
+
+function showError(msg) {
+  document.getElementById('loading-state').classList.add('hidden');
+  document.getElementById('error-state').classList.remove('hidden');
+  document.getElementById('error-msg').textContent = msg;
+}
+
+// ---- Init ----
+document.addEventListener('DOMContentLoaded', loadArticle);
+</script>
+
   <script src="js/whatsapp-floating-button.js"></script>
   <div id="sf-footer-partial-root"></div>
   <script src="js/footer-partial.js"></script>
