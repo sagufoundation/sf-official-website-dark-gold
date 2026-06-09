@@ -75,6 +75,15 @@
     @media (min-width: 1024px) {
       .sticky-sidebar { position: sticky; top: 120px; }
     }
+
+    /* Date input styling */
+    input[type="date"] {
+      color-scheme: light;
+    }
+    input[type="date"]:focus {
+      outline: none;
+      border-color: #e6a817;
+    }
   </style>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
@@ -90,8 +99,8 @@
       <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Articles, Stories & Impact</p>
       <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Our Blog</h1>
       <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
-      <p class="mt-4 text-gray-500 max-w-xl mx-auto text-base" x-show="!loading && meta.total">
-        Showing <span class="font-semibold text-[#0a0a0a]" x-text="meta.total"></span> articles
+      <p class="mt-4 text-gray-500 max-w-xl mx-auto text-base" x-show="!loading && totalFiltered > 0">
+        Showing <span class="font-semibold text-[#0a0a0a]" x-text="totalFiltered"></span> articles
       </p>
     </div>
 
@@ -122,10 +131,10 @@
         <!-- Error State -->
         <div x-show="!loading && error" class="bg-red-50 border border-red-200 rounded-3xl p-10 text-center">
           <i class="fa-solid fa-circle-exclamation text-red-400 text-4xl mb-4"></i>
-          <h3 class="font-bold text-lg text-red-700 mb-2">Gagal memuat artikel</h3>
+          <h3 class="font-bold text-lg text-red-700 mb-2">Failed to load articles</h3>
           <p class="text-red-500 mb-4" x-text="error"></p>
-          <button @click="fetchPosts()" class="bg-[#e6a817] text-[#0a0a0a] font-bold px-6 py-3 rounded-2xl hover:bg-amber-400 transition">
-            <i class="fa-solid fa-rotate-right mr-2"></i>Coba Lagi
+          <button @click="init()" class="bg-[#e6a817] text-[#0a0a0a] font-bold px-6 py-3 rounded-2xl hover:bg-amber-400 transition">
+            <i class="fa-solid fa-rotate-right mr-2"></i>Try Again
           </button>
         </div>
 
@@ -181,30 +190,30 @@
           <!-- Empty State -->
           <div x-show="posts.length === 0 && !loading" class="empty-state bg-white rounded-3xl border border-gray-200 p-16">
             <i class="fa-regular fa-face-sad-tear text-gray-300 text-6xl mb-5"></i>
-            <h3 class="font-bold text-xl mb-2 text-gray-600">Tidak ada artikel ditemukan</h3>
-            <p class="text-gray-400 mb-6">Coba kata kunci atau kategori yang berbeda.</p>
+            <h3 class="font-bold text-xl mb-2 text-gray-600">No articles found</h3>
+            <p class="text-gray-400 mb-6">Try a different keyword or category.</p>
             <button @click="resetFilters()"
                     class="bg-[#e6a817] text-[#0a0a0a] font-bold px-6 py-3 rounded-2xl hover:bg-amber-400 transition">
-              Reset Filter
+              Reset Filters
             </button>
           </div>
         </div>
 
         <!-- ======= PAGINATION ======= -->
-        <div x-show="!loading && !error && meta.last_page > 1" class="mt-12">
+        <div x-show="!loading && !error && lastPage > 1" class="mt-12">
           <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
             <!-- Info -->
             <p class="text-sm text-gray-500">
-              Halaman <span class="font-semibold text-[#0a0a0a]" x-text="meta.current_page"></span>
-              dari <span class="font-semibold text-[#0a0a0a]" x-text="meta.last_page"></span>
-              &nbsp;·&nbsp; Total <span class="font-semibold text-[#0a0a0a]" x-text="meta.total"></span> artikel
+              Page <span class="font-semibold text-[#0a0a0a]" x-text="currentPage"></span>
+              of <span class="font-semibold text-[#0a0a0a]" x-text="lastPage"></span>
+              &nbsp;·&nbsp; Total <span class="font-semibold text-[#0a0a0a]" x-text="totalFiltered"></span> articles
             </p>
 
             <!-- Page buttons -->
             <div class="flex items-center gap-2 flex-wrap justify-center">
               <!-- Prev -->
-              <button @click="goToPage(meta.current_page - 1)"
-                      :disabled="meta.current_page === 1"
+              <button @click="goToPage(currentPage - 1)"
+                      :disabled="currentPage === 1"
                       class="page-btn px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium bg-white">
                 <i class="fa-solid fa-chevron-left mr-1"></i> Prev
               </button>
@@ -216,7 +225,7 @@
                 </template>
                 <template x-if="page !== '...'">
                   <button @click="goToPage(page)"
-                          :class="{ 'active-page': page === meta.current_page }"
+                          :class="{ 'active-page': page === currentPage }"
                           class="page-btn px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium bg-white">
                     <span x-text="page"></span>
                   </button>
@@ -224,8 +233,8 @@
               </template>
 
               <!-- Next -->
-              <button @click="goToPage(meta.current_page + 1)"
-                      :disabled="meta.current_page === meta.last_page"
+              <button @click="goToPage(currentPage + 1)"
+                      :disabled="currentPage === lastPage"
                       class="page-btn px-4 py-2 border border-gray-300 rounded-xl text-sm font-medium bg-white">
                 Next <i class="fa-solid fa-chevron-right ml-1"></i>
               </button>
@@ -254,6 +263,69 @@
             </button>
           </div>
         </div>
+
+        <!-- ======= SORT & FILTER ======= -->
+        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+          <h3 class="font-bold text-lg mb-5">
+            <i class="fa-solid fa-arrow-up-wide-short text-[#e6a817] mr-2"></i>Sort & Filter
+          </h3>
+
+          <!-- Sort Order -->
+          <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2.5">Sort Order</p>
+          <div class="space-y-2 mb-6">
+            <template x-for="opt in sortOptions" :key="opt.value">
+              <button @click="selectSort(opt.value)"
+                      :class="{
+                        'bg-[#e6a817] text-[#0a0a0a]': selectedSort === opt.value,
+                        'bg-gray-100 text-gray-700 hover:bg-[#e6a817]/20': selectedSort !== opt.value
+                      }"
+                      class="cat-pill w-full text-left px-4 py-3 rounded-2xl text-sm font-medium flex items-center gap-2.5 transition-all">
+                <i :class="opt.icon" class="w-4 text-center flex-shrink-0"></i>
+                <span x-text="opt.label"></span>
+                <!-- Active checkmark -->
+                <i x-show="selectedSort === opt.value"
+                   class="fa-solid fa-check ml-auto text-xs"></i>
+              </button>
+            </template>
+          </div>
+
+          <!-- Date Range -->
+          <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2.5">Date Range</p>
+          <div class="space-y-3">
+            <div>
+              <label class="text-xs text-gray-500 mb-1.5 block font-medium">
+                <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>From
+              </label>
+              <input x-model="dateFrom"
+                     @change="applyFilters()"
+                     type="date"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+            </div>
+            <div>
+              <label class="text-xs text-gray-500 mb-1.5 block font-medium">
+                <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>To
+              </label>
+              <input x-model="dateTo"
+                     @change="applyFilters()"
+                     type="date"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+            </div>
+
+            <!-- Active date range indicator -->
+            <div x-show="dateFrom || dateTo"
+                 x-cloak
+                 class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-2xl px-4 py-3 flex items-center justify-between">
+              <span class="text-xs text-[#b8810f] font-semibold">
+                <i class="fa-solid fa-filter mr-1.5"></i>Filter active
+              </span>
+              <button @click="clearDateFilter()"
+                      class="text-xs text-[#b8810f] hover:text-red-500 font-semibold transition flex items-center gap-1">
+                <i class="fa-solid fa-xmark"></i> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- ======= END SORT & FILTER ======= -->
 
         <!-- Categories -->
         <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
@@ -298,7 +370,7 @@
         <div class="bg-[#0a0a0a] text-white rounded-3xl p-6 text-center">
           <i class="fa-solid fa-graduation-cap text-[#e6a817] text-3xl mb-3"></i>
           <h3 class="font-bold text-lg mb-2">Join Our Programs</h3>
-          <p class="text-gray-400 text-sm mb-4">Jadilah bagian dari perubahan positif di Papua.</p>
+          <p class="text-gray-400 text-sm mb-4">Be part of positive change in Papua.</p>
           <a href="courses.html"
              class="inline-block bg-[#e6a817] hover:bg-amber-400 text-[#0a0a0a] font-bold px-5 py-3 rounded-xl text-sm transition-all">
             Browse Courses <i class="fa-solid fa-arrow-right ml-1"></i>
@@ -326,86 +398,179 @@
 
 <script>
 const API_BASE = 'https://connect.sagufoundation.org/public/api/v1';
+const PER_PAGE = 10;
 
 function blogApp() {
   return {
-    posts: [],
+    // Raw data from API (all pages)
+    allPosts: [],
     recentPosts: [],
+
+    // Displayed data (result of filter+sort+paginate)
+    posts: [],
+
     loading: true,
     error: null,
+
+    // Filter & Sort state
     searchQuery: '',
     selectedCategory: 'all',
-    meta: { current_page: 1, last_page: 1, per_page: 10, total: 0, from: 1, to: 10 },
-    categories: [
-      { value: 'all', label: 'All Articles', count: null },
-      { value: 'community-development', label: 'Community Development', count: null },
-      { value: 'articles', label: 'Articles', count: null },
+    selectedSort: 'newest',
+    dateFrom: '',
+    dateTo: '',
+
+    sortOptions: [
+      { value: 'newest', label: 'Newest First', icon: 'fa-solid fa-arrow-down-short-wide' },
+      { value: 'oldest', label: 'Oldest First', icon: 'fa-solid fa-arrow-up-short-wide'   },
+      { value: 'az',     label: 'A → Z',        icon: 'fa-solid fa-arrow-down-a-z'        },
+      { value: 'za',     label: 'Z → A',        icon: 'fa-solid fa-arrow-up-a-z'          },
     ],
 
-    async init() {
-      await this.fetchPosts();
-      await this.fetchRecent();
+    categories: [
+      { value: 'all',                   label: 'All Articles'          },
+      { value: 'community-development', label: 'Community Development' },
+      { value: 'articles',              label: 'Articles'              },
+    ],
+
+    // Pagination state (client-side)
+    currentPage: 1,
+    totalFiltered: 0,
+
+    get lastPage() {
+      return Math.max(1, Math.ceil(this.totalFiltered / PER_PAGE));
     },
 
-    async fetchPosts(page = 1) {
+    get meta() {
+      const from = this.totalFiltered === 0 ? 0 : (this.currentPage - 1) * PER_PAGE + 1;
+      const to   = Math.min(this.currentPage * PER_PAGE, this.totalFiltered);
+      return {
+        current_page: this.currentPage,
+        last_page:    this.lastPage,
+        total:        this.totalFiltered,
+        from,
+        to,
+      };
+    },
+
+    // -------------------------------------------------------
+    // INIT — fetch ALL pages from API at once
+    // -------------------------------------------------------
+    async init() {
       this.loading = true;
-      this.error = null;
+      this.error   = null;
       try {
-        const params = new URLSearchParams({ page });
-        if (this.selectedCategory !== 'all') params.set('category', this.selectedCategory);
-        if (this.searchQuery.trim()) params.set('search', this.searchQuery.trim());
+        // Fetch first page to get total count
+        const firstRes  = await fetch(`${API_BASE}/blogs?page=1&per_page=${PER_PAGE}`);
+        if (!firstRes.ok) throw new Error(`Server error: ${firstRes.status}`);
+        const firstJson = await firstRes.json();
 
-        const res = await fetch(`${API_BASE}/blogs?${params}`);
-        if (!res.ok) throw new Error(`Server error: ${res.status}`);
-        const json = await res.json();
+        const apiLastPage = firstJson.meta?.last_page || 1;
+        let collected     = firstJson.data || [];
 
-        this.posts = json.data || [];
-        this.meta = json.meta || this.meta;
+        // Fetch remaining pages in parallel
+        if (apiLastPage > 1) {
+          const pageNums   = Array.from({ length: apiLastPage - 1 }, (_, i) => i + 2);
+          const restRes    = await Promise.all(
+            pageNums.map(p => fetch(`${API_BASE}/blogs?page=${p}&per_page=${PER_PAGE}`).then(r => r.json()))
+          );
+          restRes.forEach(json => { collected = collected.concat(json.data || []); });
+        }
+
+        this.allPosts    = collected;
+        this.recentPosts = collected.slice(0, 4);
+        this.applyFilters();
       } catch (e) {
-        this.error = e.message || 'Terjadi kesalahan saat memuat data.';
+        this.error = e.message || 'Something went wrong while loading data.';
       } finally {
         this.loading = false;
       }
     },
 
-    async fetchRecent() {
-      try {
-        const res = await fetch(`${API_BASE}/blogs?page=1`);
-        const json = await res.json();
-        this.recentPosts = (json.data || []).slice(0, 4);
-      } catch (_) {}
+    // -------------------------------------------------------
+    // CLIENT-SIDE FILTER + SORT + PAGINATE
+    // -------------------------------------------------------
+    applyFilters(resetPage = true) {
+      if (resetPage) this.currentPage = 1;
+
+      let result = [...this.allPosts];
+
+      // 1. Filter by category
+      if (this.selectedCategory !== 'all') {
+        result = result.filter(p =>
+          p.category?.value === this.selectedCategory ||
+          p.category?.slug  === this.selectedCategory
+        );
+      }
+
+      // 2. Filter by search query (title)
+      const q = this.searchQuery.trim().toLowerCase();
+      if (q) {
+        result = result.filter(p => p.title?.toLowerCase().includes(q));
+      }
+
+      // 3. Filter by date range
+      if (this.dateFrom) {
+        const from = new Date(this.dateFrom);
+        result = result.filter(p => new Date(p.created_at) >= from);
+      }
+      if (this.dateTo) {
+        const to = new Date(this.dateTo);
+        to.setHours(23, 59, 59, 999); // inclusive until end of day
+        result = result.filter(p => new Date(p.created_at) <= to);
+      }
+
+      // 4. Sort
+      result.sort((a, b) => {
+        if (this.selectedSort === 'newest') {
+          return new Date(b.created_at) - new Date(a.created_at);
+        } else if (this.selectedSort === 'oldest') {
+          return new Date(a.created_at) - new Date(b.created_at);
+        } else if (this.selectedSort === 'az') {
+          return (a.title || '').localeCompare(b.title || '');
+        } else if (this.selectedSort === 'za') {
+          return (b.title || '').localeCompare(a.title || '');
+        }
+        return 0;
+      });
+
+      this.totalFiltered = result.length;
+
+      // 5. Paginate
+      const start  = (this.currentPage - 1) * PER_PAGE;
+      this.posts   = result.slice(start, start + PER_PAGE);
     },
 
-    onSearchInput() {
-      this.fetchPosts(1);
-    },
-
-    clearSearch() {
-      this.searchQuery = '';
-      this.fetchPosts(1);
-    },
-
-    selectCategory(val) {
-      this.selectedCategory = val;
-      this.fetchPosts(1);
-    },
+    // -------------------------------------------------------
+    // EVENT HANDLERS
+    // -------------------------------------------------------
+    onSearchInput()    { this.applyFilters(); },
+    clearSearch()      { this.searchQuery = ''; this.applyFilters(); },
+    selectCategory(v)  { this.selectedCategory = v; this.applyFilters(); },
+    selectSort(v)      { this.selectedSort = v; this.applyFilters(); },
+    clearDateFilter()  { this.dateFrom = ''; this.dateTo = ''; this.applyFilters(); },
 
     goToPage(page) {
-      if (page < 1 || page > this.meta.last_page) return;
-      this.fetchPosts(page);
+      if (page < 1 || page > this.lastPage) return;
+      this.currentPage = page;
+      this.applyFilters(false); // don't reset page again
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
 
     resetFilters() {
-      this.searchQuery = '';
+      this.searchQuery      = '';
       this.selectedCategory = 'all';
-      this.fetchPosts(1);
+      this.selectedSort     = 'newest';
+      this.dateFrom         = '';
+      this.dateTo           = '';
+      this.applyFilters();
     },
 
-    // Generate smart page number array: [1, 2, '...', 8, 9]
+    // -------------------------------------------------------
+    // COMPUTED: smart page numbers [1, 2, '...', 8, 9]
+    // -------------------------------------------------------
     get pageNumbers() {
-      const total = this.meta.last_page;
-      const current = this.meta.current_page;
+      const total   = this.lastPage;
+      const current = this.currentPage;
       if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
 
       const pages = [];
@@ -419,10 +584,12 @@ function blogApp() {
       return pages;
     },
 
+    // -------------------------------------------------------
+    // HELPERS
+    // -------------------------------------------------------
     formatDate(dateStr) {
       if (!dateStr) return '';
-      const d = new Date(dateStr);
-      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+      return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     },
 
     stripHtml(html) {
@@ -432,10 +599,9 @@ function blogApp() {
     },
 
     readTime(html) {
-      const text = this.stripHtml(html);
-      const words = text.split(/\s+/).length;
+      const words = this.stripHtml(html).split(/\s+/).length;
       return Math.max(1, Math.ceil(words / 200));
-    }
+    },
   };
 }
 </script>
