@@ -244,7 +244,7 @@
       </section>
 
       <!-- ======= SIDEBAR ======= -->
-      <aside class="sticky-sidebar space-y-6">
+      <aside class=" space-y-6">
 
         <!-- Search -->
         <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
@@ -266,62 +266,56 @@
 
         <!-- ======= SORT & FILTER ======= -->
         <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
-          <h3 class="font-bold text-lg mb-5">
+          <h3 class="font-bold text-lg mb-4">
             <i class="fa-solid fa-arrow-up-wide-short text-[#e6a817] mr-2"></i>Sort & Filter
           </h3>
 
-          <!-- Sort Order -->
-          <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2.5">Sort Order</p>
-          <div class="space-y-2 mb-6">
-            <template x-for="opt in sortOptions" :key="opt.value">
-              <button @click="selectSort(opt.value)"
-                      :class="{
-                        'bg-[#e6a817] text-[#0a0a0a]': selectedSort === opt.value,
-                        'bg-gray-100 text-gray-700 hover:bg-[#e6a817]/20': selectedSort !== opt.value
-                      }"
-                      class="cat-pill w-full text-left px-4 py-3 rounded-2xl text-sm font-medium flex items-center gap-2.5 transition-all">
-                <i :class="opt.icon" class="w-4 text-center flex-shrink-0"></i>
-                <span x-text="opt.label"></span>
-                <!-- Active checkmark -->
-                <i x-show="selectedSort === opt.value"
-                   class="fa-solid fa-check ml-auto text-xs"></i>
-              </button>
-            </template>
-          </div>
-
-          <!-- Date Range -->
-          <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2.5">Date Range</p>
-          <div class="space-y-3">
+          <div class="space-y-4 max-h-80 overflow-y-auto pr-2">
             <div>
-              <label class="text-xs text-gray-500 mb-1.5 block font-medium">
-                <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>From
-              </label>
-              <input x-model="dateFrom"
-                     @change="applyFilters()"
-                     type="date"
-                     class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
-            </div>
-            <div>
-              <label class="text-xs text-gray-500 mb-1.5 block font-medium">
-                <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>To
-              </label>
-              <input x-model="dateTo"
-                     @change="applyFilters()"
-                     type="date"
-                     class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+              <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Sort Order</label>
+              <select x-model="selectedSort"
+                      @change="applyFilters()"
+                      class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+                <template x-for="opt in sortOptions" :key="opt.value">
+                  <option :value="opt.value" x-text="opt.label"></option>
+                </template>
+              </select>
             </div>
 
-            <!-- Active date range indicator -->
-            <div x-show="dateFrom || dateTo"
-                 x-cloak
-                 class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-2xl px-4 py-3 flex items-center justify-between">
-              <span class="text-xs text-[#b8810f] font-semibold">
-                <i class="fa-solid fa-filter mr-1.5"></i>Filter active
-              </span>
-              <button @click="clearDateFilter()"
-                      class="text-xs text-[#b8810f] hover:text-red-500 font-semibold transition flex items-center gap-1">
-                <i class="fa-solid fa-xmark"></i> Reset
-              </button>
+            <div>
+              <label class="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2 block">Date Range</label>
+              <div class="space-y-3">
+                <div>
+                  <label class="text-xs text-gray-500 mb-1.5 block font-medium">
+                    <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>From
+                  </label>
+                  <input x-model="dateFrom"
+                         @change="applyFilters()"
+                         type="date"
+                         class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+                </div>
+                <div>
+                  <label class="text-xs text-gray-500 mb-1.5 block font-medium">
+                    <i class="fa-regular fa-calendar mr-1 text-[#e6a817]"></i>To
+                  </label>
+                  <input x-model="dateTo"
+                         @change="applyFilters()"
+                         type="date"
+                         class="w-full px-4 py-3 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition bg-gray-50 hover:border-gray-300">
+                </div>
+
+                <div x-show="dateFrom || dateTo"
+                     x-cloak
+                     class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-2xl px-4 py-3 flex items-center justify-between">
+                  <span class="text-xs text-[#b8810f] font-semibold">
+                    <i class="fa-solid fa-filter mr-1.5"></i>Filter active
+                  </span>
+                  <button @click="clearDateFilter()"
+                          class="text-xs text-[#b8810f] hover:text-red-500 font-semibold transition flex items-center gap-1">
+                    <i class="fa-solid fa-xmark"></i> Reset
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
