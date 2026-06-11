@@ -214,26 +214,7 @@
             </div>
           </div>
 
-          <!-- Share buttons (top) -->
-          <div class="flex items-center gap-3 mb-8 flex-wrap">
-            <span class="text-sm font-semibold text-gray-600">Share:</span>
-            <a id="share-wa" href="#" target="_blank" rel="noopener"
-               class="share-btn flex items-center gap-2 bg-green-50 text-green-600 border border-green-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-green-100">
-              <i class="fa-brands fa-whatsapp"></i> WhatsApp
-            </a>
-            <a id="share-fb" href="#" target="_blank" rel="noopener"
-               class="share-btn flex items-center gap-2 bg-blue-50 text-blue-600 border border-blue-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-blue-100">
-              <i class="fa-brands fa-facebook"></i> Facebook
-            </a>
-            <a id="share-tw" href="#" target="_blank" rel="noopener"
-               class="share-btn flex items-center gap-2 bg-sky-50 text-sky-500 border border-sky-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-sky-100">
-              <i class="fa-brands fa-x-twitter"></i> Twitter
-            </a>
-            <button onclick="copyLink()"
-               class="share-btn flex items-center gap-2 bg-gray-100 text-gray-600 border border-gray-200 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-200">
-              <i class="fa-solid fa-link"></i> <span id="copy-label">Copy Link</span>
-            </button>
-          </div>
+         
 
           <!-- Article Body -->
           <div id="article-body" class="prose-article" style="text-align: justify;"></div>
@@ -260,24 +241,29 @@
           </div>
 
           <!-- Navigation: prev/next (simple back) -->
-          <div class="mt-10 flex justify-between items-center">
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start">
             <a href="blog.html"
-               class="inline-flex items-center gap-2 text-[#0a0a0a] font-semibold border border-gray-300 px-6 py-3 rounded-2xl hover:border-[#e6a817] hover:text-[#e6a817] transition">
+               class="inline-flex items-center justify-center gap-2 text-[#0a0a0a] font-semibold border border-gray-300 px-6 py-3 rounded-2xl hover:border-[#e6a817] hover:text-[#e6a817] transition w-full sm:w-auto">
               <i class="fa-solid fa-arrow-left"></i> All Articles
             </a>
             <!-- Share again (bottom) -->
-            <div class="flex gap-2">
-              <a id="share-wa-bottom" href="#" target="_blank" rel="noopener"
-                 class="share-btn w-10 h-10 flex items-center justify-center bg-green-50 text-green-600 border border-green-200 rounded-xl hover:bg-green-100">
-                <i class="fa-brands fa-whatsapp"></i>
+            <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-0 mt-0 w-full sm:w-auto">
+              <span class="w-full sm:w-auto text-sm font-semibold text-gray-600 mb-1 sm:mb-0">Share:</span>
+              <a id="share-wa" href="#" target="_blank" rel="noopener"
+                 class="share-btn flex items-center justify-center gap-2 bg-green-50 text-green-600 border border-green-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-green-100 flex-1 min-w-[110px] sm:flex-none">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
               </a>
-              <a id="share-fb-bottom" href="#" target="_blank" rel="noopener"
-                 class="share-btn w-10 h-10 flex items-center justify-center bg-blue-50 text-blue-600 border border-blue-200 rounded-xl hover:bg-blue-100">
-                <i class="fa-brands fa-facebook"></i>
+              <a id="share-fb" href="#" target="_blank" rel="noopener"
+                 class="share-btn flex items-center justify-center gap-2 bg-blue-50 text-blue-600 border border-blue-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-blue-100 flex-1 min-w-[110px] sm:flex-none">
+                <i class="fa-brands fa-facebook"></i> Facebook
+              </a>
+              <a id="share-tw" href="#" target="_blank" rel="noopener"
+                 class="share-btn flex items-center justify-center gap-2 bg-sky-50 text-sky-500 border border-sky-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-sky-100 flex-1 min-w-[110px] sm:flex-none">
+                <i class="fa-brands fa-x-twitter"></i> Twitter
               </a>
               <button onclick="copyLink()"
-                 class="share-btn w-10 h-10 flex items-center justify-center bg-gray-100 text-gray-600 border border-gray-200 rounded-xl hover:bg-gray-200">
-                <i class="fa-solid fa-link text-sm"></i>
+                 class="share-btn flex items-center justify-center gap-2 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-gray-200 flex-1 min-w-[110px] sm:flex-none">
+                <i class="fa-solid fa-link"></i> <span id="copy-label">Copy Link</span>
               </button>
             </div>
           </div>
