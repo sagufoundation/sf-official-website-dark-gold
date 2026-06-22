@@ -46,18 +46,6 @@
     .blog-card img { transition: transform 0.4s ease; }
     .blog-card:hover img { transform: scale(1.04); }
 
-    /* Skeleton shimmer */
-    @keyframes shimmer {
-      0% { background-position: -700px 0; }
-      100% { background-position: 700px 0; }
-    }
-    .skeleton {
-      background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
-      background-size: 700px 100%;
-      animation: shimmer 1.4s infinite;
-      border-radius: 12px;
-    }
-
     /* Category pill active state */
     .cat-pill { cursor: pointer; transition: all 0.2s ease; }
     .cat-pill:hover, .cat-pill.active { background: #e6a817; color: #0a0a0a; }
@@ -109,34 +97,14 @@
       <!-- ======= MAIN BLOG CONTENT ======= -->
       <section class="w-full min-w-0">
 
-        <!-- Loading Skeletons -->
-        <div x-show="loading" class="space-y-8">
-          <template x-for="i in 6" :key="i">
-            <div class="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-200">
-              <div class="skeleton w-full" style="height:220px"></div>
-              <div class="p-6 md:p-8 space-y-4">
-                <div class="flex gap-2">
-                  <div class="skeleton h-6 w-16 rounded-full"></div>
-                  <div class="skeleton h-6 w-28 rounded-full"></div>
-                </div>
-                <div class="skeleton h-7 w-3/4"></div>
-                <div class="skeleton h-4 w-full"></div>
-                <div class="skeleton h-4 w-5/6"></div>
-                <div class="skeleton h-4 w-24 mt-2"></div>
-              </div>
-            </div>
-          </template>
+        <!-- Loading State -->
+        <div x-show="loading" class="bg-white border border-gray-200 rounded-3xl p-10 text-center text-gray-500">
+          <i class="fa-solid fa-spinner fa-spin text-[#e6a817] text-3xl mb-4"></i>
+          <p class="text-sm font-medium">Loading articles from SF Connect...</p>
         </div>
 
         <!-- Error State -->
-        <div x-show="!loading && error" class="bg-red-50 border border-red-200 rounded-3xl p-10 text-center">
-          <i class="fa-solid fa-circle-exclamation text-red-400 text-4xl mb-4"></i>
-          <h3 class="font-bold text-lg text-red-700 mb-2">Failed to load articles</h3>
-          <p class="text-red-500 mb-4" x-text="error"></p>
-          <button @click="init()" class="bg-[#e6a817] text-[#0a0a0a] font-bold px-6 py-3 rounded-2xl hover:bg-amber-400 transition">
-            <i class="fa-solid fa-rotate-right mr-2"></i>Try Again
-          </button>
-        </div>
+        <div x-show="!loading && error" class="bg-red-50 border border-red-200 rounded-3xl p-6 text-red-700 text-sm" x-text="error"></div>
 
         <!-- Posts Grid -->
         <div x-show="!loading && !error" class="space-y-8">
