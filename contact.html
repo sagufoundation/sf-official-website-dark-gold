@@ -46,7 +46,7 @@
     .form-error { margin-top:.4rem; min-height:1rem; font-size:.78rem; line-height:1.2; color:#dc2626; }
     input[type='checkbox'].form-control-custom.is-invalid { outline:2px solid #dc2626; outline-offset:2px; border-radius:4px; }
     input[type='checkbox'].form-control-custom.is-valid { outline:2px solid #16a34a; outline-offset:2px; border-radius:4px; }
-    [x-cloak]{display:none}
+    [x-cloak]{display:none !important}
   </style>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
@@ -107,11 +107,23 @@
             </div>
           </li>
         </ul>
+
+        <div class="mt-6 rounded-md overflow-hidden border border-gray-200">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2511.0055136375227!2d140.67549763531542!3d-2.6068739185188923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x686cf58c52a21f63%3A0xa265b0ac68dc413!2sSAGU%20Foundation!5e0!3m2!1sen!2sid!4v1779109473957!5m2!1sen!2sid"
+            width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            class="w-full h-[260px]">
+          </iframe>
+        </div>
       </section>
 
       <section class="bg-white border border-gray-200 rounded-md p-8 shadow-sm">
-        <h2 class="text-2xl font-bold text-[#0a0a0a] mb-6">Send Us a Message</h2>
-        <form id="contact-form" action="#" method="post" class="space-y-5" novalidate>
+        <h2 class="text-2xl font-bold text-[#0a0a0a] mb-2">Send Us a Message</h2>
+        <p class="text-sm text-gray-500 mb-6 flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-[#25D366] text-lg"></i>
+          Your message will be sent directly to our WhatsApp.
+        </p>
+        <form id="contact-form" class="space-y-5" novalidate>
           <div>
             <label for="full-name" class="block text-sm text-gray-700 font-semibold mb-2">Full Name</label>
             <input id="full-name" name="full_name" type="text" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Enter your full name"/>
@@ -125,7 +137,7 @@
             </div>
             <div>
               <label for="email-address" class="block text-sm text-gray-700 font-semibold mb-2">Email Address</label>
-              <input id="email-address" name="email_address" type="email" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="you@example.com"/>
+              <input id="email-address" name="email_address" type="email" class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="you@example.com (optional)"/>
               <p id="error-email-address" class="form-error"></p>
             </div>
           </div>
@@ -148,28 +160,12 @@
             <textarea id="message" name="message" rows="5" required class="form-control-custom w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]" placeholder="Write your message here..."></textarea>
             <p id="error-message" class="form-error"></p>
           </div>
-          <label class="flex items-start gap-3 text-gray-600 text-sm">
-            <input id="confirmation" type="checkbox" name="confirmation" required class="form-control-custom mt-1 accent-[#e6a817]"/>
-            <span>I confirm that the information above is correct and I agree to be contacted by the SAGU Foundation team.</span>
-          </label>
-          <p id="error-confirmation" class="form-error pl-8"></p>
-          <button type="submit" class="w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-6 py-3.5 rounded-md transition-all">
-            <i class="fa-solid fa-paper-plane mr-2"></i>Send Message
+          <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-6 py-3.5 rounded-md transition-all flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-xl"></i>Send via WhatsApp
           </button>
         </form>
       </section>
     </div>
-
-    <section class="bg-white border border-gray-200 rounded-md p-4 md:p-6 shadow-sm mb-8">
-      <div class="rounded-md overflow-hidden border border-gray-200">
-
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2511.0055136375227!2d140.67549763531542!3d-2.6068739185188923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x686cf58c52a21f63%3A0xa265b0ac68dc413!2sSAGU%20Foundation!5e0!3m2!1sen!2sid!4v1779109473957!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        class="w-full h-[320px] md:h-[720px]">
-      </iframe>
-
-
-      </div>
-    </section>
 
     <section class="bg-[#0a0a0a] text-white rounded-3xl p-10 md:p-14 text-center">
       <i class="fa-solid fa-handshake-angle text-[#e6a817] text-4xl mb-5"></i>
@@ -193,78 +189,71 @@
 
   <script>
     (function () {
+      var WA_NUMBER = '6281312170710';
       var form = document.getElementById('contact-form');
       if (!form) return;
 
-      var fieldConfigs = [
-        { id: 'full-name', message: 'Full Name wajib diisi.' },
-        { id: 'phone-number', message: 'Phone Number wajib diisi.' },
-        { id: 'email-address', message: 'Email Address wajib diisi dengan format yang benar.' },
-        { id: 'topic', message: 'Silakan pilih topic.' },
-        { id: 'message', message: 'Message wajib diisi.' },
-        { id: 'confirmation', message: 'Silakan centang konfirmasi sebelum kirim pesan.' }
+      var requiredFields = [
+        { id: 'full-name',    message: 'Please enter your full name.' },
+        { id: 'phone-number', message: 'Please enter your phone number.' },
+        { id: 'topic',        message: 'Please select a topic.' },
+        { id: 'message',      message: 'Please write your message.' }
       ];
 
-      function isValidField(field) {
-        if (field.type === 'checkbox') return field.checked;
-        var value = field.value.trim();
-        if (!value) return false;
-        if (field.type === 'email') {
-          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-        }
-        return true;
-      }
-
       function setFieldState(field, isValid, message) {
-        var errorElement = document.getElementById('error-' + field.id);
+        var err = document.getElementById('error-' + field.id);
         field.classList.remove('is-invalid', 'is-valid');
         if (isValid) {
           field.classList.add('is-valid');
-          if (errorElement) errorElement.textContent = '';
-          return;
+          if (err) err.textContent = '';
+        } else {
+          field.classList.add('is-invalid');
+          if (err) err.textContent = message;
         }
-        field.classList.add('is-invalid');
-        if (errorElement) errorElement.textContent = message;
       }
 
-      function validateField(config) {
-        var field = document.getElementById(config.id);
+      function validate(cfg) {
+        var field = document.getElementById(cfg.id);
         if (!field) return true;
-        var valid = isValidField(field);
-        setFieldState(field, valid, config.message);
+        var valid = field.value.trim() !== '';
+        setFieldState(field, valid, cfg.message);
         return valid;
       }
 
-      fieldConfigs.forEach(function (config) {
-        var field = document.getElementById(config.id);
+      requiredFields.forEach(function (cfg) {
+        var field = document.getElementById(cfg.id);
         if (!field) return;
-        var eventName = field.type === 'checkbox' || field.tagName === 'SELECT' ? 'change' : 'input';
-        field.addEventListener(eventName, function () {
-          validateField(config);
-        });
-        field.addEventListener('blur', function () {
-          validateField(config);
-        });
+        var evt = field.tagName === 'SELECT' ? 'change' : 'input';
+        field.addEventListener(evt, function () { validate(cfg); });
+        field.addEventListener('blur', function () { validate(cfg); });
       });
 
-      form.addEventListener('submit', function (event) {
-        var firstInvalidField = null;
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
         var allValid = true;
-
-        fieldConfigs.forEach(function (config) {
-          var field = document.getElementById(config.id);
-          if (!field) return;
-          var valid = validateField(config);
-          if (!valid) {
+        var first = null;
+        requiredFields.forEach(function (cfg) {
+          if (!validate(cfg)) {
             allValid = false;
-            if (!firstInvalidField) firstInvalidField = field;
+            if (!first) first = document.getElementById(cfg.id);
           }
         });
+        if (!allValid) { if (first) first.focus(); return; }
 
-        if (!allValid) {
-          event.preventDefault();
-          if (firstInvalidField) firstInvalidField.focus();
-        }
+        var name    = document.getElementById('full-name').value.trim();
+        var phone   = document.getElementById('phone-number').value.trim();
+        var email   = document.getElementById('email-address').value.trim();
+        var topic   = document.getElementById('topic').value;
+        var message = document.getElementById('message').value.trim();
+
+        var text = 'Hello SAGU Foundation!\n\n'
+          + 'Name: ' + name + '\n'
+          + 'Phone: ' + phone + '\n'
+          + (email ? 'Email: ' + email + '\n' : '')
+          + 'Topic: ' + topic + '\n\n'
+          + 'Message:\n' + message;
+
+        window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener,noreferrer');
       });
     })();
   </script>

@@ -40,7 +40,7 @@
     .nav-link.active { color:#e6a817; }
     .nav-link.active::after { width:100%; }
     .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
-    [x-cloak]{display:none}
+    [x-cloak]{display:none !important}
   </style>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
@@ -51,127 +51,222 @@
 
 <main class="pt-28 md:pt-36 pb-14"
   x-data="coursesDirectory()"
-  x-init="init()">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="mb-10">
+  x-init="init()"
+  @keydown.escape.window="closeModal()">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="mb-8 md:mb-10">
       <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Course Directory</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Latest Courses</h1>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">All Courses</h1>
       <div class="gold-bar"></div>
     </div>
-    <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-8 items-start">
+    <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)] gap-6 md:gap-8 items-start">
+
+      <!-- ═══ COURSE LIST ═══ -->
       <section>
-        <div x-show="loading" class="bg-white border border-gray-200 rounded-md p-6 text-gray-600">
-          Loading courses from SF Connect...
+        <!-- Loading -->
+        <div x-show="loading" class="bg-white border border-gray-200 rounded-xl p-8 text-center text-gray-500">
+          <i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading courses from SF Connect...
         </div>
-        <div x-show="!loading && errorMessage" class="bg-red-50 border border-red-200 rounded-md p-6 text-red-700" x-text="errorMessage"></div>
-        <div class="space-y-6" x-show="!loading && !errorMessage">
+        <!-- Error -->
+        <div x-show="!loading && errorMessage" class="bg-red-50 border border-red-200 rounded-xl p-6 text-red-700" x-text="errorMessage"></div>
+        <!-- Course grid (card view) -->
+        <div class="grid sm:grid-cols-2 gap-5" x-show="!loading && !errorMessage">
           <template x-for="course in courses" :key="course.id ? 'course-' + course.id : course.slug">
-            <article class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm">
-              <div class="grid md:grid-cols-[240px_minmax(0,1fr)]">
-                <div class="aspect-[4/5] bg-gray-100"><img :src="course.image" :alt="course.title" class="w-full h-full object-contain bg-white p-2"/></div>
-                <div class="p-6">
-                  <div class="flex flex-wrap gap-2 mb-3 text-xs font-semibold">
-                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded">Term <span x-text="course.term"></span></span>
-                    <span class="bg-gray-100 text-gray-700 px-2.5 py-1 rounded" x-text="course.programName"></span>
-                    <span class="px-2.5 py-1 rounded" :class="statusClass(course.status)" x-text="statusLabel(course.status)"></span>
-                    <span class="bg-[#e6a817]/20 text-[#b98305] px-2.5 py-1 rounded" x-text="course.priceFormatted"></span>
-                    <template x-if="course.isTest">
-                      <span class="bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded">Test</span>
-                    </template>
-                  </div>
-                  <h2 class="text-2xl font-bold text-[#0a0a0a] mb-3" x-text="course.title"></h2>
-                  <p class="text-gray-600 leading-relaxed mb-5" x-text="course.description || 'Description is currently unavailable.'"></p>
-                  <div class="flex flex-wrap items-center gap-4">
-                    <a :href="coursePublicUrl(course)" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#0a0a0a] font-semibold hover:underline">View Course <i class="fa-solid fa-up-right-from-square text-xs"></i></a>
-                    <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-[#b98305] font-semibold hover:underline">Register Now <i class="fa-solid fa-arrow-right text-xs"></i></a>
-                  </div>
+            <article
+              class="group bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#e6a817]/50 transition-all cursor-pointer flex flex-col"
+              @click="openModal(course)">
+              <!-- Poster -->
+              <div class="aspect-[4/3] bg-gray-100 overflow-hidden flex-shrink-0">
+                <img :src="course.image" :alt="course.title" loading="lazy" decoding="async"
+                  class="w-full h-full object-contain bg-white p-2 group-hover:scale-105 transition-transform duration-400"/>
+              </div>
+              <!-- Info -->
+              <div class="p-4 flex flex-col flex-1">
+                <div class="flex flex-wrap gap-1.5 mb-2 text-[11px] font-bold">
+                  <span class="px-2 py-0.5 rounded-full" :class="statusClass(course.status)" x-text="statusLabel(course.status)"></span>
+                  <span class="bg-[#e6a817]/15 text-[#b98305] px-2 py-0.5 rounded-full" x-text="course.priceFormatted"></span>
+                  <template x-if="course.isTest">
+                    <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">Test</span>
+                  </template>
                 </div>
+                <h2 class="text-base font-bold text-[#0a0a0a] mb-1 leading-snug line-clamp-2 group-hover:text-[#b98305] transition-colors" x-text="course.title"></h2>
+                <p class="text-xs text-gray-500 mb-1" x-text="course.programName"></p>
+                <p class="text-xs text-gray-400 mt-auto pt-2 border-t border-gray-100">Term <span x-text="course.term"></span> · <span x-text="course.meetings"></span> meetings</p>
               </div>
             </article>
           </template>
-          <template x-if="courses.length === 0">
-            <div class="bg-white border border-gray-200 rounded-md p-6 text-gray-600">
-              No courses match your current filters.
+          <!-- Empty state -->
+          <template x-if="!loading && courses.length === 0">
+            <div class="col-span-2 bg-white border border-gray-200 rounded-xl p-10 text-center text-gray-500">
+              <i class="fa-solid fa-magnifying-glass text-3xl mb-3 opacity-30"></i>
+              <p class="font-semibold">No courses match your filters.</p>
+              <button @click="resetFilters()" class="mt-4 text-sm text-[#b98305] font-semibold hover:underline">Reset Filters</button>
             </div>
           </template>
         </div>
+        <!-- Pagination -->
         <div x-show="!loading && !errorMessage && totalItems > 0" class="mt-8 flex flex-wrap items-center justify-between gap-3">
           <p class="text-sm text-gray-600">
-            Showing <span class="font-semibold" x-text="courses.length"></span> of <span class="font-semibold" x-text="totalItems"></span> courses · page <span class="font-semibold" x-text="currentPage"></span> of <span class="font-semibold" x-text="totalPages"></span>
+            Showing <span class="font-semibold" x-text="courses.length"></span> of <span class="font-semibold" x-text="totalItems"></span> courses
+            &nbsp;·&nbsp; Page <span class="font-semibold" x-text="currentPage"></span> of <span class="font-semibold" x-text="totalPages"></span>
           </p>
-          <div class="flex items-center gap-2" x-show="totalPages > 1">
-            <button @click="prevPage()" :disabled="currentPage === 1" class="px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-50 disabled:cursor-not-allowed">
+          <div class="flex items-center gap-1.5" x-show="totalPages > 1">
+            <button @click="prevPage()" :disabled="currentPage === 1" class="w-9 h-9 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center">
               <i class="fa-solid fa-chevron-left text-xs"></i>
             </button>
             <template x-for="page in pageNumbers" :key="'page-' + page">
-              <button @click="setPage(page)" class="min-w-9 px-3 py-2 rounded-md border text-sm font-semibold transition-colors"
+              <button @click="setPage(page)" class="min-w-9 h-9 px-2 rounded-md border text-sm font-semibold transition-colors"
                 :class="currentPage === page ? 'border-[#e6a817] bg-[#e6a817] text-black' : 'border-gray-300 bg-white text-gray-700 hover:border-[#e6a817]'">
                 <span x-text="page"></span>
               </button>
             </template>
-            <button @click="nextPage()" :disabled="currentPage === totalPages" class="px-3 py-2 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-50 disabled:cursor-not-allowed">
+            <button @click="nextPage()" :disabled="currentPage === totalPages" class="w-9 h-9 rounded-md border border-gray-300 bg-white text-sm font-semibold text-gray-700 hover:border-[#e6a817] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center">
               <i class="fa-solid fa-chevron-right text-xs"></i>
             </button>
           </div>
         </div>
       </section>
-      <aside class="space-y-6">
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Search</h3>
-          <div class="relative"><i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input x-model="search" @input="queueSearch()" @keydown.enter.prevent="applyFilters()" type="text" placeholder="Search courses..." class="w-full bg-white border border-gray-300 rounded-md pl-10 pr-4 py-3 text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]"/></div>
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <aside class="space-y-5">
+        <!-- Search -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-base mb-3">Search Courses</h3>
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            <input x-model="search" @input="queueSearch()" @keydown.enter.prevent="applyFilters()" type="text"
+              placeholder="Search by course name..."
+              class="w-full bg-white border border-gray-300 rounded-lg pl-9 pr-4 py-2.5 text-sm text-[#0a0a0a] placeholder:text-gray-400 focus:outline-none focus:border-[#e6a817]"/>
+          </div>
         </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Program</h3>
-          <select x-model="selectedProgram" @change="applyFilters()" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
+        <!-- Filter by Status -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-base mb-3">Filter by Status</h3>
+          <div class="flex flex-wrap gap-2">
+            <template x-for="opt in statusOptions" :key="'status-' + opt.value">
+              <button type="button" @click="selectedStatus = opt.value; applyFilters()"
+                class="px-3 py-1.5 rounded-full text-xs font-bold border transition-all"
+                :class="selectedStatus === opt.value ? opt.activeClass : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-400'"
+                x-text="opt.label"></button>
+            </template>
+          </div>
+        </div>
+        <!-- Filter by Program -->
+        <div class="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
+          <h3 class="text-[#0a0a0a] font-bold text-base mb-3">Filter by Program</h3>
+          <select x-model="selectedProgram" @change="applyFilters()" class="w-full bg-white border border-gray-300 rounded-lg px-3 py-2.5 text-sm text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
             <option value="all">All Programs</option>
             <template x-for="program in programs" :key="'filter-program-' + program.slug">
-              <option :value="program.slug" x-text="program.name"></option>
+              <option :value="program.slug" x-text="program.name + (program.coursesCount ? ' (' + program.coursesCount + ')' : '')"></option>
             </template>
           </select>
-          <p x-show="programsLoading" class="text-xs text-gray-500 mt-2">Loading program options...</p>
+          <p x-show="programsLoading" class="text-xs text-gray-400 mt-2">Loading program options...</p>
         </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Status</h3>
-          <select x-model="selectedStatus" @change="applyFilters()" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
-            <option value="all">All Statuses</option>
-            <option value="registration">Open Registration</option>
-            <option value="ongoing">Ongoing</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Filter by Term</h3>
-          <select x-model="selectedTerm" @change="applyFilters()" class="w-full bg-white border border-gray-300 rounded-md px-4 py-3 text-[#0a0a0a] focus:outline-none focus:border-[#e6a817]">
-            <option value="all">All Terms</option>
-            <option value="1">Term 1</option>
-            <option value="2">Term 2</option>
-            <option value="3">Term 3</option>
-            <option value="4">Term 4</option>
-          </select>
-        </div>
-        <div class="bg-white border border-gray-200 rounded-md p-5 shadow-sm">
-          <h3 class="text-[#0a0a0a] font-bold text-lg mb-4">Course Categories</h3>
-          <ul class="space-y-2 text-gray-700">
-            <template x-if="programs.length === 0 && !programsLoading">
-              <li class="text-gray-500">No categories available.</li>
-            </template>
-            <template x-for="program in programs" :key="'program-list-' + program.slug">
-              <li>
-                <button type="button" @click="selectedProgram = program.slug; applyFilters()" class="w-full flex items-center justify-between text-left transition-colors"
-                  :class="selectedProgram === program.slug ? 'text-[#b98305] font-semibold' : 'hover:text-[#b98305]'">
-                  <span x-text="program.name"></span>
-                  <span class="text-xs rounded-full bg-gray-100 px-2 py-0.5" x-text="program.coursesCount"></span>
-                </button>
-              </li>
-            </template>
-          </ul>
-        </div>
-        <div class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-md p-5">
-          <h3 class="text-[#b98305] font-extrabold text-xl mb-2">Need a Private Class?</h3>
-          <p class="text-gray-700 mb-4">Get a personalized learning plan tailored to your goal and schedule.</p>
-          <a href="index.html#contact" class="inline-flex items-center justify-center w-full bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all"><i class="fa-solid fa-comments mr-2"></i>Go to Contact Page</a>
+        <!-- Private Class CTA -->
+        <div class="bg-[#e6a817]/10 border border-[#e6a817]/30 rounded-xl p-5">
+          <h3 class="text-[#b98305] font-extrabold text-lg mb-1">Need a Private Class?</h3>
+          <p class="text-gray-700 text-sm mb-4">Get a personalized plan tailored to your goal and schedule.</p>
+          <a href="https://wa.me/6281312170710?text=Halo%20SAGU%20Foundation%2C%20Saya%20ingin%20bertanya%20terkait%20kursus%20private"
+            target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-full bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-5 py-3 rounded-lg transition-all text-sm gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i>Chat via WhatsApp
+          </a>
         </div>
       </aside>
+    </div>
+  </div>
+
+  <!-- ═══ COURSE DETAIL MODAL ═══ -->
+  <div x-show="modalOpen" x-cloak
+    class="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6"
+    style="background:rgba(0,0,0,0.80);"
+    @click.self="closeModal()"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0">
+    <div class="w-full sm:max-w-3xl bg-white rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl max-h-[92vh] overflow-y-auto"
+      x-transition:enter="transition ease-out duration-200"
+      x-transition:enter-start="translate-y-8 sm:translate-y-0 sm:scale-95"
+      x-transition:enter-end="translate-y-0 sm:scale-100">
+      <!-- Modal header -->
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-5 py-3 flex items-center justify-between z-10">
+        <p class="text-xs font-bold text-[#b98305] uppercase tracking-widest">Course Detail</p>
+        <button type="button" @click="closeModal()"
+          class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="flex flex-col sm:flex-row">
+        <!-- Poster -->
+        <div class="sm:w-48 flex-shrink-0 bg-gray-50 flex items-center justify-center p-4">
+          <div class="w-full aspect-[3/4] rounded-lg overflow-hidden border border-gray-200 bg-white">
+            <img :src="selectedCourse && selectedCourse.image ? selectedCourse.image : 'images/logo-sagufoundation.png'"
+              :alt="selectedCourse && selectedCourse.title ? selectedCourse.title : 'Course poster'"
+              loading="lazy" decoding="async"
+              class="w-full h-full object-contain p-1"/>
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="flex-1 p-5 sm:p-6">
+          <!-- Status + badges -->
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold"
+              :class="selectedCourse ? statusClass(selectedCourse.status) : ''"
+              x-text="selectedCourse ? statusLabel(selectedCourse.status) : ''"></span>
+            <span class="bg-[#e6a817]/15 text-[#b98305] px-2.5 py-0.5 rounded-full text-xs font-bold"
+              x-text="selectedCourse ? selectedCourse.priceFormatted : ''"></span>
+            <template x-if="selectedCourse && selectedCourse.isTest">
+              <span class="bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-full text-xs font-bold">Test</span>
+            </template>
+          </div>
+          <!-- Title -->
+          <h2 class="text-xl sm:text-2xl font-extrabold text-[#0a0a0a] mb-1 leading-tight"
+            x-text="selectedCourse && selectedCourse.title ? selectedCourse.title : ''"></h2>
+          <p class="text-sm text-gray-500 mb-4"
+            x-text="selectedCourse && selectedCourse.programName ? selectedCourse.programName : ''"></p>
+          <!-- Meta -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4 text-xs">
+            <div class="bg-gray-50 rounded-lg px-3 py-2 border border-gray-100">
+              <p class="text-gray-400 uppercase tracking-wide mb-0.5">Term</p>
+              <p class="font-semibold text-[#0a0a0a]" x-text="selectedCourse ? selectedCourse.term : '-'"></p>
+            </div>
+            <div class="bg-gray-50 rounded-lg px-3 py-2 border border-gray-100">
+              <p class="text-gray-400 uppercase tracking-wide mb-0.5">Meetings</p>
+              <p class="font-semibold text-[#0a0a0a]" x-text="selectedCourse ? selectedCourse.meetings : '-'"></p>
+            </div>
+            <div class="bg-gray-50 rounded-lg px-3 py-2 border border-gray-100">
+              <p class="text-gray-400 uppercase tracking-wide mb-0.5">Price</p>
+              <p class="font-semibold text-[#0a0a0a]" x-text="selectedCourse ? selectedCourse.priceFormatted : '-'"></p>
+            </div>
+          </div>
+          <!-- Description -->
+          <p class="text-sm text-gray-600 leading-relaxed mb-5 line-clamp-5"
+            x-text="selectedCourse && selectedCourse.description ? selectedCourse.description : 'Course description is not available yet.'"></p>
+          <!-- How to register -->
+          <ol class="list-decimal list-inside space-y-1.5 text-sm text-gray-600 mb-5">
+            <li>Log in or register on <a href="https://connect.sagufoundation.org" target="_blank" rel="noopener noreferrer" class="text-[#e6a817] hover:underline font-semibold">SF Connect</a>.</li>
+            <li>Search for this course and click <strong class="text-[#0a0a0a]">"Register"</strong>.</li>
+            <li>Wait for verification and enjoy your learning journey.</li>
+          </ol>
+          <!-- CTA buttons -->
+          <div class="flex flex-col sm:flex-row gap-2">
+            <a :href="selectedCourse && selectedCourse.slug ? 'https://connect.sagufoundation.org/courses/' + selectedCourse.slug : 'https://connect.sagufoundation.org'"
+              target="_blank" rel="noopener noreferrer"
+              class="flex-1 inline-flex items-center justify-center gap-2 bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-xl transition-all text-sm">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>Open in SF Connect
+            </a>
+            <a href="https://wa.me/6281312170710?text=Halo%20SAGU%20Foundation%2C%20Saya%20ingin%20mendaftar%20kursus%20ini"
+              target="_blank" rel="noopener noreferrer"
+              class="flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-5 py-3 rounded-xl transition-all text-sm">
+              <i class="fa-brands fa-whatsapp"></i>Ask via WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -185,16 +280,28 @@
       search: '',
       selectedProgram: 'all',
       selectedStatus: 'all',
-      selectedTerm: 'all',
       currentPage: 1,
       totalPages: 1,
       totalItems: 0,
-      itemsPerPage: 6,
+      itemsPerPage: 12,
       courses: [],
       programs: [],
+      modalOpen: false,
+      selectedCourse: null,
       searchDebounceHandle: null,
+      statusOptions: [
+        { value: 'all',          label: 'All',          activeClass: 'border-gray-800 bg-gray-800 text-white' },
+        { value: 'ongoing',      label: 'Ongoing',      activeClass: 'border-sky-500 bg-sky-500 text-white' },
+        { value: 'registration', label: 'Registration', activeClass: 'border-emerald-500 bg-emerald-500 text-white' },
+        { value: 'completed',    label: 'Completed',    activeClass: 'border-zinc-500 bg-zinc-500 text-white' }
+      ],
       get pageNumbers() {
-        return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+        if (this.totalPages <= 7) return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+        const p = this.currentPage, t = this.totalPages, pages = [];
+        if (p <= 4) { pages.push(1, 2, 3, 4, 5, '...', t); }
+        else if (p >= t - 3) { pages.push(1, '...', t - 4, t - 3, t - 2, t - 1, t); }
+        else { pages.push(1, '...', p - 1, p, p + 1, '...', t); }
+        return pages;
       },
       statusLabel(status) {
         if (status === 'registration') return 'Open Registration';
@@ -221,46 +328,49 @@
           programName: course && course.program ? (course.program.name || '-') : '-',
           programSlug: course && course.program ? (course.program.slug || '') : '',
           term: course.term || '-',
+          meetings: course.meetings || '-',
           status: course.status || '',
           isTest: course.is_test === true || course.is_test === 1 || course.is_test === '1',
           priceFormatted: isFree ? 'Free' : (formattedPrice || 'N/A')
         };
       },
-      coursePublicUrl(course) {
-        if (course && course.slug) {
-          return 'https://connect.sagufoundation.org/courses/' + course.slug;
-        }
-        return 'https://connect.sagufoundation.org';
+      openModal(course) {
+        this.selectedCourse = course;
+        this.modalOpen = true;
+        document.body.style.overflow = 'hidden';
+      },
+      closeModal() {
+        this.modalOpen = false;
+        document.body.style.overflow = '';
       },
       buildCourseQuery(page) {
         const params = new URLSearchParams();
         params.set('per_page', String(this.itemsPerPage));
         params.set('page', String(page));
+        params.set('sort', 'newest');
         if (this.search.trim()) params.set('search', this.search.trim());
         if (this.selectedProgram !== 'all') params.set('program_slug', this.selectedProgram);
         if (this.selectedStatus !== 'all') params.set('status', this.selectedStatus);
-        if (this.selectedTerm !== 'all') params.set('term', this.selectedTerm);
         return params.toString();
+      },
+      resetFilters() {
+        this.search = '';
+        this.selectedProgram = 'all';
+        this.selectedStatus = 'all';
+        this.applyFilters();
       },
       async fetchPrograms() {
         this.programsLoading = true;
         try {
           const response = await fetch(this.apiBase + '/courses/programs');
           const result = await response.json();
-          if (!response.ok || !result.success || !Array.isArray(result.data)) {
-            throw new Error('Invalid programs response');
-          }
-          this.programs = result.data.map((program) => ({
-            id: program.id,
-            name: program.name || 'Program',
-            slug: program.slug || '',
-            coursesCount: Number(program.courses_count || 0)
-          })).filter((program) => program.slug);
-        } catch (error) {
-          this.programs = [];
-        } finally {
-          this.programsLoading = false;
-        }
+          if (!response.ok || !result.success || !Array.isArray(result.data)) throw new Error('Invalid programs');
+          this.programs = result.data.map((p) => ({
+            id: p.id, name: p.name || 'Program', slug: p.slug || '',
+            coursesCount: Number(p.courses_count || 0)
+          })).filter((p) => p.slug);
+        } catch { this.programs = []; }
+        finally { this.programsLoading = false; }
       },
       async fetchCourses(page = 1) {
         this.loading = true;
@@ -268,47 +378,32 @@
         try {
           const response = await fetch(this.apiBase + '/courses?' + this.buildCourseQuery(page));
           const result = await response.json();
-          if (!response.ok || !result.success || !Array.isArray(result.data)) {
-            throw new Error('Invalid courses response');
-          }
-          this.courses = result.data.map((course) => this.normalizeCourse(course));
+          if (!response.ok || !result.success || !Array.isArray(result.data)) throw new Error('Invalid courses');
+          this.courses = result.data.map((c) => this.normalizeCourse(c));
           const meta = result.meta || {};
-          this.currentPage = Number(meta.current_page || page || 1);
+          this.currentPage = Number(meta.current_page || page);
           this.totalPages = Math.max(1, Number(meta.last_page || 1));
           this.totalItems = Number(meta.total || this.courses.length);
           this.itemsPerPage = Number(meta.per_page || this.itemsPerPage);
-        } catch (error) {
+        } catch {
           this.errorMessage = 'Failed to load courses. Please refresh and try again.';
           this.courses = [];
-          this.currentPage = 1;
-          this.totalPages = 1;
-          this.totalItems = 0;
-        } finally {
-          this.loading = false;
-        }
+          this.currentPage = 1; this.totalPages = 1; this.totalItems = 0;
+        } finally { this.loading = false; }
       },
-      async applyFilters() {
-        await this.fetchCourses(1);
-      },
+      async applyFilters() { await this.fetchCourses(1); },
       queueSearch() {
         if (this.searchDebounceHandle) clearTimeout(this.searchDebounceHandle);
-        this.searchDebounceHandle = setTimeout(() => {
-          this.fetchCourses(1);
-        }, 400);
+        this.searchDebounceHandle = setTimeout(() => { this.fetchCourses(1); }, 400);
       },
       async setPage(page) {
-        if (page < 1 || page > this.totalPages || page === this.currentPage) return;
+        if (typeof page !== 'number' || page < 1 || page > this.totalPages || page === this.currentPage) return;
         await this.fetchCourses(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       },
-      async nextPage() {
-        await this.setPage(this.currentPage + 1);
-      },
-      async prevPage() {
-        await this.setPage(this.currentPage - 1);
-      },
-      async init() {
-        await Promise.all([this.fetchPrograms(), this.fetchCourses(1)]);
-      }
+      async nextPage() { await this.setPage(this.currentPage + 1); },
+      async prevPage() { await this.setPage(this.currentPage - 1); },
+      async init() { await Promise.all([this.fetchPrograms(), this.fetchCourses(1)]); }
     };
   }
 </script>

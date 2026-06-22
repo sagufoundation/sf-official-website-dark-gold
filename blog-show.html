@@ -5,16 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="page-title">Article | SAGU Foundation</title>
   <meta id="meta-desc" name="description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
-  <meta name="keywords" content="SAGU Foundation, Papua, education, community development" />
-  <meta name="author" content="SAGU Foundation" />
+  <meta id="meta-keywords" name="keywords" content="SAGU Foundation, Papua, education, community development" />
+  <meta id="meta-author" name="author" content="SAGU Foundation" />
   <meta name="robots" content="index, follow" />
+  <link id="meta-canonical" rel="canonical" href="https://sagufoundation.org/blog-show.html" />
   <meta id="og-title" property="og:title" content="Article | SAGU Foundation" />
   <meta id="og-desc" property="og:description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
   <meta id="og-image" property="og:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
   <meta id="og-url" property="og:url" content="https://sagufoundation.org/blog-show.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="SAGU Foundation" />
+  <meta id="og-article-time" property="article:published_time" content="" />
+  <meta id="og-article-author" property="article:author" content="" />
+  <meta id="og-article-section" property="article:section" content="" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta id="twitter-title" name="twitter:title" content="Article | SAGU Foundation" />
+  <meta id="twitter-desc" name="twitter:description" content="Detail artikel dan cerita terbaru dari blog SAGU Foundation." />
+  <meta id="twitter-image" name="twitter:image" content="https://sagufoundation.org/images/logo-sagufoundation.png" />
   <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
   <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -137,7 +144,7 @@
 </button>
 
 <main class="pt-28 md:pt-36 pb-14">
-  <div class="max-w-7xl mx-auto px-4 md:px-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
     <!-- ======= LOADING STATE ======= -->
     <div id="loading-state" class="space-y-6">
@@ -164,10 +171,10 @@
     <!-- ======= ERROR STATE ======= -->
     <div id="error-state" class="hidden text-center py-24">
       <i class="fa-solid fa-triangle-exclamation text-[#e6a817] text-6xl mb-6"></i>
-      <h2 class="text-2xl font-bold mb-3">Artikel tidak ditemukan</h2>
-      <p class="text-gray-500 mb-8" id="error-msg">Artikel yang kamu cari tidak tersedia atau telah dihapus.</p>
+      <h2 class="text-2xl font-bold mb-3">Article not found</h2>
+      <p class="text-gray-500 mb-8" id="error-msg">The article you are looking for is not available or has been removed.</p>
       <a href="blog.html" class="inline-flex items-center gap-2 bg-[#e6a817] text-[#0a0a0a] font-bold px-8 py-4 rounded-2xl hover:bg-amber-400 transition">
-        <i class="fa-solid fa-arrow-left"></i> Kembali ke Blog
+        <i class="fa-solid fa-arrow-left"></i> Back to Blog
       </a>
     </div>
 
@@ -176,7 +183,7 @@
 
      
 
-      <div class="grid lg:grid-cols-[minmax(0,1fr)_280px] gap-10 items-start">
+      <div class="grid lg:grid-cols-[minmax(0,1fr)_260px] gap-8 lg:gap-10 items-start">
 
         <!-- ===== MAIN ARTICLE ===== -->
         <article>
@@ -185,7 +192,8 @@
             <img id="article-cover"
                  src="" alt=""
                  class="w-full object-cover"
-                 style="max-height: 480px; min-height: 260px;"
+                 style="max-height: 420px; min-height: 200px;"
+                 loading="lazy" decoding="async"
                  onerror="this.src='https://placehold.co/1200x480/f5f5f5/cccccc?text=SAGU+Foundation'">
             <!-- Category badge -->
             <div class="absolute bottom-5 left-5 flex gap-2 flex-wrap" id="article-badges"></div>
@@ -240,31 +248,34 @@
             </div>
           </div>
 
-          <!-- Navigation: prev/next (simple back) -->
-          <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start">
+          <!-- Navigation: back + share -->
+          <div class="mt-10 space-y-4">
+            <!-- Back button -->
             <a href="blog.html"
-               class="inline-flex items-center justify-center gap-2 text-[#0a0a0a] font-semibold border border-gray-300 px-6 py-3 rounded-2xl hover:border-[#e6a817] hover:text-[#e6a817] transition w-full sm:w-auto">
-              <i class="fa-solid fa-arrow-left"></i> All Articles
+               class="inline-flex items-center gap-2 text-[#0a0a0a] font-semibold border border-gray-300 px-5 py-2.5 rounded-2xl hover:border-[#e6a817] hover:text-[#e6a817] transition text-sm">
+              <i class="fa-solid fa-arrow-left text-xs"></i> All Articles
             </a>
-            <!-- Share again (bottom) -->
-            <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-0 mt-0 w-full sm:w-auto">
-              <span class="w-full sm:w-auto text-sm font-semibold text-gray-600 mb-1 sm:mb-0">Share:</span>
-              <a id="share-wa" href="#" target="_blank" rel="noopener"
-                 class="share-btn flex items-center justify-center gap-2 bg-green-50 text-green-600 border border-green-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-green-100 flex-1 min-w-[110px] sm:flex-none">
-                <i class="fa-brands fa-whatsapp"></i> WhatsApp
-              </a>
-              <a id="share-fb" href="#" target="_blank" rel="noopener"
-                 class="share-btn flex items-center justify-center gap-2 bg-blue-50 text-blue-600 border border-blue-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-blue-100 flex-1 min-w-[110px] sm:flex-none">
-                <i class="fa-brands fa-facebook"></i> Facebook
-              </a>
-              <a id="share-tw" href="#" target="_blank" rel="noopener"
-                 class="share-btn flex items-center justify-center gap-2 bg-sky-50 text-sky-500 border border-sky-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-sky-100 flex-1 min-w-[110px] sm:flex-none">
-                <i class="fa-brands fa-x-twitter"></i> Twitter
-              </a>
-              <button onclick="copyLink()"
-                 class="share-btn flex items-center justify-center gap-2 bg-gray-100 text-gray-600 border border-gray-200 px-3 py-2 rounded-xl text-sm font-medium hover:bg-gray-200 flex-1 min-w-[110px] sm:flex-none">
-                <i class="fa-solid fa-link"></i> <span id="copy-label">Copy Link</span>
-              </button>
+            <!-- Share buttons -->
+            <div>
+              <p class="text-sm font-semibold text-gray-600 mb-3">Share this article:</p>
+              <div class="flex flex-wrap gap-2">
+                <a id="share-wa" href="#" target="_blank" rel="noopener"
+                   class="share-btn inline-flex items-center gap-1.5 bg-green-50 text-green-700 border border-green-200 px-3.5 py-2 rounded-xl text-sm font-semibold hover:bg-green-100 transition-all">
+                  <i class="fa-brands fa-whatsapp text-base"></i><span>WhatsApp</span>
+                </a>
+                <a id="share-fb" href="#" target="_blank" rel="noopener"
+                   class="share-btn inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 border border-blue-200 px-3.5 py-2 rounded-xl text-sm font-semibold hover:bg-blue-100 transition-all">
+                  <i class="fa-brands fa-facebook text-base"></i><span>Facebook</span>
+                </a>
+                <a id="share-tw" href="#" target="_blank" rel="noopener"
+                   class="share-btn inline-flex items-center gap-1.5 bg-sky-50 text-sky-600 border border-sky-200 px-3.5 py-2 rounded-xl text-sm font-semibold hover:bg-sky-100 transition-all">
+                  <i class="fa-brands fa-x-twitter text-base"></i><span>Twitter</span>
+                </a>
+                <button onclick="copyLink()"
+                   class="share-btn inline-flex items-center gap-1.5 bg-gray-100 text-gray-600 border border-gray-200 px-3.5 py-2 rounded-xl text-sm font-semibold hover:bg-gray-200 transition-all">
+                  <i class="fa-solid fa-link text-base"></i><span id="copy-label">Copy Link</span>
+                </button>
+              </div>
             </div>
           </div>
         </article>
@@ -286,21 +297,21 @@
               <i class="fa-solid fa-circle-info text-[#e6a817]"></i> Article Info
             </h3>
             <div class="space-y-3 text-sm">
-              <div class="flex justify-between">
-                <span class="text-gray-500">Published</span>
-                <span class="font-semibold" id="sidebar-date"></span>
+              <div class="flex items-start justify-between gap-2">
+                <span class="text-gray-500 flex-shrink-0">Published</span>
+                <span class="font-semibold text-right" id="sidebar-date"></span>
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-500">Author</span>
-                <span class="font-semibold" id="sidebar-author"></span>
+              <div class="flex items-start justify-between gap-2">
+                <span class="text-gray-500 flex-shrink-0">Author</span>
+                <span class="font-semibold text-right" id="sidebar-author"></span>
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-500">Category</span>
-                <span class="font-semibold" id="sidebar-cat"></span>
+              <div class="flex items-start justify-between gap-2">
+                <span class="text-gray-500 flex-shrink-0">Category</span>
+                <span class="font-semibold text-right" id="sidebar-cat"></span>
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-500">Read Time</span>
-                <span class="font-semibold" id="sidebar-readtime"></span>
+              <div class="flex items-start justify-between gap-2">
+                <span class="text-gray-500 flex-shrink-0">Read Time</span>
+                <span class="font-semibold text-right" id="sidebar-readtime"></span>
               </div>
             </div>
           </div>
@@ -309,7 +320,7 @@
           <div class="bg-[#0a0a0a] text-white rounded-3xl p-5 text-center">
             <i class="fa-solid fa-graduation-cap text-[#e6a817] text-3xl mb-3"></i>
             <h3 class="font-bold text-base mb-2">Join Our Programs</h3>
-            <p class="text-gray-400 text-xs mb-4">Jadilah bagian dari perubahan positif di Papua.</p>
+            <p class="text-gray-400 text-xs mb-4">Be part of positive change in Papua.</p>
             <a href="courses.html"
                class="inline-block bg-[#e6a817] hover:bg-amber-400 text-[#0a0a0a] font-bold px-4 py-2.5 rounded-xl text-sm transition-all">
               Browse Courses <i class="fa-solid fa-arrow-right ml-1"></i>
@@ -461,7 +472,7 @@ function renderRecs(posts) {
   const loading = document.getElementById('recs-loading');
 
   if (!posts || posts.length === 0) {
-    loading.innerHTML = '<p class="text-gray-400 text-sm col-span-3">Tidak ada rekomendasi saat ini.</p>';
+    loading.innerHTML = '<p class="text-gray-400 text-sm col-span-3">No recommendations available at this time.</p>';
     return;
   }
 
@@ -496,16 +507,36 @@ function renderRecs(posts) {
 
 // ---- Update Meta Tags ----
 function updateMeta(post) {
-  const title = `${post.title} | SAGU Foundation`;
-  const desc = stripHtml(post.content).substring(0, 160);
-  const url = window.location.href;
+  const title  = `${post.title} | SAGU Foundation`;
+  const desc   = stripHtml(post.content).substring(0, 160).trim().replace(/\s+/g, ' ');
+  const url    = window.location.href;
+  const image  = post.cover || 'https://sagufoundation.org/images/logo-sagufoundation.png';
+  const author = post.author?.name || 'SAGU Foundation';
+  const category = post.category?.label || 'Article';
+  const published = post.created_at || '';
+  const keywords = ['SAGU Foundation', 'Papua', category, 'education', 'community development']
+    .filter(Boolean).join(', ');
 
-  document.getElementById('page-title').textContent = title;
+  // Basic
+  document.getElementById('page-title').textContent          = title;
   document.getElementById('meta-desc').setAttribute('content', desc);
+  document.getElementById('meta-keywords').setAttribute('content', keywords);
+  document.getElementById('meta-author').setAttribute('content', author);
+  document.getElementById('meta-canonical').setAttribute('href', url);
+
+  // Open Graph
   document.getElementById('og-title').setAttribute('content', title);
   document.getElementById('og-desc').setAttribute('content', desc);
-  document.getElementById('og-image').setAttribute('content', post.cover);
+  document.getElementById('og-image').setAttribute('content', image);
   document.getElementById('og-url').setAttribute('content', url);
+  document.getElementById('og-article-time').setAttribute('content', published);
+  document.getElementById('og-article-author').setAttribute('content', author);
+  document.getElementById('og-article-section').setAttribute('content', category);
+
+  // Twitter
+  document.getElementById('twitter-title').setAttribute('content', title);
+  document.getElementById('twitter-desc').setAttribute('content', desc);
+  document.getElementById('twitter-image').setAttribute('content', image);
 }
 
 // ---- Main Fetch ----
