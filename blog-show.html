@@ -29,8 +29,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     * { font-family: 'Plus Jakarta Sans', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background: #f5f5f5; color: #0a0a0a; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { background: #f5f5f5; color: #0a0a0a; overflow-x: hidden; }
 
     /* Reading progress bar */
     #reading-progress {
@@ -45,7 +45,7 @@
     }
 
     /* Article prose */
-    .prose-article { max-width: none; line-height: 1.85; color: #1a1a1a; }
+    .prose-article { max-width: none; line-height: 1.85; color: #1a1a1a; overflow-wrap: break-word; word-break: break-word; }
     .prose-article p { margin-bottom: 1.35em; font-size: 1.0625rem; }
     .prose-article h1, .prose-article h2, .prose-article h3, .prose-article h4 {
       font-weight: 800; color: #0a0a0a; margin: 2em 0 0.8em; line-height: 1.3;
@@ -76,7 +76,8 @@
     .prose-article figure.image img { max-height: 520px; }
 
     /* Tables in content */
-    .prose-article table { width: 100%; border-collapse: collapse; margin: 1.5em 0; border-radius: 12px; overflow: hidden; }
+    .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5em 0; border-radius: 12px; }
+    .prose-article table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; min-width: 480px; }
     .prose-article td, .prose-article th {
       border: 1px solid #e8e8e8; padding: 12px 16px; text-align: left; font-size: 0.9rem;
     }
@@ -84,8 +85,16 @@
     .prose-article td em { font-size: 0.875rem; color: #666; }
 
     /* Disclaimer table styling */
-    .prose-article figure.table { background: #fffbf0; border: 1px solid #e6a817/30; border-radius: 12px; overflow: hidden; }
+    .prose-article figure.table { background: #fffbf0; border: 1px solid #e6a817/30; border-radius: 12px; overflow-x: auto; }
     .prose-article figure.table td { background: transparent; border: none; padding: 14px 18px; color: #7a6030; font-size: 0.875rem; }
+
+    /* Pre / code blocks */
+    .prose-article pre { overflow-x: auto; max-width: 100%; white-space: pre-wrap; word-break: break-all; background: #1a1a1a; color: #f0f0f0; padding: 1em 1.25em; border-radius: 12px; margin: 1.5em 0; font-size: 0.875rem; }
+    .prose-article code { word-break: break-all; }
+
+    /* Iframes (YouTube, maps, etc) */
+    .iframe-wrap { position: relative; padding-top: 56.25%; width: 100%; overflow: hidden; border-radius: 12px; margin: 1.5em 0; }
+    .iframe-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
     /* Skeleton shimmer */
     @keyframes shimmer {
@@ -597,9 +606,30 @@ async function loadArticle() {
     // Fix images in content: ensure responsive
     bodyEl.querySelectorAll('img').forEach(img => {
       img.removeAttribute('width');
+      img.removeAttribute('height');
       img.removeAttribute('srcset');
       img.removeAttribute('sizes');
       img.classList.add('max-w-full', 'h-auto');
+    });
+
+    // Wrap iframes in responsive 16:9 container
+    bodyEl.querySelectorAll('iframe').forEach(iframe => {
+      if (iframe.parentElement?.classList.contains('iframe-wrap')) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'iframe-wrap';
+      iframe.parentNode.insertBefore(wrap, iframe);
+      wrap.appendChild(iframe);
+      iframe.removeAttribute('width');
+      iframe.removeAttribute('height');
+    });
+
+    // Wrap tables for horizontal scroll on mobile
+    bodyEl.querySelectorAll('table').forEach(table => {
+      if (table.parentElement?.classList.contains('table-scroll-wrap')) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'table-scroll-wrap';
+      table.parentNode.insertBefore(wrap, table);
+      wrap.appendChild(table);
     });
 
     // Build TOC
