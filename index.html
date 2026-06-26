@@ -414,7 +414,7 @@
       class="float-img absolute bottom-28 right-[3%] w-32 h-22 object-cover rounded-md border-2 border-[#e6a817]/20 shadow-xl opacity-35 pointer-events-none z-[5] hidden lg:block" />
 
     <!-- PERBAIKAN: min-h ditingkatkan di mobile, py dikurangi sedikit agar tidak overflow -->
-    <div class="relative z-10 w-full min-h-[620px] sm:min-h-[660px] lg:min-h-[720px] py-8 sm:py-12 sm:pb-16" style="margin-bottom: 60px;">
+    <div class="relative z-10 w-full min-h-[1000px] sm:min-h-[950px] md:min-h-[800px] lg:min-h-[720px] py-8 sm:py-12 sm:pb-16" style="margin-bottom: 60px;">
       <!-- Slide 1: Main hero -->
       <div class="absolute inset-0 z-10 flex items-center w-full transition-opacity duration-700 ease-out"
         x-show="slide === 0" x-cloak x-transition:enter="transition ease-out duration-700"
@@ -443,7 +443,7 @@
               </a>
             </div>
           </div>
-          <div class="grid gap-3 sm:grid-cols-3 sm:gap-5">
+          <div class="grid gap-3 md:grid-cols-3 md:gap-5">
             <div class="bg-white/5 backdrop-blur rounded-md p-4 sm:p-6 border border-white/10">
               <div class="flex items-center gap-3 mb-2 sm:mb-3">
                 <div
@@ -452,8 +452,7 @@
                 </div>
                 <h3 class="text-[#e6a817] text-base sm:text-xl font-extrabold">Education</h3>
               </div>
-              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">Contributing to the advancement of education
-                in Papua through targeted programmes and initiatives.</p>
+              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">SAGU Foundation contributes to the advancement of education in Papua through targeted programmes and initiatives that strengthen access, improve learning outcomes, and support pathways to further study.</p>
             </div>
             <div class="bg-[#e6a817]/10 backdrop-blur rounded-md p-4 sm:p-6 border border-[#e6a817]/30">
               <div class="flex items-center gap-3 mb-2 sm:mb-3">
@@ -463,9 +462,7 @@
                 </div>
                 <h3 class="text-[#e6a817] text-base sm:text-xl font-extrabold">Workforce Development</h3>
               </div>
-              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">Specialised programmes focused on developing
-                practical skills and building workforce readiness, opening pathways to employment and scholarship
-                opportunities that contribute to long-term development in Papua.</p>
+              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">SAGU Foundation develops practical skills and workforce readiness through targeted programmes that support pathways to employment, scholarships, and further study.</p>
             </div>
             <div class="bg-white/5 backdrop-blur rounded-md p-4 sm:p-6 border border-white/10">
               <div class="flex items-center gap-3 mb-2 sm:mb-3">
@@ -475,8 +472,7 @@
                 </div>
                 <h3 class="text-[#e6a817] text-base sm:text-xl font-extrabold">Research</h3>
               </div>
-              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">Programme implementation is systematically
-                documented and developed into research outputs for evaluation and continuous improvement.</p>
+              <p class="text-gray-400 text-xs sm:text-lg leading-relaxed">SAGU Foundation documents programme implementation and develops these into research that supports evaluation and continuous improvement.</p>
             </div>
           </div>
         </div>
@@ -664,7 +660,7 @@
                     x-text="selectedCourse && selectedCourse.title ? selectedCourse.title : 'Selected Course'"></h3>
                 </div>
                 <button type="button" @click="closeCourseModal()"
-                  class="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-md text-white/70 hover:text-white hover:bg-white/10 text-xl transition-colors">
+                  class="hidden flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-md text-white/70 hover:text-white hover:bg-white/10 text-xl transition-colors">
                   <i class="fa-solid fa-xmark"></i>
                 </button>
               </div>
