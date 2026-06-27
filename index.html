@@ -377,6 +377,13 @@
     class="grain relative min-h-screen flex items-center overflow-hidden pt-[96px] sm:pt-[120px] md:pt-[136px] pb-28 sm:pb-20 md:pb-20"
     style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 55%,#111111 100%);"
     x-data="{ slide: 0, init() { setInterval(() => this.slide = (this.slide + 1) % 2, 7000) } }">
+    <!-- Slide background layers -->
+    <div class="absolute inset-0 transition-opacity duration-700 pointer-events-none"
+      :class="slide === 0 ? 'opacity-100' : 'opacity-0'"
+      style="background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 55%,#111111 100%);"></div>
+    <div class="absolute inset-0 transition-opacity duration-700 pointer-events-none"
+      :class="slide === 1 ? 'opacity-100' : 'opacity-0'"
+      style="background:linear-gradient(150deg,#06090f 0%,#0d1422 55%,#080c12 100%);"></div>
     <div class="absolute top-10 right-0 w-[900px] h-[900px] rounded-md opacity-15 pointer-events-none"
       style="background:radial-gradient(circle,#e6a817,transparent 65%)"></div>
     <div class="absolute -bottom-32 -left-32 w-[700px] h-[700px] rounded-md opacity-15 pointer-events-none"
