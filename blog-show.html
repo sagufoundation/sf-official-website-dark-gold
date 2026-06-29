@@ -46,7 +46,8 @@
 
     /* Article prose */
     .prose-article { max-width: none; line-height: 1.85; color: #1a1a1a; overflow-wrap: break-word; word-break: break-word; }
-    .prose-article p { margin-bottom: 1.35em; font-size: 1.0625rem; }
+    .prose-article p { margin-bottom: 1.35em; font-size: 0.9375rem; }
+    @media (min-width: 640px) { .prose-article p { font-size: 1.0625rem; } }
     .prose-article h1, .prose-article h2, .prose-article h3, .prose-article h4 {
       font-weight: 800; color: #0a0a0a; margin: 2em 0 0.8em; line-height: 1.3;
     }
@@ -67,26 +68,38 @@
       font-style: italic; color: #555;
     }
 
-    /* Images in content */
-    .prose-article figure { margin: 2em 0; }
+    /* Images in content — override CMS inline width on figures */
+    .prose-article figure { margin: 2em 0; width: auto !important; max-width: 100% !important; }
     .prose-article figure img {
-      width: 100%; border-radius: 16px; object-fit: cover;
+      width: 100% !important; max-width: 100% !important; height: auto;
+      border-radius: 16px; object-fit: cover;
       box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     .prose-article figure.image img { max-height: 520px; }
+    .prose-article img { max-width: 100% !important; height: auto; }
+    /* Catch-all: prevent any CMS element from overflowing */
+    .prose-article > * { max-width: 100%; }
 
     /* Tables in content */
-    .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5em 0; border-radius: 12px; }
-    .prose-article table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; min-width: 480px; }
+    .table-scroll-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5em 0; border-radius: 12px; max-width: 100%; }
+    .prose-article table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; box-sizing: border-box; }
     .prose-article td, .prose-article th {
-      border: 1px solid #e8e8e8; padding: 12px 16px; text-align: left; font-size: 0.9rem;
+      border: 1px solid #e8e8e8; padding: 10px 14px; text-align: left; font-size: 0.875rem;
+    }
+    @media (min-width: 640px) {
+      .prose-article td, .prose-article th { padding: 12px 16px; font-size: 0.9rem; }
     }
     .prose-article tr:nth-child(even) td { background: #fafafa; }
     .prose-article td em { font-size: 0.875rem; color: #666; }
 
-    /* Disclaimer table styling */
-    .prose-article figure.table { background: #fffbf0; border: 1px solid #e6a817/30; border-radius: 12px; overflow-x: auto; }
-    .prose-article figure.table td { background: transparent; border: none; padding: 14px 18px; color: #7a6030; font-size: 0.875rem; }
+    /* Disclaimer / figure.table — override CMS inline width */
+    .prose-article figure.table {
+      width: auto !important; max-width: 100% !important;
+      background: #fffbf0; border: 1px solid rgba(230,168,23,0.3);
+      border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .prose-article figure.table table { width: 100%; min-width: 0; }
+    .prose-article figure.table td { background: transparent; border: none; padding: 12px 16px; color: #7a6030; font-size: 0.875rem; word-break: break-word; }
 
     /* Pre / code blocks */
     .prose-article pre { overflow-x: auto; max-width: 100%; white-space: pre-wrap; word-break: break-all; background: #1a1a1a; color: #f0f0f0; padding: 1em 1.25em; border-radius: 12px; margin: 1.5em 0; font-size: 0.875rem; }
@@ -152,7 +165,7 @@
   <i class="fa-solid fa-arrow-up text-sm"></i>
 </button>
 
-<main class="pt-28 md:pt-36 pb-14">
+<main class="pt-28 md:pt-36 pb-14 overflow-x-hidden">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
 
     <!-- ======= LOADING STATE ======= -->
@@ -195,25 +208,24 @@
       <div class="grid lg:grid-cols-[minmax(0,1fr)_260px] gap-8 lg:gap-10 items-start">
 
         <!-- ===== MAIN ARTICLE ===== -->
-        <article>
+        <article class="min-w-0 w-full">
           <!-- Hero Cover Image -->
-          <div class="relative rounded-3xl overflow-hidden shadow-md mb-10">
+          <div class="relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden shadow-md mb-6 sm:mb-10">
             <img id="article-cover"
                  src="" alt=""
-                 class="w-full object-cover"
-                 style="max-height: 420px; min-height: 200px;"
+                 class="w-full object-cover max-h-[220px] sm:max-h-[340px] lg:max-h-[420px] min-h-[140px]"
                  loading="lazy" decoding="async"
                  onerror="this.src='https://placehold.co/1200x480/f5f5f5/cccccc?text=SAGU+Foundation'">
             <!-- Category badge -->
-            <div class="absolute bottom-5 left-5 flex gap-2 flex-wrap" id="article-badges"></div>
+            <div class="absolute bottom-3 left-3 sm:bottom-5 sm:left-5 flex gap-2 flex-wrap" id="article-badges"></div>
           </div>
 
           <!-- Title & Meta -->
-          <div class="mb-8">
-            <h1 id="article-title" class="text-3xl md:text-4xl font-extrabold leading-tight mb-5 text-[#0a0a0a]"></h1>
+          <div class="mb-6 sm:mb-8">
+            <h1 id="article-title" class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight mb-4 sm:mb-5 text-[#0a0a0a]"></h1>
 
             <!-- Author + Date + Read time -->
-            <div class="flex flex-wrap items-center gap-4 text-sm text-gray-500 pb-6 border-b border-gray-200">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-4 text-sm text-gray-500 pb-5 sm:pb-6 border-b border-gray-200">
               <div class="flex items-center gap-2">
                 <div class="w-9 h-9 rounded-full bg-[#e6a817]/20 flex items-center justify-center">
                   <i class="fa-solid fa-user text-[#e6a817] text-xs"></i>
@@ -244,7 +256,7 @@
           </div>
 
           <!-- Author Card -->
-          <div class="mt-8 bg-white border border-gray-200 rounded-3xl p-6 md:p-8 flex gap-5 items-start shadow-sm">
+          <div class="mt-6 sm:mt-8 bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-6 md:p-8 flex flex-row gap-4 sm:gap-5 items-start shadow-sm">
             <div class="w-14 h-14 rounded-2xl bg-[#e6a817]/20 flex items-center justify-center flex-shrink-0">
               <i class="fa-solid fa-user-pen text-[#e6a817] text-xl"></i>
             </div>
@@ -300,8 +312,8 @@
             <ul id="toc-list" class="space-y-2 text-sm"></ul>
           </div>
 
-          <!-- Article Info Card -->
-          <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm">
+          <!-- Article Info Card — desktop only (info sudah tampil di header artikel) -->
+          <div class="hidden lg:block bg-white border border-gray-200 rounded-3xl p-5 shadow-sm">
             <h3 class="font-bold text-base mb-4 flex items-center gap-2">
               <i class="fa-solid fa-circle-info text-[#e6a817]"></i> Article Info
             </h3>
@@ -340,8 +352,8 @@
       </div>
 
       <!-- ======= RECOMMENDED ARTICLES ======= -->
-      <section class="mt-16 pt-10 border-t border-gray-200">
-        <div class="flex items-center justify-between mb-8">
+      <section class="mt-10 sm:mt-16 pt-8 sm:pt-10 border-t border-gray-200">
+        <div class="flex items-center justify-between mb-6 sm:mb-8">
           <div>
             <p class="text-[#e6a817] text-xs tracking-widest uppercase font-bold mb-1">Keep Reading</p>
             <h2 class="text-2xl md:text-3xl font-extrabold">Recommended Articles</h2>

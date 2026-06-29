@@ -92,6 +92,26 @@
       </p>
     </div>
 
+    <!-- Search — mobile/tablet only, di atas artikel -->
+    <div class="lg:hidden mb-5">
+      <div class="bg-white border border-gray-200 rounded-3xl p-5 shadow-sm">
+        <h3 class="font-bold text-base mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-magnifying-glass text-[#e6a817]"></i>Search Articles
+        </h3>
+        <div class="relative">
+          <input x-model="searchQuery"
+                 @input.debounce.500ms="onSearchInput()"
+                 type="search"
+                 placeholder="Search for article title..."
+                 class="w-full pl-5 pr-10 py-3.5 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:border-[#e6a817] transition">
+          <button x-show="searchQuery" @click="clearSearch()"
+                  class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="grid lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)] gap-6 sm:gap-8 items-start">
 
       <!-- ======= MAIN BLOG CONTENT ======= -->
@@ -215,8 +235,8 @@
       <!-- ======= SIDEBAR ======= -->
       <aside class="w-full space-y-4 sm:space-y-6 mt-0 lg:mt-0">
 
-        <!-- Search -->
-        <div class="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+        <!-- Search — desktop only (mobile version ada di atas artikel) -->
+        <div class="hidden lg:block bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
           <h3 class="font-bold text-lg mb-4">
             <i class="fa-solid fa-magnifying-glass text-[#e6a817] mr-2"></i>Search Articles
           </h3>
