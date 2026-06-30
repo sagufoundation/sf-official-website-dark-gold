@@ -197,6 +197,94 @@
       "imageAlt": "Internship",
       "menuHref": "program-detail.html?id=internship",
       "sectionHref": "program-detail.html?id=internship"
+    },
+    {
+      "id": "tutor-led-comdev-projects",
+      "title": "Tutor-led ComDev Projects",
+      "description": "Community-based educational projects led by SAGU Foundation tutors in direct partnership with local communities.",
+      "detailDescription": "Tutor-led ComDev Projects are community-based initiatives where SAGU Foundation tutors lead structured educational and development activities directly within local communities. These projects are designed to address specific local needs, combining structured learning with active community participation to create meaningful and lasting impact across Papua.",
+      "highlights": [
+        "Tutor-facilitated learning in community settings",
+        "Context-based activities tailored to local priorities",
+        "Collaborative approach with community stakeholders"
+      ],
+      "idealFor": [
+        "Community members seeking structured learning support",
+        "Local facilitators collaborating with education programs",
+        "Groups participating in SAGU Foundation initiatives"
+      ],
+      "ctaLabel": "Join a Project",
+      "ctaHref": "contact.html",
+      "image": "images/programs/program-community-development.png",
+      "imageAlt": "Tutor-led ComDev Projects",
+      "menuHref": "program-detail.html?id=tutor-led-comdev-projects",
+      "sectionHref": "program-detail.html?id=tutor-led-comdev-projects"
+    },
+    {
+      "id": "sagu-visits-schools",
+      "title": "SAGU Visits Schools",
+      "description": "Outreach visits to schools across Papua to deliver educational sessions and engage with students and teachers.",
+      "detailDescription": "SAGU Visits Schools is an outreach program where SAGU Foundation team members visit schools across Papua to deliver educational sessions, share learning resources, and engage directly with students and teachers. The program aims to bridge educational gaps and inspire students in underserved communities, building stronger connections between SAGU Foundation and local schools.",
+      "highlights": [
+        "Direct school outreach across Papua communities",
+        "Educational sessions and learning resource sharing",
+        "Student and teacher engagement activities"
+      ],
+      "idealFor": [
+        "Schools seeking educational support and collaboration",
+        "Teachers interested in curriculum enrichment resources",
+        "Students who benefit from outreach-based learning"
+      ],
+      "ctaLabel": "Partner with Us",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-Visit-School.webp",
+      "imageAlt": "SAGU Visits Schools",
+      "menuHref": "program-detail.html?id=sagu-visits-schools",
+      "sectionHref": "program-detail.html?id=sagu-visits-schools"
+    },
+    {
+      "id": "sagu-visits-communities",
+      "title": "SAGU Visits Communities",
+      "description": "Delivering educational activities and skills-building programs directly to local communities across Papua.",
+      "detailDescription": "SAGU Visits Communities brings SAGU Foundation's educational and development activities directly to local communities across Papua. Through structured visits, the program delivers practical learning, community dialogues, and skills-building activities designed to empower community members, strengthen local capacity, and foster a culture of continuous learning.",
+      "highlights": [
+        "Structured community visits and educational activities",
+        "Skills-building programs adapted to local context",
+        "Community dialogue and participation-driven approach"
+      ],
+      "idealFor": [
+        "Communities seeking practical education and development support",
+        "Local leaders collaborating on community improvement",
+        "Members interested in skills development and learning"
+      ],
+      "ctaLabel": "Get Involved",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-visit-communities.webp",
+      "imageAlt": "SAGU Visits Communities",
+      "menuHref": "program-detail.html?id=sagu-visits-communities",
+      "sectionHref": "program-detail.html?id=sagu-visits-communities"
+    },
+    {
+      "id": "sagu-scholarship-club",
+      "title": "SAGU Scholarship Club",
+      "description": "Structured study sessions and mentoring to prepare students in Papua for scholarship applications and opportunities.",
+      "detailDescription": "The SAGU Scholarship Club prepares students in Papua for scholarship applications and academic opportunities through structured study sessions, exam preparation support, and mentoring. The club connects aspiring students with resources, guidance, and a supportive peer community to help them pursue higher education goals and unlock pathways to scholarships both locally and nationally.",
+      "highlights": [
+        "Scholarship application guidance and preparation support",
+        "Study sessions for academic and exam readiness",
+        "Mentoring and peer support network"
+      ],
+      "idealFor": [
+        "Students targeting local and national scholarship programs",
+        "Learners preparing for university entrance requirements",
+        "Youth seeking mentoring for academic advancement"
+      ],
+      "ctaLabel": "Join the Club",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-Scolarship-Club.webp",
+      "imageAlt": "SAGU Scholarship Club",
+      "menuHref": "program-detail.html?id=sagu-scholarship-club",
+      "sectionHref": "program-detail.html?id=sagu-scholarship-club"
     }
   ]
 }
