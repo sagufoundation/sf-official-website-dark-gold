@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" x-data="{ mobileMenu: false }">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Development | SAGU Foundation</title>
+  <meta name="description" content="SAGU Foundation's Community Development program empowers communities in Papua through school visits, community outreach, scholarship clubs, and tutor-led initiatives." />
+  <meta name="keywords" content="SAGU Foundation, community development, Papua, education outreach, scholarship club, SAGU visits schools" />
+  <meta name="author" content="SAGU Foundation" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://sagufoundation.org/comdev.html" />
+  <meta property="og:title" content="Community Development | SAGU Foundation" />
+  <meta property="og:description" content="SAGU Foundation's Community Development program empowers communities in Papua through school visits, community outreach, scholarship clubs, and tutor-led initiatives." />
+  <meta property="og:image" content="https://sagufoundation.org/images/programs/program-community-development.png" />
+  <meta property="og:url" content="https://sagufoundation.org/comdev.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="SAGU Foundation" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Community Development | SAGU Foundation" />
+  <meta name="twitter:description" content="SAGU Foundation's Community Development program empowers communities in Papua through school visits, community outreach, scholarship clubs, and tutor-led initiatives." />
+  <meta name="twitter:image" content="https://sagufoundation.org/images/programs/program-community-development.png" />
+  <link rel="icon" type="image/png" href="images/logo-sagufoundation.png" />
+  <link rel="apple-touch-icon" href="images/logo-sagufoundation.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Plus Jakarta Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #f5f5f5; color: #0a0a0a; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; left: 0; bottom: -3px; width: 0; height: 2px; background: #e6a817; transition: width .3s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .topbar-link { position: relative; }
+    .topbar-link::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px; background: #e6a817; transition: width .3s ease; }
+    .topbar-link:hover::after { width: 100%; }
+    .topbar-link.active { color: #e6a817; }
+    .topbar-link.active::after { width: 100%; }
+    .nav-link.active { color: #e6a817; }
+    .nav-link.active::after { width: 100%; }
+    .gold-bar { width: 48px; height: 3px; background: #e6a817; border-radius: 2px; }
+    [x-cloak] { display: none; }
+  </style>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"SAGU Foundation","url":"https://sagufoundation.org","logo":"https://sagufoundation.org/images/logo-sagufoundation.png"}
+  </script>
+</head>
+<body>
+
+<main class="pt-28 md:pt-36 pb-14">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Header -->
+    <section class="mb-12 text-center">
+      <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Our Programs</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">Community Development</h1>
+      <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
+      <p class="max-w-3xl mx-auto mt-6 text-gray-600 leading-relaxed">
+        Information and resources related to community-focused projects and initiatives. SAGU Foundation brings education, outreach, and development opportunities directly to schools and communities across Papua.
+      </p>
+    </section>
+
+    <!-- Detail Content -->
+    <div>
+
+      <!-- Main Grid: image/overview left + highlights/ideal right -->
+      <section class="grid lg:grid-cols-5 gap-8 mb-10">
+
+        <!-- Left Column: Image + Overview + CTA -->
+        <div class="lg:col-span-2 bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm self-start">
+          <img
+            src="images/programs/program-community-development.png"
+            alt="Community Development — SAGU Foundation"
+            class="w-full h-72 object-cover"
+          />
+          <div class="p-6">
+            <p class="text-xs tracking-[0.15em] uppercase text-[#b98305] font-bold mb-2">Program Overview</p>
+            <p class="text-gray-700 leading-relaxed">
+              The Community Development program at SAGU Foundation is built on a belief that lasting change begins at the grassroots level. Our tutors and volunteers go beyond the classroom — visiting schools, communities, and villages across Papua to deliver education, mentoring, and outreach sessions tailored to local needs. Through four active sub-programs, we create meaningful impact for students, educators, and entire communities.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href="contact.html"
+                class="inline-flex items-center justify-center bg-[#e6a817] hover:bg-[#c9921a] text-black font-bold px-5 py-3 rounded-md transition-all"
+              >
+                <i class="fa-solid fa-circle-right mr-2"></i>Contact Us
+              </a>
+              <a
+                href="index.html#programs"
+                class="inline-flex items-center justify-center border border-gray-300 hover:border-[#e6a817] text-[#0a0a0a] font-semibold px-5 py-3 rounded-md transition-all"
+              >
+                <i class="fa-solid fa-arrow-left mr-2"></i>Back to Our Programs
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Highlights + Ideal Participants + Sub-Programs -->
+        <div class="lg:col-span-3 space-y-8">
+
+          <!-- Program Highlights -->
+          <section class="bg-white border border-gray-200 rounded-md p-7 shadow-sm">
+            <h2 class="text-2xl font-bold text-[#0a0a0a] mb-5">Program Highlights</h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Tutor-led community projects designed to address specific local needs in Papua</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">School visits delivering English sessions, study skills workshops, and career motivation talks</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Community outreach to villages and remote areas with limited access to education</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Scholarship Club offering mentoring and preparation for domestic and international scholarships</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Collaborative program design co-created with community leaders and local educators</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Documentation and research of project outcomes for continuous improvement</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Long-term relationship building with schools, institutions, and community organisations</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-check"></i></span>
+                <span class="text-gray-700">Essay writing, interview preparation, and scholarship application guidance for aspirants</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Ideal Participants -->
+          <section class="bg-white border border-gray-200 rounded-md p-7 shadow-sm">
+            <h2 class="text-2xl font-bold text-[#0a0a0a] mb-5">Ideal Participants</h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span>
+                <span class="text-gray-700">Primary, secondary, and university students seeking academic and personal development</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span>
+                <span class="text-gray-700">Villages, community groups, and local organisations in Papua needing education support</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span>
+                <span class="text-gray-700">Teachers and school administrators looking to collaborate and enhance classroom learning</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span>
+                <span class="text-gray-700">Students aspiring to domestic and international scholarships who need mentoring and preparation</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-1 text-[#e6a817]"><i class="fa-solid fa-user-check"></i></span>
+                <span class="text-gray-700">Motivated volunteers and interns eager to make a difference in Papuan communities</span>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Sub-Programs Quick Links -->
+          <section class="bg-white border border-gray-200 rounded-md p-7 shadow-sm">
+            <h2 class="text-2xl font-bold text-[#0a0a0a] mb-5">Sub-Programs</h2>
+            <div class="space-y-3">
+              <a
+                href="program-detail.html?id=tutor-led-comdev-projects"
+                class="flex items-center gap-4 p-4 rounded-lg border border-gray-100 hover:border-[#e6a817]/40 hover:bg-[#e6a817]/5 transition-all group"
+              >
+                <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-base flex-shrink-0">
+                  <i class="fa-solid fa-chalkboard-user"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-[#0a0a0a] group-hover:text-[#e6a817] transition-colors">Tutor-led ComDev Projects</p>
+                  <p class="text-gray-500 text-sm">Tutor-designed projects tailored to local community needs</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-[#e6a817] transition-colors flex-shrink-0"></i>
+              </a>
+              <a
+                href="program-detail.html?id=sagu-visits-schools"
+                class="flex items-center gap-4 p-4 rounded-lg border border-gray-100 hover:border-[#e6a817]/40 hover:bg-[#e6a817]/5 transition-all group"
+              >
+                <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-base flex-shrink-0">
+                  <i class="fa-solid fa-school"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-[#0a0a0a] group-hover:text-[#e6a817] transition-colors">SAGU Visits Schools</p>
+                  <p class="text-gray-500 text-sm">English sessions, workshops, and motivation talks in schools</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-[#e6a817] transition-colors flex-shrink-0"></i>
+              </a>
+              <a
+                href="program-detail.html?id=sagu-visits-communities"
+                class="flex items-center gap-4 p-4 rounded-lg border border-gray-100 hover:border-[#e6a817]/40 hover:bg-[#e6a817]/5 transition-all group"
+              >
+                <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-base flex-shrink-0">
+                  <i class="fa-solid fa-house-chimney-user"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-[#0a0a0a] group-hover:text-[#e6a817] transition-colors">SAGU Visits Communities</p>
+                  <p class="text-gray-500 text-sm">Outreach to villages and remote communities across Papua</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-[#e6a817] transition-colors flex-shrink-0"></i>
+              </a>
+              <a
+                href="program-detail.html?id=sagu-scholarship-club"
+                class="flex items-center gap-4 p-4 rounded-lg border border-gray-100 hover:border-[#e6a817]/40 hover:bg-[#e6a817]/5 transition-all group"
+              >
+                <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-base flex-shrink-0">
+                  <i class="fa-solid fa-award"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="font-semibold text-[#0a0a0a] group-hover:text-[#e6a817] transition-colors">SAGU Scholarship Club</p>
+                  <p class="text-gray-500 text-sm">Mentoring and preparation for scholarship applicants</p>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-300 group-hover:text-[#e6a817] transition-colors flex-shrink-0"></i>
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </section>
+
+      <!-- Other Programs -->
+      <section>
+        <h2 class="text-2xl md:text-3xl font-extrabold text-[#0a0a0a] mb-5">Other Programs</h2>
+        <div class="grid md:grid-cols-3 gap-5">
+
+          <a href="program-detail.html?id=internship" class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all">
+            <img src="images/programs/program-internship.png" alt="Internship" class="w-full h-36 object-cover" />
+            <div class="p-4">
+              <h3 class="font-bold text-[#0a0a0a] mb-1">Internship</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Hands-on experience for students and young professionals in real community projects.</p>
+            </div>
+          </a>
+
+          <a href="courses.html" class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all">
+            <img src="images/programs/SAGU-Foundation-General-English-2-500x300.png" alt="Courses" class="w-full h-36 object-cover" />
+            <div class="p-4">
+              <h3 class="font-bold text-[#0a0a0a] mb-1">Courses</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">General English, IELTS, and TOEFL preparation courses for all levels.</p>
+            </div>
+          </a>
+
+          <a href="program-detail.html?id=computer-literacy" class="bg-white border border-gray-200 rounded-md overflow-hidden shadow-sm hover:shadow-md transition-all">
+            <img src="images/programs/program-computer-literacy.png" alt="Computer Literacy" class="w-full h-36 object-cover" />
+            <div class="p-4">
+              <h3 class="font-bold text-[#0a0a0a] mb-1">Computer Literacy</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">Building essential digital skills for students and community members in Papua.</p>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<script src="js/whatsapp-floating-button.js"></script>
+<div id="sf-footer-partial-root"></div>
+<script src="js/footer-partial.js"></script>
+<script src="js/header-partial.js"></script>
+</body>
+</html>
