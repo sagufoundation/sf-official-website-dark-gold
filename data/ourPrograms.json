@@ -285,6 +285,132 @@
       "imageAlt": "SAGU Scholarship Club",
       "menuHref": "program-detail.html?id=sagu-scholarship-club",
       "sectionHref": "program-detail.html?id=sagu-scholarship-club"
+    },
+    {
+      "id": "english-for-young-learners",
+      "title": "English for Young Learners (EYL)",
+      "description": "English courses designed for children, building foundational language skills through engaging, age-appropriate activities.",
+      "detailDescription": "English for Young Learners (EYL) introduces children to English through structured, age-appropriate lessons that build vocabulary, pronunciation, and basic communication skills. The programme uses interactive activities, games, and storytelling to keep young learners engaged while establishing a strong foundation for further English study.",
+      "highlights": [
+        "Age-appropriate, activity-based lessons",
+        "Focus on vocabulary, pronunciation, and basic communication",
+        "Interactive games and storytelling to build confidence"
+      ],
+      "idealFor": [
+        "Children and young learners new to English",
+        "Parents seeking a structured introduction to English",
+        "Schools looking to strengthen early English education"
+      ],
+      "ctaLabel": "Enquire About EYL",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-English-For-Young-Learners.webp",
+      "menuHref": "program-detail.html?id=english-for-young-learners",
+      "sectionHref": "program-detail.html?id=english-for-young-learners"
+    },
+    {
+      "id": "english-for-specific-purposes",
+      "title": "English for Specific Purposes (ESP)",
+      "description": "Customised English training tailored to the specific needs of workplaces, institutions, and professional contexts.",
+      "detailDescription": "English for Specific Purposes (ESP) delivers customised English training tailored to the specific communication needs of workplaces, institutions, and professional sectors. Course content is contextualised to participants' fields of work, helping them build the vocabulary and communication skills relevant to their roles.",
+      "highlights": [
+        "Content tailored to specific professional contexts",
+        "Practical vocabulary and workplace communication skills",
+        "Flexible delivery for institutions and organisations"
+      ],
+      "idealFor": [
+        "Employees and professionals in specific industries",
+        "Institutions requiring tailored English training",
+        "Organisations preparing staff for English-language tasks"
+      ],
+      "ctaLabel": "Discuss ESP Training",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-english-for-specific-purposes.webp",
+      "menuHref": "program-detail.html?id=english-for-specific-purposes",
+      "sectionHref": "program-detail.html?id=english-for-specific-purposes"
+    },
+    {
+      "id": "professional-training-workshops",
+      "title": "Professional Training & Workshops",
+      "description": "Skills-focused workshops and training sessions supporting professional growth and workplace readiness.",
+      "detailDescription": "Professional Training & Workshops provide targeted, skills-focused sessions designed to support professional growth and workplace readiness. Topics are developed in response to the needs of participating schools, institutions, and organisations, combining practical exercises with guided facilitation.",
+      "highlights": [
+        "Skills-focused, practical training sessions",
+        "Content adapted to participant and organisational needs",
+        "Delivered for schools, institutions, and organisations"
+      ],
+      "idealFor": [
+        "Professionals seeking targeted skills development",
+        "Institutions organising staff training",
+        "Organisations planning capacity-building workshops"
+      ],
+      "ctaLabel": "Request a Workshop",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-professional-training-workshops.webp",
+      "menuHref": "program-detail.html?id=professional-training-workshops",
+      "sectionHref": "program-detail.html?id=professional-training-workshops"
+    },
+    {
+      "id": "programme-evaluation",
+      "title": "Programme Evaluation",
+      "description": "Structured evaluation of programme implementation to measure outcomes and guide improvement.",
+      "detailDescription": "Programme Evaluation involves the structured review of SAGU Foundation's programme implementation, measuring outcomes against objectives and identifying areas for improvement. Findings from evaluation activities feed directly into the design and refinement of future programmes.",
+      "highlights": [
+        "Structured review of programme outcomes",
+        "Evidence-based recommendations for improvement",
+        "Findings incorporated into future programme design"
+      ],
+      "idealFor": [
+        "Partners and stakeholders monitoring programme impact",
+        "Institutions collaborating on evaluation activities",
+        "Teams responsible for programme quality assurance"
+      ],
+      "ctaLabel": "Learn About Our Evaluation Process",
+      "ctaHref": "annual-reports.html",
+      "image": "images/programs/SAGU-Foundation-programme-evaluation.webp",
+      "menuHref": "program-detail.html?id=programme-evaluation",
+      "sectionHref": "program-detail.html?id=programme-evaluation"
+    },
+    {
+      "id": "research-projects",
+      "title": "Research Projects",
+      "description": "Applied research documenting programme implementation to support evidence-based development.",
+      "detailDescription": "Research Projects at SAGU Foundation document programme implementation processes and translate them into applied research. This work supports evidence-based decision-making and contributes to the wider understanding of education and community development practices in Papua.",
+      "highlights": [
+        "Applied research grounded in programme implementation",
+        "Evidence-based insights for community development",
+        "Collaboration opportunities with academic and research partners"
+      ],
+      "idealFor": [
+        "Researchers and academics interested in Papua-based studies",
+        "Partners supporting evidence-based development work",
+        "Institutions collaborating on applied research"
+      ],
+      "ctaLabel": "Collaborate on Research",
+      "ctaHref": "contact.html",
+      "image": "images/programs/SAGU-Foundation-research-projects.webp",
+      "menuHref": "program-detail.html?id=research-projects",
+      "sectionHref": "program-detail.html?id=research-projects"
+    },
+    {
+      "id": "publications",
+      "title": "Publications",
+      "description": "Reports and publications sharing SAGU Foundation's programmes, activities, and impact.",
+      "detailDescription": "SAGU Foundation publishes annual reports and other publications that document its programmes, activities, and impact across Papua. These publications provide transparency on our work and share learning with partners, supporters, and the wider community.",
+      "highlights": [
+        "Annual reports documenting programmes and impact",
+        "Transparent reporting for partners and supporters",
+        "Shared learning for the wider community"
+      ],
+      "idealFor": [
+        "Partners and donors reviewing programme impact",
+        "Researchers referencing SAGU Foundation's work",
+        "Community members interested in our activities"
+      ],
+      "ctaLabel": "View Publications",
+      "ctaHref": "annual-reports.html",
+      "image": "images/programs/SAGU-Foundation-programme-evaluation.webp",
+      "menuHref": "program-detail.html?id=publications",
+      "sectionHref": "program-detail.html?id=publications"
     }
   ]
 }

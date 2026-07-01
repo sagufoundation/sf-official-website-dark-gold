@@ -40,6 +40,8 @@
     .nav-link.active { color:#e6a817; }
     .nav-link.active::after { width:100%; }
     .gold-bar { width:48px; height:3px; background:#e6a817; border-radius:2px; }
+    .card-hover { transition: transform .3s ease, box-shadow .3s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(230, 168, 23, .1); }
     [x-cloak]{display:none}
   </style>
   <script type="application/ld+json">
@@ -61,24 +63,15 @@
     <div class="mb-12 text-center">
       <p class="text-[#e6a817] tracking-[0.2em] uppercase text-sm font-bold mb-3">Our Impact</p>
       <h1 class="text-4xl md:text-5xl font-extrabold mb-3 text-[#0a0a0a]">What We Do</h1>
-      <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto"></div>
+      <div class="gold-bar w-24 h-1 bg-[#e6a817] mx-auto mb-6"></div>
+      <p class="text-gray-600 leading-relaxed max-w-3xl mx-auto">
+        SAGU Foundation contributes to the advancement of education and community development in Papua through targeted programmes and initiatives focused on education, workforce development, research, and capacity building. Our work is designed to expand opportunities, strengthen local capacity, and support long-term development across communities.
+      </p>
     </div>
 
     <div class="max-w-6xl mx-auto space-y-16">
 
-      <!-- Section 1: English Programs -->
-      <div class="bg-white border border-gray-200 rounded-md p-8 md:p-10 shadow-sm text-center">
-        <h2 class="text-3xl font-bold text-[#0a0a0a] mb-6">English Language Development</h2>
-        <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
-          SAGU Foundation provides various English courses, including <strong>General English classes</strong>, 
-          <strong>English courses for children</strong>, and <strong>preparation classes for IELTS and TOEFL tests</strong>.
-        </p>
-        <p class="text-gray-600 leading-relaxed mt-4 max-w-2xl mx-auto">
-          We also regularly hold workshops on English preparation and IELTS/TOEFL test readiness to help students achieve their academic and professional goals.
-        </p>
-      </div>
-
-      <!-- Section 2: Three Focus Areas -->
+      <!-- Section 1: Three Focus Areas -->
       <div>
         <h2 class="text-3xl font-bold text-[#0a0a0a] mb-8 text-center">Our Focus Areas</h2>
         <div class="grid md:grid-cols-3 gap-6">
@@ -90,20 +83,18 @@
             </div>
             <h3 class="font-bold text-xl mb-3">Education</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
-              We are primarily focused on supporting the development of education in Indonesia, especially in Papua. 
-              SAGU Foundation aims to be an agent of change in the region.
+              SAGU Foundation contributes to the advancement of education in Papua through targeted programmes and initiatives that strengthen access, improve learning outcomes, and support pathways to further study.
             </p>
           </div>
 
-          <!-- Human Resource Development -->
+          <!-- Workforce Development -->
           <div class="bg-white border border-gray-200 rounded-md p-7 shadow-sm hover:shadow transition-shadow text-center">
             <div class="w-16 h-16 bg-[#e6a817]/10 text-[#e6a817] rounded-2xl flex items-center justify-center text-4xl mx-auto mb-5">
-              <i class="fa-solid fa-users"></i>
+              <i class="fa-solid fa-briefcase"></i>
             </div>
-            <h3 class="font-bold text-xl mb-3">Human Resource Development</h3>
+            <h3 class="font-bold text-xl mb-3">Workforce Development</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
-              SAGU Foundation organizes specialized programs aimed at supporting and enhancing skills, abilities, 
-              and capacities across various fields of work.
+              SAGU Foundation develops practical skills and workforce readiness through targeted programmes that support pathways to employment, scholarships, and further study.
             </p>
           </div>
 
@@ -114,68 +105,75 @@
             </div>
             <h3 class="font-bold text-xl mb-3">Research</h3>
             <p class="text-gray-600 text-sm leading-relaxed">
-              SAGU Foundation documents and records various program implementation processes, 
-              which are then developed into research for evaluation and improvement.
+              SAGU Foundation documents programme implementation and develops these into research that supports evaluation and continuous improvement.
             </p>
           </div>
 
         </div>
       </div>
 
-      <!-- Section 3: Our Programs -->
+      <!-- Section 2: Our Programmes -->
       <div class="bg-white border border-gray-200 rounded-md p-8 md:p-10 shadow-sm">
-        <h2 class="text-3xl font-bold text-[#0a0a0a] mb-8 text-center">Our Programs</h2>
-        
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-language"></i>
-            </div>
-            <span class="font-semibold">General English</span>
+        <h2 class="text-3xl font-bold text-[#0a0a0a] mb-8 text-center">Our Programmes</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+          <!-- Education -->
+          <div>
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2.5 text-[#0a0a0a]">
+              <span class="w-8 h-8 rounded-lg bg-[#e6a817]/10 text-[#e6a817] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-graduation-cap"></i></span>
+              Education
+            </h3>
+            <ul class="space-y-1.5">
+              <li><a href="program-detail.html?id=general-english" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>General English</a></li>
+              <li><a href="program-detail.html?id=english-for-young-learners" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>English for Young Learners (EYL)</a></li>
+              <li><a href="program-detail.html?id=ielts-preparation" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>IELTS Preparation</a></li>
+              <li><a href="program-detail.html?id=toefl-preparation" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>TOEFL Preparation</a></li>
+              <li><a href="program-detail.html?id=ielts-simulation-test" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>IELTS/TOEFL Simulation Test</a></li>
+              <li><a href="program-detail.html?id=computer-literacy" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Computer Literacy</a></li>
+              <li><a href="program-detail.html?id=sagu-scholarship-club" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Scholarship Club</a></li>
+            </ul>
           </div>
 
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-flag-checkered"></i>
-            </div>
-            <span class="font-semibold">IELTS/TOEFL Preparation</span>
+          <!-- Workforce Development -->
+          <div>
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2.5 text-[#0a0a0a]">
+              <span class="w-8 h-8 rounded-lg bg-[#e6a817]/10 text-[#e6a817] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-briefcase"></i></span>
+              Workforce Development
+            </h3>
+            <ul class="space-y-1.5">
+              <li><a href="program-detail.html?id=english-for-specific-purposes" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>English for Specific Purposes (ESP)</a></li>
+              <li><a href="program-detail.html?id=professional-training-workshops" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Professional Training &amp; Workshops</a></li>
+              <li><a href="program-detail.html?id=internship" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Internship Programme</a></li>
+              <li><a href="program-detail.html?id=community-development" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Community Development Programme</a></li>
+            </ul>
           </div>
 
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-file-lines"></i>
-            </div>
-            <span class="font-semibold">IELTS/TOEFL Simulation Test</span>
+          <!-- Research -->
+          <div>
+            <h3 class="font-bold text-lg mb-4 flex items-center gap-2.5 text-[#0a0a0a]">
+              <span class="w-8 h-8 rounded-lg bg-[#e6a817]/10 text-[#e6a817] flex items-center justify-center text-sm flex-shrink-0"><i class="fa-solid fa-magnifying-glass"></i></span>
+              Research
+            </h3>
+            <ul class="space-y-1.5">
+              <li><a href="program-detail.html?id=programme-evaluation" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Programme Evaluation</a></li>
+              <li><a href="program-detail.html?id=research-projects" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Research Projects</a></li>
+              <li><a href="program-detail.html?id=publications" class="flex items-center gap-2 text-gray-600 hover:text-[#c9921a] text-sm py-1.5 transition-colors"><i class="fa-solid fa-chevron-right text-[#e6a817] text-[10px]"></i>Publications</a></li>
+            </ul>
           </div>
 
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-laptop"></i>
-            </div>
-            <span class="font-semibold">Computer Literacy</span>
-          </div>
-
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-hands-helping"></i>
-            </div>
-            <span class="font-semibold">Community Development</span>
-          </div>
-
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-briefcase"></i>
-            </div>
-            <span class="font-semibold">Internship</span>
-          </div>
-
-          <div class="flex items-center gap-4 bg-gray-50 hover:bg-[#e6a817]/5 border border-transparent hover:border-[#e6a817]/30 rounded-xl p-5 transition-all md:col-span-2">
-            <div class="w-9 h-9 bg-[#e6a817]/10 text-[#e6a817] rounded-lg flex items-center justify-center text-xl">
-              <i class="fa-solid fa-award"></i>
-            </div>
-            <span class="font-semibold">Scholarship Club</span>
-          </div>
         </div>
+      </div>
+
+      <!-- Section 3: English Language Development -->
+      <div class="bg-white border border-gray-200 rounded-md p-8 md:p-10 shadow-sm text-center">
+        <h2 class="text-3xl font-bold text-[#0a0a0a] mb-6">English Language Development</h2>
+        <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+          English language education has been one of SAGU Foundation's core areas of work since its establishment. We offer General English courses across various proficiency levels, English for Young Learners (EYL), IELTS and TOEFL preparation, English for Specific Purposes (ESP), workshops, and customised training programmes for schools, institutions, government agencies, and other organisations.
+        </p>
+        <p class="text-gray-600 leading-relaxed mt-4 max-w-2xl mx-auto">
+          In addition to course delivery, SAGU Foundation develops contextualised English curricula and learning materials tailored to the needs of educational institutions, organisations, and local communities. Our materials reflect local cultures, educational settings, professional contexts, and specific learning objectives, making English learning more relevant, engaging, and applicable to participants' everyday lives.
+        </p>
       </div>
 
 
